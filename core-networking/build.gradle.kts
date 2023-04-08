@@ -1,5 +1,5 @@
 dependencies {
-    implementation(project(Dependencies.Module.core_networking))
+    Dependencies.Retrofit.list.forEach { implementation(it) }
     Dependencies.Kotlin.list.forEach { implementation(it) }
     Dependencies.Support.list.forEach { implementation(it) }
 

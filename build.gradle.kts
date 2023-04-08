@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath(Dependencies.Gradle.kotlinPlugin)
+        classpath(Dependencies.Gradle.kotlinGradlePlugin)
         classpath(Dependencies.Gradle.androidTools)
         classpath(kotlin(Dependencies.Gradle.gradlePlugin, Versions.kotlin_version))
     }
@@ -92,9 +93,6 @@ fun Project.configureAppAndroid() {
 fun Project.configureAndroidLibrary() {
     apply(plugin = "com.android.library")
     apply(plugin = "org.jetbrains.kotlin.android")
-
-    configure<com.android.build.gradle.BaseExtension> {
-    }
 }
 
 tasks.register("clean").configure {

@@ -21,6 +21,6 @@ object Versions {
     const val constraint_motion_version = "2.1.3"
     const val kotlin_version = "1.8.0"
     const val androidx_core_ktx = "1.1.0"
-    const val viewmodel_version = "2.0.0"
+    const val viewmodel_version = "2.2.0"
     const val mockWebServer = "4.10.0"
 }

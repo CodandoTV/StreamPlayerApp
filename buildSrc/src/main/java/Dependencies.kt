@@ -8,11 +8,12 @@ object Dependencies {
     const val runnerPackage = "androidx.test.runner.AndroidJUnitRunner"
 
     object Module {
+        const val core_networking = ":core-networking"
     }
 
     val modules: List<String> by lazy {
         Module::class.memberProperties.map {
-            it.name
+            it.name.replace("_","-")
         }
     }
 
@@ -21,6 +22,7 @@ object Dependencies {
             "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
         const val androidTools = "com.android.tools.build:gradle:${Versions.gradle_plugin_version}"
         const val gradlePlugin = "gradle-plugin"
+        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     }
 
     object Kotlin : GroupLibs {
