@@ -11,7 +11,8 @@ class ListMovieUseCaseImpl(
     private val repository: ListMovieRepository
 ) : ListMovieUseCase{
 
-    override fun getMovies(): ListMovie =
-        repository.getMovies()
-
+    override fun getMovies(): ListMovie {
+        println(">>>>>>> Curta o video!!!")
+        return repository.getMovies()
+    }
 }

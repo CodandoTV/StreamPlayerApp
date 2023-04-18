@@ -23,4 +23,5 @@ object Versions {
     const val androidx_core_ktx = "1.1.0"
     const val viewmodel_version = "2.2.0"
     const val mockWebServer = "4.10.0"
+    const val koin = "3.4.0"
 }

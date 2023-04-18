@@ -8,10 +8,8 @@ interface ListMovieRepository {
 }
 
 class ListMovieRepositoryImpl(
-    private val service : ListMovieService
+//    private val service : ListMovieService
 ) : ListMovieRepository {
 
-    override fun getMovies(): ListMovie =
-        service.getMovies()
-            .toListMovie()
+    override fun getMovies(): ListMovie = ListMovie("")
 }
