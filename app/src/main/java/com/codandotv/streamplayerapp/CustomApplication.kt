@@ -1,7 +1,7 @@
 package com.codandotv.streamplayerapp
 
 import android.app.Application
-import com.codandotv.streamplayerapp.di.AppModule
+import di.AppModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

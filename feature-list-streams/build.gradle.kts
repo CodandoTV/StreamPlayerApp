@@ -1,4 +1,5 @@
 dependencies {
+    implementation(Dependencies.Koin.koin)
     Dependencies.Retrofit.list.forEach { implementation(it) }
     Dependencies.Kotlin.list.forEach { implementation(it) }
     Dependencies.Support.list.forEach { implementation(it) }
