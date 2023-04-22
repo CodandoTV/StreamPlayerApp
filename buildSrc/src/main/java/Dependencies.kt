@@ -100,6 +100,10 @@ object Dependencies {
             )
     }
 
+    object Koin  {
+        const val koin = "io.insert-koin:koin-android:${Versions.koin}"
+    }
+
     object Retrofit : GroupLibs {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
         const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi_version}"
