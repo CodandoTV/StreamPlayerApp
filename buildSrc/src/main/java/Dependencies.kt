@@ -9,6 +9,7 @@ object Dependencies {
 
     object Module {
         const val core_networking = ":core-networking"
+        const val feature_list_streams = ":feature-list-streams"
     }
 
     val modules: List<String> by lazy {
@@ -132,6 +133,14 @@ object Dependencies {
             get() = listOf(
                 ViewModel.lifecycleExtensions,
                 ViewModel.lifecycleConvertRxToLivedata
+            )
+    }
+
+    object Compose: GroupLibs {
+        const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose_version}"
+        override val list: List<String>
+            get() = listOf(
+                Compose.composeFoundation
             )
     }
 }

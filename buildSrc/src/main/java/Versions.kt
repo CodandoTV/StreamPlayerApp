@@ -24,4 +24,5 @@ object Versions {
     const val viewmodel_version = "2.2.0"
     const val mockWebServer = "4.10.0"
     const val koin = "3.4.0"
+    const val compose_version = "1.4.2"
 }
