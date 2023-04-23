@@ -5,5 +5,6 @@ import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStrea
 
 fun ListStreamResponse.toListStream() : ListStream =
     ListStream(
-        name = this.name
+        name = this.name,
+        description = this.description
     )

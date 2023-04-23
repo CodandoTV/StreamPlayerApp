@@ -2,7 +2,7 @@ package com.codandotv.streamplayerapp.feature_list_streams.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.codandotv.streamplayerapp.R
+import com.codandotv.streamplayerapp.feature_list_streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.di.ListStreamModule
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules

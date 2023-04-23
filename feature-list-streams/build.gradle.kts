@@ -1,3 +1,7 @@
+android {
+    namespace = "${Config.packageName}feature_list_streams"
+}
+
 dependencies {
     implementation(Dependencies.Koin.koin)
     Dependencies.Retrofit.list.forEach { implementation(it) }
