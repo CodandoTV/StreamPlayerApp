@@ -1,0 +1,18 @@
+package com.codandotv.streamplayerapp.feature_list_streams.domain
+
+import com.codandotv.streamplayerapp.feature_list_streams.data.ListStreamRepository
+import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStream
+
+interface ListStreamUseCase {
+    fun getMovies() : ListStream
+}
+
+class ListStreamUseCaseImpl(
+    private val repository: ListStreamRepository
+) : ListStreamUseCase {
+
+    override fun getMovies(): ListStream {
+        println(">>>>>>> Curta o video!!!")
+        return repository.getMovies()
+    }
+}
