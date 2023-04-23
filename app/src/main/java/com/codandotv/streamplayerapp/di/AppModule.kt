@@ -1,4 +1,4 @@
-package di
+package com.codandotv.streamplayerapp.di
 
 import android.content.res.Resources
 import org.koin.android.ext.koin.androidContext
