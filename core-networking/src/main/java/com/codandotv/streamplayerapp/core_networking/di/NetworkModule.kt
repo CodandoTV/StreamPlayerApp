@@ -23,14 +23,29 @@ object NetworkModule {
                 .build()
         }
 
-        single<Interceptor> {
-            HttpLoggingInterceptor().apply {
-                level = if (BuildConfig.DEBUG) {
+        single(QualifierAuthInterceptor) {
+            Interceptor { chain ->
+                val newRequest =
+                    chain.request()
+                        .newBuilder()
+                        .addHeader(
+                            "Authorization",
+                            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNDg2NWM4YTAzNzhmM2I4NjI0OWU1ZjNiYWFiMjU2NyIsInN1YiI6IjY0Mjk4YTg5YTNlNGJhMWM0NDgzM2U4OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9cIxv29vkaZ2yW88DIFRUFK_nXbK2b6KS8t96kA8WAE"
+                        )
+                        .addHeader("Content-Type", "application/json;charset=utf-8")
+                        .build()
+                chain.proceed(newRequest)
+            }
+        }
+
+        single<Interceptor>(QualifierLoggerInterceptor) {
+            HttpLoggingInterceptor().setLevel(
+                if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
                 } else {
                     HttpLoggingInterceptor.Level.NONE
                 }
-            }
+            )
         }
         single {
             provideRetrofit(
@@ -42,17 +57,19 @@ object NetworkModule {
 
         single {
             provideOkhttp(
-                interceptor = get()
+                get(QualifierAuthInterceptor),
+                get(QualifierLoggerInterceptor),
             )
         }
     }
 
     private fun provideOkhttp(
-        interceptor: Interceptor
+        vararg interceptor: Interceptor
     ): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
-        okHttpClientBuilder.addInterceptor(interceptor)
-
+        interceptor.forEach {
+            okHttpClientBuilder.addInterceptor(it)
+        }
         return okHttpClientBuilder
             .connectTimeout(15, TimeUnit.SECONDS)
             .build()
