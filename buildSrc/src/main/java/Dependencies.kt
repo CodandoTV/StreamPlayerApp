@@ -137,10 +137,21 @@ object Dependencies {
     }
 
     object Compose: GroupLibs {
-        const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose_version}"
+        const val composeBomVersion = "androidx.compose:compose-bom:${Versions.composeBomVersion}"
+        const val composeUI = "androidx.compose.ui:ui"
+        const val coposeUIToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+        const val composeActivityCompose = "androidx.activity:activity-compose"
+        const val composeUITooling = "androidx.compose.ui:ui-tooling"
+        const val composeMaterial3 = "androidx.compose.material3:material3:" +
+                "${Versions.composeMaterial3Version}"
+
         override val list: List<String>
             get() = listOf(
-                Compose.composeFoundation
+                Compose.composeUI,
+                Compose.coposeUIToolingPreview,
+                Compose.composeActivityCompose,
+                Compose.composeUITooling,
+                Compose.composeMaterial3
             )
     }
 }

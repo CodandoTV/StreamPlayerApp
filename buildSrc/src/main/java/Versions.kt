@@ -19,10 +19,14 @@ object Versions {
     const val okhttp_version = "4.10.0"
     const val mockk = "1.10.0"
     const val constraint_motion_version = "2.1.3"
-    const val kotlin_version = "1.8.0"
+    const val kotlin_version = "1.8.10"
     const val androidx_core_ktx = "1.1.0"
     const val viewmodel_version = "2.2.0"
     const val mockWebServer = "4.10.0"
     const val koin = "3.4.0"
     const val compose_version = "1.4.2"
+
+    const val composeBomVersion = "2023.01.00"
+    const val composeCompilerVersion = "1.4.2"
+    const val composeMaterial3Version = "1.0.1"
 }
