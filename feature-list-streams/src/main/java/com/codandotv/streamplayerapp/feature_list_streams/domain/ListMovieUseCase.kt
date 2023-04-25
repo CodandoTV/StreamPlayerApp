@@ -4,13 +4,13 @@ import com.codandotv.streamplayerapp.feature_list_streams.data.ListStreamReposit
 import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStream
 
 interface ListStreamUseCase {
-    suspend fun getMovies() : ListStream
+    suspend fun getMovies() : Result<ListStream>
 }
 
 class ListStreamUseCaseImpl(
     private val repository: ListStreamRepository
 ) : ListStreamUseCase {
-    override suspend fun getMovies(): ListStream {
+    override suspend fun getMovies(): Result<ListStream> {
         println(">>>>>>> Curta o video!!!")
         return repository.getMovies()
     }

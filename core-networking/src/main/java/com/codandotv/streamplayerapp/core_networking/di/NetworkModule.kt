@@ -1,6 +1,8 @@
 package com.codandotv.streamplayerapp.core_networking.di
 
 import com.codandotv.streamplayerapp.core_networking.BuildConfig
+import com.codandotv.streamplayerapp.core_networking.handleError.coroutines.NetworkResponseAdapter
+import com.codandotv.streamplayerapp.core_networking.handleError.coroutines.NetworkResponseAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
@@ -57,7 +59,7 @@ object NetworkModule {
 
         single {
             provideOkhttp(
-                get(QualifierAuthInterceptor),
+//                get(QualifierAuthInterceptor),
                 get(QualifierLoggerInterceptor),
             )
         }
@@ -84,5 +86,6 @@ object NetworkModule {
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(NetworkResponseAdapterFactory(moshi))
             .build()
 }

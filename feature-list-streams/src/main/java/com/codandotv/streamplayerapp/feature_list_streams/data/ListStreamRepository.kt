@@ -1,17 +1,22 @@
 package com.codandotv.streamplayerapp.feature_list_streams.data
 
+import com.codandotv.streamplayerapp.core_networking.handleError.toResult
 import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStream
 import com.codandotv.streamplayerapp.feature_list_streams.domain.toListStream
 
 interface ListStreamRepository {
-    suspend fun getMovies() : ListStream
+    suspend fun getMovies(): Result<ListStream>
 }
 
 class ListStreamRepositoryImpl(
-    private val service : ListStreamService
+    private val service: ListStreamService
 ) : ListStreamRepository {
 
-    override suspend fun getMovies(): ListStream =
+    override suspend fun getMovies(): Result<ListStream> =
         service.getMovies()
-            .toListStream()
+            .toResult()
+            .map {
+                it.toListStream()
+            }
+
 }

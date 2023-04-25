@@ -3,6 +3,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Dependencies.Module.core_networking))
     implementation(Dependencies.Koin.koin)
     Dependencies.Retrofit.list.forEach { implementation(it) }
     Dependencies.Kotlin.list.forEach { implementation(it) }
