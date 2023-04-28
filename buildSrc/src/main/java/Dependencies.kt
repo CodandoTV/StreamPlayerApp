@@ -154,4 +154,11 @@ object Dependencies {
                 Compose.composeMaterial3
             )
     }
+
+    object Coil: GroupLibs {
+        const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
+
+        override val list: List<String>
+            get() = listOf(Coil.coil)
+    }
 }
