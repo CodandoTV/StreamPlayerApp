@@ -1,4 +1,4 @@
-package com.codandotv.streamplayerapp.feature_list_streams.widgets
+package com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets
 
 import androidx.compose.ui.text.TextRange
 

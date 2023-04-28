@@ -80,7 +80,7 @@ fun Project.configureAppAndroid() {
 
         buildTypes {
             getByName("release") {
-                isMinifyEnabled = false
+                isMinifyEnabled = true
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
@@ -92,7 +92,6 @@ fun Project.configureAppAndroid() {
 
 fun Project.configureAndroidLibrary() {
     apply(plugin = "com.android.library")
-    apply(plugin = "org.jetbrains.kotlin.android")
 }
 
 tasks.register("clean").configure {
