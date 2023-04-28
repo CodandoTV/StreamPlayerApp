@@ -9,7 +9,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
 class ListStreamActivity  : AppCompatActivity() {
-    private val viewModel : ListMovieViewModel by viewModel()
+    private val viewModel : ListStreamViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_stream)

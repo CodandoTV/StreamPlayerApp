@@ -6,26 +6,26 @@ package com.codandotv.streamplayerapp.core_networking.handleError
 sealed class Failure(val code: Int? = -1, val errorMessage: String) : java.lang.Exception() {
     data class NoDataContent(val codeStatus: Int? = null) : Failure(codeStatus, "No data content")
     data class ServerError(val codeStatus: Int? = null) : Failure(codeStatus, "Server error!")
-    data class GenericError(val codeStatus: Int? = -1100,
+    data class GenericError(val codeStatus: Int? = -12,
                             private val msg: String? = null) : Failure(codeStatus, msg
             ?: MSG_DEFAULT)
 
-    data class NetworkError(val codeStatus: Int? = -1200,
+    data class NetworkError(val codeStatus: Int? = -13,
                             private val throwable: Throwable) : Failure(codeStatus, "Sem conexão. Verifique o wifi ou dados móveis e tente novamente em alguns instantes.")
 
     data class UnknownError(val codeStatus: Int? = null,
                             private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
             ?: MSG_DEFAULT)
 
-    data class UnexpectedApiException(val codeStatus: Int? = -1011,
+    data class UnexpectedApiException(val codeStatus: Int? = -14,
                                       private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
             ?: MSG_DEFAULT)
 
-    data class ClientException(val codeStatus: Int? = -1011,
+    data class ClientException(val codeStatus: Int? = -15,
                                private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
             ?: MSG_DEFAULT)
 
-    data class UnparsableResponseException(val codeStatus: Int? = -1012,
+    data class UnparsableResponseException(val codeStatus: Int? = -16,
                                            private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
             ?: MSG_DEFAULT)
 

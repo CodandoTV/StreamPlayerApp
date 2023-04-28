@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ListStreamService {
     @GET("codandotv")
-    suspend fun getMovies() :  NetworkResponse<ListStreamResponse>
+    suspend fun getMovies() : NetworkResponse<ListStreamResponse>
 }
