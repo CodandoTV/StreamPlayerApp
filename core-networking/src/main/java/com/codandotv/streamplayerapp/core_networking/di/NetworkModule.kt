@@ -59,7 +59,7 @@ object NetworkModule {
 
         single {
             provideOkhttp(
-//                get(QualifierAuthInterceptor),
+                get(QualifierAuthInterceptor),
                 get(QualifierLoggerInterceptor),
             )
         }

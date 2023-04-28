@@ -9,8 +9,7 @@ object Config {
     const val packageName = "com.codandotv.streamplayerapp."
 
     object BuildField {
-
-        const val host_debug = "\"https://demo5700495.mockable.io/\""
-        const val host_release = "\"https://demo5700495.mockable.io/\""
+        const val host_debug = "\"https://api.themoviedb.org/\""
+        const val host_release = "\"https://api.themoviedb.org/\""
     }
 }
