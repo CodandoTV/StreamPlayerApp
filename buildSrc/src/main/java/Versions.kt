@@ -25,6 +25,7 @@ object Versions {
     const val mockWebServer = "4.10.0"
     const val koin = "3.4.0"
     const val compose_version = "1.4.2"
+    const val retrofit = "2.9.0"
 
     const val composeBomVersion = "2023.01.00"
     const val composeCompilerVersion = "1.4.2"

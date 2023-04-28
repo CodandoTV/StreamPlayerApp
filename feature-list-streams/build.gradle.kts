@@ -1,6 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 android {
+    namespace = "${Config.packageName}feature_list_streams"
+        
     buildFeatures {
         compose = true
     }
@@ -10,6 +12,7 @@ android {
     }
 
     dependencies {
+        implementation(Dependencies.Koin.koin)
         Dependencies.Retrofit.list.forEach { implementation(it) }
         Dependencies.Kotlin.list.forEach { implementation(it) }
         Dependencies.Support.list.forEach { implementation(it) }

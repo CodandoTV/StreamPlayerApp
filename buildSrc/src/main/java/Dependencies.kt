@@ -59,8 +59,6 @@ object Dependencies {
         const val runner = "androidx.test:runner:${Versions.test_core_version}"
         const val espresso =
             "androidx.test.espresso:espresso-core:${Versions.test_espresso_version}"
-        const val espressoContrib =
-            "com.android.support.test.espresso:espresso-contrib:${Versions.test_espresso_version}"
         const val rules = "androidx.test:rules:${Versions.test_rules_version}"
         const val hamcrest = "org.hamcrest:hamcrest-library:${Versions.test_hamcrest}"
         const val uiautomator = "androidx.test.uiautomator:uiautomator:${Versions.test_uiautomator}"
@@ -76,7 +74,6 @@ object Dependencies {
                 AndroidTest.rules,
                 AndroidTest.uiautomator,
                 AndroidTest.runner,
-                AndroidTest.espressoContrib,
                 AndroidTest.mockWebServer,
                 AndroidTest.ext,
                 AndroidTest.intent
