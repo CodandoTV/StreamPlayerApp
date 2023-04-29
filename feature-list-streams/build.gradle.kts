@@ -24,6 +24,6 @@ android {
         Dependencies.UnitTest.list.forEach { testImplementation(it) }
         //Dependencies.AndroidTest.list.forEach { androidTestImplementation(it) }
 
-        Dependencies.Coil.list.forEach { implementation(it) }
+        implementation(Dependencies.coil)
     }
 }

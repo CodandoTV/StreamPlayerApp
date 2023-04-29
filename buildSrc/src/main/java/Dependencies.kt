@@ -6,6 +6,7 @@ interface GroupLibs {
 
 object Dependencies {
     const val runnerPackage = "androidx.test.runner.AndroidJUnitRunner"
+    const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
 
     object Module {
         const val core_networking = ":core-networking"
@@ -150,12 +151,5 @@ object Dependencies {
                 Compose.composeUITooling,
                 Compose.composeMaterial3
             )
-    }
-
-    object Coil: GroupLibs {
-        const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
-
-        override val list: List<String>
-            get() = listOf(Coil.coil)
     }
 }
