@@ -19,25 +19,19 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.codandotv.streamplayerapp.feature_onboarding.R
 
 @Composable
-fun SplashScreen(){
+fun SplashScreen() {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize()
     ) {
         Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black),
-            contentAlignment = Alignment.Center
+                .background(Color.Black)
         ) {
             val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.logo))
-            val logoAnimationState =
-                animateLottieCompositionAsState(composition = composition)
-            LottieAnimation(
-                composition = composition,
-                progress = { logoAnimationState.progress }
-            )
+            val logoAnimationState = animateLottieCompositionAsState(composition = composition)
+            LottieAnimation(composition = composition, progress = { logoAnimationState.progress })
             if (logoAnimationState.isAtEnd && logoAnimationState.isPlaying) {
                 println("faz alguma coisa")
             }
@@ -47,6 +41,6 @@ fun SplashScreen(){
 
 @Composable
 @Preview
-fun SplashScreenPreview(){
+fun SplashScreenPreview() {
     SplashScreen()
 }
