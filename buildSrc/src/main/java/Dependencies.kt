@@ -10,7 +10,9 @@ object Dependencies {
 
     object Module {
         const val core_networking = ":core-networking"
+        const val core_shared_ui = ":core-shared-ui"
         const val feature_list_streams = ":feature-list-streams"
+        const val feature_onboarding = ":feature-onboarding"
     }
 
     val modules: List<String> by lazy {
@@ -151,5 +153,14 @@ object Dependencies {
                 Compose.composeUITooling,
                 Compose.composeMaterial3
             )
+    }
+
+    object Lottie: GroupLibs {
+        const val lottieAnimation = "com.airbnb.android:lottie-compose:${Versions.lottie}"
+        override val list: List<String>
+            get() = listOf(
+                Lottie.lottieAnimation
+            )
+
     }
 }

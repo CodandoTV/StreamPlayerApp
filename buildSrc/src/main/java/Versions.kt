@@ -32,4 +32,6 @@ object Versions {
     const val composeMaterial3Version = "1.0.1"
 
     const val coilVersion = "2.3.0"
+
+    const val lottie = "5.2.0"
 }
