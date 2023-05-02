@@ -7,7 +7,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamAnaly
 import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamAnalyticsImpl
 import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamUseCaseImpl
-import com.codandotv.streamplayerapp.feature_list_streams.presentation.ListMovieViewModel
+import com.codandotv.streamplayerapp.feature_list_streams.presentation.ListStreamViewModel
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.ListStreamUiModelImpl
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.ListStreamUimodel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 object ListStreamModule {
     val module = module {
         viewModel {
-            ListMovieViewModel(
+            ListStreamViewModel(
                 uiModel = get(),
                 useCase = get(),
                 analytics = get()
