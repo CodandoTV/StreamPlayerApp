@@ -1,35 +1,55 @@
 package com.codandotv.streamplayerapp.core_networking.handleError
 
+import com.codandotv.streamplayerapp.core_networking.R
+import org.koin.core.component.KoinComponent
+
 /**
  * Base Class for handling errors/failures/exceptions.
  */
-sealed class Failure(val code: Int? = -1, val errorMessage: String) : java.lang.Exception() {
-    data class NoDataContent(val codeStatus: Int? = null) : Failure(codeStatus, "No data content")
-    data class ServerError(val codeStatus: Int? = null) : Failure(codeStatus, "Server error!")
-    data class GenericError(val codeStatus: Int? = -12,
-                            private val msg: String? = null) : Failure(codeStatus, msg
-            ?: MSG_DEFAULT)
+sealed class Failure(
+    val code: Int? = -1,
+    val errorMessage: String? = null,
+    val errorMessageRes: Int = R.string.core_networking_msg_default_error
+) : Exception(), KoinComponent {
+    data class NoDataContent(val codeStatus: Int? = null) :
+        Failure(codeStatus, errorMessageRes = R.string.core_networking_no_data_content)
 
-    data class NetworkError(val codeStatus: Int? = -13,
-                            private val throwable: Throwable) : Failure(codeStatus, "Sem conexão. Verifique o wifi ou dados móveis e tente novamente em alguns instantes.")
+    data class ServerError(val codeStatus: Int? = null) :
+        Failure(codeStatus, errorMessageRes = R.string.core_networking_no_server_error)
 
-    data class UnknownError(val codeStatus: Int? = null,
-                            private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
-            ?: MSG_DEFAULT)
+    data class GenericError(
+        val codeStatus: Int? = -12, private val msg: String? = null
+    ) : Failure(
+        codeStatus
+    )
 
-    data class UnexpectedApiException(val codeStatus: Int? = -14,
-                                      private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
-            ?: MSG_DEFAULT)
+    data class NetworkError(
+        val codeStatus: Int? = -13, private val throwable: Throwable
+    ) : Failure(
+        codeStatus, errorMessageRes = R.string.core_networking_networking_error
+    )
 
-    data class ClientException(val codeStatus: Int? = -15,
-                               private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
-            ?: MSG_DEFAULT)
+    data class UnknownError(
+        val codeStatus: Int? = null, private val throwable: Throwable? = Exception()
+    ) : Failure(
+        codeStatus, throwable?.message
+    )
 
-    data class UnparsableResponseException(val codeStatus: Int? = -16,
-                                           private val throwable: Throwable? = Exception()) : Failure(codeStatus, throwable?.message
-            ?: MSG_DEFAULT)
+    data class UnexpectedApiException(
+        val codeStatus: Int? = -14, private val throwable: Throwable? = Exception()
+    ) : Failure(
+        codeStatus, throwable?.message
+    )
 
-    companion object {
-        private const val MSG_DEFAULT = "Não foi possível concluir. Estamos trabalhando para resolver. Tente novamente em alguns instantes."
-    }
+    data class ClientException(
+        val codeStatus: Int? = -15, private val throwable: Throwable? = Exception()
+    ) : Failure(
+        codeStatus, throwable?.message
+    )
+
+    data class UnparsableResponseException(
+        val codeStatus: Int? = -16, private val throwable: Throwable? = Exception()
+    ) : Failure(
+        codeStatus, throwable?.message
+    )
 }
