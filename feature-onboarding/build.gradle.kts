@@ -1,8 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-plugins {
-    id("org.jetbrains.kotlin.android")
-}
 android {
     namespace = "${Config.packageName}feature_onboarding"
 
