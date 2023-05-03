@@ -12,7 +12,7 @@ object Dependencies {
         const val core_networking = ":core-networking"
         const val core_shared_ui = ":core-shared-ui"
         const val feature_list_streams = ":feature-list-streams"
-        const val feature_onboarding = ":feature-onboarding"
+//        const val feature_onboarding = ":feature-onboarding"
     }
 
     val modules: List<String> by lazy {
@@ -140,7 +140,7 @@ object Dependencies {
         const val composeBomVersion = "androidx.compose:compose-bom:${Versions.composeBomVersion}"
         const val composeUI = "androidx.compose.ui:ui"
         const val coposeUIToolingPreview = "androidx.compose.ui:ui-tooling-preview"
-        const val composeActivityCompose = "androidx.activity:activity-compose"
+        const val composeActivityCompose = "androidx.activity:activity-compose:"+"${Versions.composeActivity}"
         const val composeUITooling = "androidx.compose.ui:ui-tooling"
         const val composeMaterial3 = "androidx.compose.material3:material3:" +
                 "${Versions.composeMaterial3Version}"
