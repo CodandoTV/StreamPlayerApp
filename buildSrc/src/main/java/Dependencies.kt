@@ -7,17 +7,17 @@ interface GroupLibs {
 object Dependencies {
     const val runnerPackage = "androidx.test.runner.AndroidJUnitRunner"
     const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
+    const val lottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
 
     object Module {
         const val core_networking = ":core-networking"
         const val core_shared_ui = ":core-shared-ui"
         const val feature_list_streams = ":feature-list-streams"
-//        const val feature_onboarding = ":feature-onboarding"
     }
 
     val modules: List<String> by lazy {
         Module::class.memberProperties.map {
-            it.name.replace("_","-")
+            it.name.replace("_", "-")
         }
     }
 
@@ -26,7 +26,8 @@ object Dependencies {
             "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
         const val androidTools = "com.android.tools.build:gradle:${Versions.gradle_plugin_version}"
         const val gradlePlugin = "gradle-plugin"
-        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
+        const val kotlinGradlePlugin =
+            "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     }
 
     object Kotlin : GroupLibs {
@@ -100,7 +101,7 @@ object Dependencies {
             )
     }
 
-    object Koin  {
+    object Koin {
         const val koin = "io.insert-koin:koin-android:${Versions.koin}"
     }
 
@@ -136,11 +137,12 @@ object Dependencies {
             )
     }
 
-    object Compose: GroupLibs {
+    object Compose : GroupLibs {
         const val composeBomVersion = "androidx.compose:compose-bom:${Versions.composeBomVersion}"
         const val composeUI = "androidx.compose.ui:ui"
         const val coposeUIToolingPreview = "androidx.compose.ui:ui-tooling-preview"
-        const val composeActivityCompose = "androidx.activity:activity-compose:"+"${Versions.composeActivity}"
+        const val composeActivityCompose =
+            "androidx.activity:activity-compose:" + "${Versions.composeActivity}"
         const val composeUITooling = "androidx.compose.ui:ui-tooling"
         const val composeMaterial3 = "androidx.compose.material3:material3:" +
                 "${Versions.composeMaterial3Version}"
@@ -153,14 +155,5 @@ object Dependencies {
                 Compose.composeUITooling,
                 Compose.composeMaterial3
             )
-    }
-
-    object Lottie: GroupLibs {
-        const val lottieAnimation = "com.airbnb.android:lottie-compose:${Versions.lottie}"
-        override val list: List<String>
-            get() = listOf(
-                Lottie.lottieAnimation
-            )
-
     }
 }

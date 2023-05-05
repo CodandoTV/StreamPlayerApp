@@ -22,5 +22,5 @@ dependencies {
     val composeBom = platform(Dependencies.Compose.composeBomVersion)
     implementation(composeBom)
     Dependencies.Compose.list.forEach { implementation(it) }
-    Dependencies.Lottie.list.forEach { implementation(it) }
+    implementation(Dependencies.lottie)
 }
