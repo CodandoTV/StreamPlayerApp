@@ -11,6 +11,7 @@ object Dependencies {
     object Module {
         const val core_networking = ":core-networking"
         const val feature_list_streams = ":feature-list-streams"
+        const val core_ui = ":core-ui"
     }
 
     val modules: List<String> by lazy {
