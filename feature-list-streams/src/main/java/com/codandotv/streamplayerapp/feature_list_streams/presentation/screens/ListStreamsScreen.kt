@@ -10,8 +10,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codandotv.streamplayerapp.core_ui.theme.ThemePreview
-import com.codandotv.streamplayerapp.core_ui.theme.ThemePreviews
+import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreview
+import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets.StreamsCardContent
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets.StreamsCarousel
 

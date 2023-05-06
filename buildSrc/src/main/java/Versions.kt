@@ -30,6 +30,9 @@ object Versions {
     const val composeBomVersion = "2023.01.00"
     const val composeCompilerVersion = "1.4.2"
     const val composeMaterial3Version = "1.0.1"
+    const val composeActivity = "1.5.0"
 
     const val coilVersion = "2.3.0"
+
+    const val lottie = "5.2.0"
 }
