@@ -11,7 +11,7 @@ object Colors {
     )
 
     val DarkColors = darkColorScheme(
-        primary = Color(0xFFFFFFFF),
+        primary = Color(0xFF000000),
     )
 
 }
