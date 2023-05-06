@@ -1,0 +1,6 @@
+<resources>
+    <string name="core_networking_msg_default_error">Não foi possível concluir. Estamos trabalhando para resolver. Tente novamente em alguns instantes.</string>
+    <string name="core_networking_no_data_content">Sem conteúdo de dados</string>
+    <string name="core_networking_no_server_error">Erro no servidor</string>
+    <string name="core_networking_networking_error">Sem conexão. Verifique o wifi ou dados móveis e tente novamente em alguns instantes.</string>
+</resources>
