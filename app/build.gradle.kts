@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage")
 android {
     namespace = "${Config.packageName}app"
 

@@ -12,6 +12,7 @@ android {
 
     dependencies {
         implementation(project(Dependencies.Module.core_networking))
+        implementation(project(Dependencies.Module.core_shared_ui))
         implementation(Dependencies.Koin.koin)
         Dependencies.Retrofit.list.forEach { implementation(it) }
         Dependencies.Kotlin.list.forEach { implementation(it) }
