@@ -14,14 +14,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun StreamPlayerApp() {
-//    StreamPlayerTheme {
-//        Scaffold { innerPadding ->
-//            Box(Modifier.padding(innerPadding)) {
-//                ListStreamsScreen()
-//            }
-//        }
-//    }
-//}
