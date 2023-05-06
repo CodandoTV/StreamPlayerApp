@@ -24,5 +24,4 @@ fun ThemePreview(
     StreamPlayerTheme {
         Surface { content() }
     }
-
 }
