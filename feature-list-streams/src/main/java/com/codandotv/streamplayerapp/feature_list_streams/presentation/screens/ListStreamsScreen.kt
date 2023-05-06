@@ -64,7 +64,7 @@ val streamsCategoryY = listOf(
 fun ListStreamsScreen() {
     Column(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.background)
             .fillMaxSize()
     ) {
         StreamsCarousel(
