@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- region Bottom Nav Items -->
+    <string name="bottom_nav_home">Início</string>
+    <string name="bottom_nav_games">Jogos</string>
+    <string name="bottom_nav_news">Novidades</string>
+    <string name="bottom_nav_downloads">Downloads</string>
+    <!-- endregion Bottom Nav Items -->
+</resources>

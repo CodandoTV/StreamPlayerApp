@@ -13,7 +13,7 @@ fun StreamPlayerTheme(
 
     MaterialTheme(
         colorScheme = getColorScheme(isDarkTheme),
-        content = content
+        content = content,
     )
 }
 
@@ -23,6 +23,3 @@ private fun getColorScheme(isDarkTheme: Boolean) =
     } else {
         Colors.DarkColors
     }
-
-
-

@@ -1,4 +1,4 @@
-package com.codandotv.streamplayerapp.screens
+package com.codandotv.streamplayerapp.splah.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,9 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.codandotv.streamplayerapp.core_shared_ui.R
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(
+    onAnimationFinished: () -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -31,7 +33,7 @@ fun SplashScreen() {
             val logoAnimationState = animateLottieCompositionAsState(composition = composition)
             LottieAnimation(composition = composition, progress = { logoAnimationState.progress })
             if (logoAnimationState.isAtEnd && logoAnimationState.isPlaying) {
-                println("faz alguma coisa")
+                onAnimationFinished()
             }
         }
     }
@@ -40,5 +42,5 @@ fun SplashScreen() {
 @Composable
 @Preview
 fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreen(onAnimationFinished = {})
 }

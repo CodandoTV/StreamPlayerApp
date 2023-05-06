@@ -14,6 +14,7 @@ dependencies {
     implementation(project(Dependencies.Module.feature_list_streams))
     implementation(project(Dependencies.Module.core_networking))
     implementation(project(Dependencies.Module.core_shared_ui))
+    implementation(project(Dependencies.Module.core_navigation))
     implementation(Dependencies.Koin.koin)
     Dependencies.Kotlin.list.forEach { implementation(it) }
     Dependencies.Support.list.forEach { implementation(it) }

@@ -13,6 +13,7 @@ object Dependencies {
         const val core_networking = ":core-networking"
         const val core_shared_ui = ":core-shared-ui"
         const val feature_list_streams = ":feature-list-streams"
+        const val core_navigation = ":core-navigation"
     }
 
     val modules: List<String> by lazy {
@@ -145,6 +146,7 @@ object Dependencies {
             "androidx.activity:activity-compose:${Versions.composeActivity}"
         const val composeUITooling = "androidx.compose.ui:ui-tooling"
         const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
+        const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
 
         override val list: List<String>
             get() = listOf(
@@ -152,7 +154,8 @@ object Dependencies {
                 Compose.coposeUIToolingPreview,
                 Compose.composeActivityCompose,
                 Compose.composeUITooling,
-                Compose.composeMaterial3
+                Compose.composeMaterial3,
+                Compose.composeNavigation
             )
     }
 }
