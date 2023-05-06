@@ -142,10 +142,9 @@ object Dependencies {
         const val composeUI = "androidx.compose.ui:ui"
         const val coposeUIToolingPreview = "androidx.compose.ui:ui-tooling-preview"
         const val composeActivityCompose =
-            "androidx.activity:activity-compose:" + "${Versions.composeActivity}"
+            "androidx.activity:activity-compose:${Versions.composeActivity}"
         const val composeUITooling = "androidx.compose.ui:ui-tooling"
-        const val composeMaterial3 = "androidx.compose.material3:material3:" +
-                "${Versions.composeMaterial3Version}"
+        const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
 
         override val list: List<String>
             get() = listOf(
