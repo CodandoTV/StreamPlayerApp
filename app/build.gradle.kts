@@ -14,9 +14,7 @@ dependencies {
     implementation(project(Dependencies.Module.core_networking))
     implementation(project(Dependencies.Module.core_ui))
     implementation(Dependencies.Koin.koin)
-    implementation(Dependencies.Compose.composeUI)
-    implementation(Dependencies.Compose.composeMaterial3)
-    implementation(Dependencies.Compose.composeNavigation)
+    Dependencies.Compose.list.forEach { implementation(it) }
     Dependencies.Kotlin.list.forEach { implementation(it) }
     Dependencies.Support.list.forEach { implementation(it) }
     Dependencies.UnitTest.list.forEach { testImplementation(it) }
