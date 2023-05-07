@@ -102,8 +102,15 @@ object Dependencies {
             )
     }
 
-    object Koin {
+    object Koin : GroupLibs {
         const val koin = "io.insert-koin:koin-android:${Versions.koin}"
+        const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+
+        override val list: List<String>
+            get() = listOf(
+                koin,
+                compose
+            )
     }
 
     object Retrofit : GroupLibs {

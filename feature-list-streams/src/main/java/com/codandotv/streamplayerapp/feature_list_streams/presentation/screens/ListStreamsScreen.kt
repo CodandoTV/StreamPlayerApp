@@ -14,6 +14,7 @@ import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreview
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets.StreamsCardContent
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets.StreamsCarousel
+import org.koin.androidx.compose.koinViewModel
 
 val streamsCategoryX = listOf(
     StreamsCardContent(
@@ -61,7 +62,7 @@ val streamsCategoryY = listOf(
 )
 
 @Composable
-fun ListStreamsScreen() {
+fun ListStreamsScreen(viewModel: ListStreamViewModel = koinViewModel()) {
     Column(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
