@@ -18,7 +18,7 @@ class ListStreamViewModel(
     private val useCase: ListStreamUseCase,
     private val analytics: ListStreamAnalytics
 ) : ViewModel() {
-    fun curtaVideo() {
+    init {
         viewModelScope.launch {
             useCase.getMovies()
                 .catchFailure {

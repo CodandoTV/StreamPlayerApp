@@ -5,6 +5,6 @@ import com.codandotv.streamplayerapp.feature_list_streams.data.model.ListStreamR
 import retrofit2.http.GET
 
 interface ListStreamService {
-    @GET("3/movie/76341")
+    @GET("3/discover/movie")
     suspend fun getMovies() : NetworkResponse<ListStreamResponse>
 }
