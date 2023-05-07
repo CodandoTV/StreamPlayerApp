@@ -1,5 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.presentation.screens
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
@@ -18,6 +20,14 @@ class ListStreamViewModel(
     private val useCase: ListStreamUseCase,
     private val analytics: ListStreamAnalytics
 ) : ViewModel() {
+
+    private val _uiState = mutableStateOf(
+        ListStreamsUIState(
+            emptyList()
+        )
+    )
+    val uiState : State<ListStreamsUIState> = _uiState
+
     init {
         viewModelScope.launch {
             useCase.getMovies()
@@ -25,7 +35,7 @@ class ListStreamViewModel(
                     println(">>>> ${it.errorMessage}")
                 }
                 .collect {
-                    println(">>> $it")
+                    _uiState.value = uiModel.convertToCardContent(it)
                 }
         }
     }

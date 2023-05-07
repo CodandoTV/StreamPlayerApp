@@ -10,7 +10,7 @@ fun ListStreamResponse.toListStream(): ListStream =
             Stream(
                 description = it.overview,
                 name = it.title,
-                posterPathUrl = it.poster_path
+                posterPathUrl =  "https://image.tmdb.org/t/p/w300${it.poster_path}"
             )
         }
     )
