@@ -23,13 +23,16 @@ class ListStreamViewModel(
 
     private val _uiState = mutableStateOf(
         ListStreamsUIState(
-            emptyList()
+            carousels = emptyList(),
+            isLoading = false
         )
     )
     val uiState : State<ListStreamsUIState> = _uiState
 
     init {
         viewModelScope.launch {
+            onLoading()
+
             useCase.getMovies()
                 .catchFailure {
                     println(">>>> ${it.errorMessage}")
@@ -37,6 +40,20 @@ class ListStreamViewModel(
                 .collect {
                     _uiState.value = uiModel.convertToCardContent(it)
                 }
+        }.invokeOnCompletion {
+            loaded()
         }
+    }
+
+    private fun loaded() {
+        _uiState.value = _uiState.value.copy(
+            isLoading = false
+        )
+    }
+
+    private fun onLoading() {
+        _uiState.value = _uiState.value.copy(
+            isLoading = true
+        )
     }
 }

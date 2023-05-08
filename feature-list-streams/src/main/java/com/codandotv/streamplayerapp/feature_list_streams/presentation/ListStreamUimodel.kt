@@ -15,6 +15,7 @@ class ListStreamUiModelImpl(
 ) : ListStreamUimodel {
     override fun convertToCardContent(listStream: List<ListStream>): ListStreamsUIState {
         return ListStreamsUIState(
+            isLoading = false,
             carousels = listStream.map {
                 CarouselData(
                     categoryName = it.categoryName,

@@ -8,5 +8,6 @@ data class CarouselData(
 )
 
 data class ListStreamsUIState(
-    val carousels: List<CarouselData>
+    val carousels: List<CarouselData>,
+    val isLoading: Boolean
 )
