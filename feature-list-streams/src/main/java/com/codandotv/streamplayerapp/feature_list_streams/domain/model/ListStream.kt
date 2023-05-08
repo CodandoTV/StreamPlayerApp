@@ -6,5 +6,6 @@ data class Stream(
     val posterPathUrl: String,
 )
 data class ListStream(
+    val categoryName: String,
     val streams: List<Stream>
 )

@@ -1,11 +1,12 @@
 package com.codandotv.streamplayerapp.feature_list_streams.presentation.screens
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,10 +28,11 @@ fun ListStreamsScreen(viewModel: ListStreamViewModel = koinViewModel()) {
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .fillMaxSize()
+            .verticalScroll(ScrollState(0))
     ) {
         uiState.value.carousels.forEach {
             StreamsCarousel(
-                title = "Category do Server",
+                title = it.categoryName,
                 contentList = it.cards
             )
         }

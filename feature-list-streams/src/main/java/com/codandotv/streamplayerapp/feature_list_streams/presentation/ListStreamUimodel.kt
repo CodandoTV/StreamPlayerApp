@@ -7,25 +7,25 @@ import com.codandotv.streamplayerapp.feature_list_streams.presentation.screens.L
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets.StreamsCardContent
 
 interface ListStreamUimodel {
-    fun convertToCardContent(listStream: ListStream): ListStreamsUIState
+    fun convertToCardContent(listStream: List<ListStream>): ListStreamsUIState
 }
 
 class ListStreamUiModelImpl(
     private val resources: Resources
 ) : ListStreamUimodel {
-    override fun convertToCardContent(listStream: ListStream): ListStreamsUIState {
+    override fun convertToCardContent(listStream: List<ListStream>): ListStreamsUIState {
         return ListStreamsUIState(
-            carousels = listOf(
+            carousels = listStream.map {
                 CarouselData(
-                    categoryName = "",
-                    cards = listStream.streams.map {
+                    categoryName = it.categoryName,
+                    cards = it.streams.map { stream ->
                         StreamsCardContent(
-                            contentDescription = it.name,
-                            url = it.posterPathUrl
+                            contentDescription = stream.name,
+                            url = stream.posterPathUrl
                         )
                     }
                 )
-            )
+            }
         )
     }
 }

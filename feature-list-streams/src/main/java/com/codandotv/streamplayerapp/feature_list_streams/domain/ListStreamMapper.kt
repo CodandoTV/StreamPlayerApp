@@ -4,8 +4,9 @@ import com.codandotv.streamplayerapp.feature_list_streams.data.model.ListStreamR
 import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStream
 import com.codandotv.streamplayerapp.feature_list_streams.domain.model.Stream
 
-fun ListStreamResponse.toListStream(): ListStream =
+fun ListStreamResponse.toListStream(genre: String): ListStream =
     ListStream(
+        categoryName = genre,
         streams = this.results.map {
             Stream(
                 description = it.overview,

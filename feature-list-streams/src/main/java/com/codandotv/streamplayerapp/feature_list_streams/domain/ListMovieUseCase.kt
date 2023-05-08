@@ -5,14 +5,13 @@ import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStrea
 import kotlinx.coroutines.flow.Flow
 
 interface ListStreamUseCase {
-    suspend fun getMovies() : Flow<ListStream>
+    suspend fun getMovies() : Flow<List<ListStream>>
 }
 
 class ListStreamUseCaseImpl(
     private val repository: ListStreamRepository
 ) : ListStreamUseCase {
-    override suspend fun getMovies(): Flow<ListStream> {
-        println(">>>>>>> Curta o video!!!")
+    override suspend fun getMovies(): Flow<List<ListStream>> {
         return repository.getMovies()
     }
 }
