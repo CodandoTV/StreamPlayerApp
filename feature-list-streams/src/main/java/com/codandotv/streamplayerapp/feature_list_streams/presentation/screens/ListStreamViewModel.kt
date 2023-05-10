@@ -7,15 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
 import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamAnalytics
 import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStream
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.ListStreamUimodel
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-
-sealed class ListStreamState {
-    data class Success(val listMovie: ListStream)
-}
 
 class ListStreamViewModel(
     private val uiModel: ListStreamUimodel,
