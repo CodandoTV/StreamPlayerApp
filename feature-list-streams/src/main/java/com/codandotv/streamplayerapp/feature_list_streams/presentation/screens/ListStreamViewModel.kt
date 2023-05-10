@@ -9,6 +9,8 @@ import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamAnaly
 import com.codandotv.streamplayerapp.feature_list_streams.domain.ListStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.domain.model.ListStream
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.ListStreamUimodel
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 sealed class ListStreamState {
@@ -31,17 +33,15 @@ class ListStreamViewModel(
 
     init {
         viewModelScope.launch {
-            onLoading()
-
             useCase.getMovies()
+                .onStart { onLoading() }
                 .catchFailure {
                     println(">>>> ${it.errorMessage}")
                 }
+                .onCompletion { loaded() }
                 .collect {
                     _uiState.value = uiModel.convertToCardContent(it)
                 }
-        }.invokeOnCompletion {
-            loaded()
         }
     }
 
