@@ -15,24 +15,14 @@ import com.codandotv.streamplayerapp.core_navigation.bottomnavigation.StreamPlay
 import com.codandotv.streamplayerapp.core_navigation.helper.currentRoute
 import com.codandotv.streamplayerapp.core_navigation.routes.SplashRoutes
 import com.codandotv.streamplayerapp.core_shared_ui.theme.StreamPlayerTheme
-import com.codandotv.streamplayerapp.feature_list_streams.di.ListStreamModule
 import com.codandotv.streamplayerapp.navigation.NavigationGraph
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.unloadKoinModules
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        loadKoinModules(ListStreamModule.module)
         setContent {
             StreamPlayerApp()
         }
-    }
-
-    override fun onDestroy() {
-        unloadKoinModules(ListStreamModule.module)
-        super.onDestroy()
     }
 }
 
