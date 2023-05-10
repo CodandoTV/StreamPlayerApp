@@ -16,6 +16,7 @@ import com.codandotv.streamplayerapp.core_navigation.helper.currentRoute
 import com.codandotv.streamplayerapp.core_navigation.routes.SplashRoutes
 import com.codandotv.streamplayerapp.core_shared_ui.theme.StreamPlayerTheme
 import com.codandotv.streamplayerapp.navigation.NavigationGraph
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
