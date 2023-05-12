@@ -19,7 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.codandotv.streamplayerapp.core_navigation.bottomnavigation.StreamPlayerBottomNavigation
+import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 import com.codandotv.streamplayerapp.feature_list_streams.presentation.widgets.StreamsCarousel
 import org.koin.androidx.compose.koinViewModel
 
@@ -70,4 +72,10 @@ fun ListStreamsScreen(
             }
         }
     }
+}
+
+@ThemePreviews
+@Composable
+fun ListStreamsScreenPreview() {
+    ListStreamsScreen(navController = rememberNavController())
 }
