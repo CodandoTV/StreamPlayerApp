@@ -8,6 +8,6 @@ import com.codandotv.streamplayerapp.feature_list_streams.presentation.screens.L
 
 fun NavGraphBuilder.listStreamsNavGraph(navController: NavHostController) {
     composable(BottomNavRoutes.HOME) {
-        ListStreamsScreen()
+        ListStreamsScreen(navController)
     }
 }
