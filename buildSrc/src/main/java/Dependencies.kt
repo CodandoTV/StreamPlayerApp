@@ -91,14 +91,14 @@ object Dependencies {
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${Versions.constraint_motion_version}"
         const val material = "com.google.android.material:material:${Versions.material_version}"
-        const val animation = "androidx.dynamicanimation:dynamicanimation:1.0.0"
+        const val animation = "androidx.dynamicanimation:dynamicanimation:${Versions.dynamic_animation}"
 
         override val list: List<String>
             get() = listOf(
                 Support.appCompat,
                 Support.constraintLayout,
                 Support.material,
-                Support.animation
+                Support.animation,
             )
     }
 
