@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -28,9 +29,12 @@ fun IconWithText(
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = text, style = MaterialTheme.typography.headlineMedium.copy(
-                fontSize = 12.sp
-            ), color = textColor
+            text = text,
+            style = MaterialTheme.typography.headlineMedium.copy(
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+            ),
+            color = textColor
         )
     }
 }

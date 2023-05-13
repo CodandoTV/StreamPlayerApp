@@ -1,6 +1,5 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.navigation
 
-import androidx.activity.compose.BackHandler
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -21,7 +20,8 @@ fun NavGraphBuilder.detailStreamNavGraph(navController: NavHostController) {
         DetailStreamScreen(
             koinViewModel {
                 parametersOf(nav.arguments?.getString(ID) ?: DEFAULT_ID)
-            }
+            },
+            navController
         ) {
             unloadKoinModules(DetailStreamModule.module)
         }

@@ -31,7 +31,7 @@ fun DetailStreamImagePreview(uiState: DetailStreamsLoadedUIState) {
         )
         Box(
             modifier = Modifier
-                .background(Color.DarkGray.copy(alpha = 0.5f), CircleShape)
+                .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                 .size(50.dp)
                 .align(Alignment.Center),
         )

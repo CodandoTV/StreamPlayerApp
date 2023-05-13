@@ -7,4 +7,6 @@
     <string name="detail_classification">Classificar</string>
     <string name="detail_share">Compartilhar</string>
     <string name="detail_download">Baixar completo</string>
+    <string name="detail_search">Pesquisar</string>
+    <string name="detail_back">Voltar</string>
 </resources>
