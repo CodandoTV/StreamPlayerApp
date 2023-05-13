@@ -16,40 +16,40 @@ import kotlinx.coroutines.launch
 class ListStreamViewModel(
     private val uiModel: ListStreamUimodel,
     private val useCase: ListStreamUseCase,
-) :  ViewModel(), DefaultLifecycleObserver {
+) : ViewModel(), DefaultLifecycleObserver {
 
-    private val _uiState = mutableStateOf(
+    val uiState = mutableStateOf(
         ListStreamsUIState(
             carousels = emptyList(),
             isLoading = false
         )
     )
-    val uiState : State<ListStreamsUIState> = _uiState
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-
         viewModelScope.launch {
-            useCase.getMovies()
-                .onStart { onLoading() }
-                .catchFailure {
-                    println(">>>> ${it.errorMessage}")
-                }
-                .onCompletion { loaded() }
-                .collect {
-                    _uiState.value = uiModel.convertToCardContent(it)
-                }
+            if (uiState.value.carousels.isEmpty()) {
+                useCase.getMovies()
+                    .onStart { onLoading() }
+                    .catchFailure {
+                        println(">>>> ${it.errorMessage}")
+                    }
+                    .onCompletion { loaded() }
+                    .collect {
+                        this@ListStreamViewModel.uiState.value = uiModel.convertToCardContent(it)
+                    }
+            }
         }
     }
 
     private fun loaded() {
-        _uiState.value = _uiState.value.copy(
+        this.uiState.value = this.uiState.value.copy(
             isLoading = false
         )
     }
 
     private fun onLoading() {
-        _uiState.value = _uiState.value.copy(
+        this.uiState.value = this.uiState.value.copy(
             isLoading = true
         )
     }

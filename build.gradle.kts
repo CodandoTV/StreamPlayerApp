@@ -35,6 +35,7 @@ fun Project.configureAndroid() {
 
     apply(plugin = "kotlin-android")
     apply(plugin = "kotlin-kapt")
+    apply(plugin = "kotlin-parcelize")
 
     configure<com.android.build.gradle.BaseExtension> {
         compileSdkVersion(Config.compileSdkVersion)
