@@ -154,6 +154,7 @@ object Dependencies {
         const val composeUITooling = "androidx.compose.ui:ui-tooling"
         const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
         const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
+        const val composeIcons = "androidx.compose.material:material-icons-extended:${Versions.composeIcons}"
 
         override val list: List<String>
             get() = listOf(
@@ -162,7 +163,8 @@ object Dependencies {
                 Compose.composeActivityCompose,
                 Compose.composeUITooling,
                 Compose.composeMaterial3,
-                Compose.composeNavigation
+                Compose.composeNavigation,
+                Compose.composeIcons
             )
     }
 }

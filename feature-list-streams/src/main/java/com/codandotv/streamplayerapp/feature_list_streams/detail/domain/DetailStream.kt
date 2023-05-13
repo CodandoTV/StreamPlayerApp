@@ -5,5 +5,6 @@ data class DetailStream(
     val title : String,
     val overview : String,
     val tagline : String,
-    val imagePath : String
+    val url : String,
+    val releaseYear : String
 )

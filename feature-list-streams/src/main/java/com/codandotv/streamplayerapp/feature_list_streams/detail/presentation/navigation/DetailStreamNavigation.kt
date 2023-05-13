@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.navigation
 
+import androidx.activity.compose.BackHandler
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable

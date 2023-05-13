@@ -11,7 +11,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.codandotv.streamplayerapp.core_navigation.routes.Routes.DETAIL
 import com.codandotv.streamplayerapp.core_networking.Url.IMAGE_URL_SIZE_300
 
 data class StreamsCardContent(

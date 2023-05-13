@@ -9,5 +9,6 @@ fun DetailStreamResponse.toDetailStream(): DetailStream =
         title = this.title,
         overview = this.overview,
         tagline = this.tagline,
-        imagePath = "$IMAGE_URL_SIZE_500${this.backdrop_path}"
+        url = "$IMAGE_URL_SIZE_500${this.backdrop_path}",
+        releaseYear = this.release_date.substring(0, 4)
     )

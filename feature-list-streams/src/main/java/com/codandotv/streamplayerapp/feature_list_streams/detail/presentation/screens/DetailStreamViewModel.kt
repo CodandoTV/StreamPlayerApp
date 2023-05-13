@@ -8,21 +8,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.ListStreamUimodel
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class DetailStreamViewModel(
     private val useCase: DetailStreamUseCase,
-) :  ViewModel(), DefaultLifecycleObserver {
+) : ViewModel(), DefaultLifecycleObserver {
 
-    private val _uiState = mutableStateOf(
-        DetailStreamsUIState(
-            isLoading = false
-        )
-    )
-    val uiState : State<DetailStreamsUIState> = _uiState
+    private val _uiState = mutableStateOf<DetailStreamsUIState>(LoadingStreamUIState)
+    val uiState: State<DetailStreamsUIState> = _uiState
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
@@ -33,24 +29,15 @@ class DetailStreamViewModel(
                 .catchFailure {
                     println(">>>> ${it.errorMessage}")
                 }
-                .onCompletion { loaded() }
                 .collect {
-                    _uiState.value = _uiState.value.copy(
+                    _uiState.value = DetailStreamsLoadedUIState(
                         detailStream = it
                     )
                 }
         }
     }
 
-    private fun loaded() {
-        _uiState.value = _uiState.value.copy(
-            isLoading = false
-        )
-    }
-
     private fun onLoading() {
-        _uiState.value = _uiState.value.copy(
-            isLoading = true
-        )
+        _uiState.value = LoadingStreamUIState
     }
 }

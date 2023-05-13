@@ -32,6 +32,7 @@ object Versions {
     const val composeCompilerVersion = "1.4.2"
     const val composeMaterial3Version = "1.0.1"
     const val composeActivity = "1.5.0"
+    const val composeIcons = "1.4.3"
     const val composeNavigationVersion = "2.5.3"
 
     const val coilVersion = "2.3.0"

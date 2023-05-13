@@ -6,4 +6,5 @@ data class DetailStreamResponse(
     val overview : String,
     val tagline : String,
     val backdrop_path : String,
+    val release_date : String
 )

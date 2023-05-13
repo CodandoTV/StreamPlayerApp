@@ -1,6 +1,8 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -32,7 +35,6 @@ fun ListStreamsScreen(
     onNavigateDetailList: (String) -> Unit = {},
     disposable: () -> Unit = {}
 ) {
-
     val uiState = remember {
         viewModel.uiState
     }
@@ -75,7 +77,8 @@ fun ListStreamsScreen(
                     uiState.value.carousels.forEach {
                         StreamsCarousel(
                             title = it.categoryName,
-                            contentList = it.cards
+                            contentList = it.cards,
+                            onNavigateDetailList = onNavigateDetailList
                         )
                     }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_watch_primary_button">Assistir</string>
+    <string name="detail_default_text_secondary_button">Baixar E1</string>
+    <string name="detail_movie">Filme</string>
+    <string name="detail_my_list">Minha Lista</string>
+    <string name="detail_classification">Classificar</string>
+    <string name="detail_share">Compartilhar</string>
+    <string name="detail_download">Baixar completo</string>
+</resources>

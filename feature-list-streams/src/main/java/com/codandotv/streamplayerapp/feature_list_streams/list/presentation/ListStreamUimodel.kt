@@ -1,8 +1,8 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation
 
 import android.content.res.Resources
-import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.CarouselData
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.ListStream
+import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.CarouselData
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.ListStreamsUIState
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.StreamsCardContent
 
