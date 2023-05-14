@@ -15,18 +15,18 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun DetailStreamButtonAction(
     buttonsColors: ButtonColors,
-    imageVector : ImageVector,
-    imageVectorColor : Color,
-    text : String,
-    textColor : Color,
+    imageVector: ImageVector,
+    imageVectorColor: Color,
+    text: String,
+    textColor: Color,
+    modifier: Modifier = Modifier.fillMaxWidth(),
     onClick: () -> Unit,
 ) {
     Button(
         onClick = { },
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier
-            .fillMaxWidth(),
-        colors = buttonsColors
+        modifier = modifier,
+        colors = buttonsColors,
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically

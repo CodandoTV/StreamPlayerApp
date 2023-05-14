@@ -1,7 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -13,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,7 +36,7 @@ fun DetailStreamScreen(
     }
 
     val lifecycleOwner = LocalLifecycleOwner.current
-    lifecycle(lifecycleOwner, viewModel, disposable)
+    Lifecycle(lifecycleOwner, viewModel, disposable)
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (val uiState = uiStateRemember.value) {
@@ -127,7 +125,7 @@ private fun SetupDetailScreen(
 }
 
 @Composable
-private fun lifecycle(
+private fun Lifecycle(
     lifecycleOwner: LifecycleOwner, viewModel: DetailStreamViewModel, disposable: () -> Unit
 ) {
     DisposableEffect(lifecycleOwner) {

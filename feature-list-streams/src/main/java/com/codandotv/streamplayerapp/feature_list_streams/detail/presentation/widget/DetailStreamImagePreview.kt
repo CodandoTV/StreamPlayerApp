@@ -19,15 +19,18 @@ import com.codandotv.streamplayerapp.feature_list_streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 
 @Composable
-fun DetailStreamImagePreview(uiState: DetailStreamsLoadedUIState) {
+fun DetailStreamImagePreview(
+    uiState: DetailStreamsLoadedUIState,
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(16f / 9f)
+) {
     Box(contentAlignment = Alignment.Center) {
         AsyncImage(
             model = uiState.detailStream.url,
             contentScale = ContentScale.FillBounds,
             contentDescription = uiState.detailStream.tagline,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(16f / 9f)
+            modifier = modifier
         )
         Box(
             modifier = Modifier

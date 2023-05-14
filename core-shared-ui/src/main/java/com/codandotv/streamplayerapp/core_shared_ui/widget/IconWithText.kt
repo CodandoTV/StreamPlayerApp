@@ -17,10 +17,15 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun IconWithText(
-    imageVector: ImageVector, imageColor: Color, text: String, textColor: Color
+    imageVector: ImageVector,
+    imageColor: Color,
+    text: String,
+    textColor: Color,
+    modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         Icon(
             imageVector = imageVector,

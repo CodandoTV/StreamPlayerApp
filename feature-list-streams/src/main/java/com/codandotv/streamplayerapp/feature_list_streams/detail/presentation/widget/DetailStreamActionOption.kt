@@ -16,10 +16,11 @@ import com.codandotv.streamplayerapp.core_shared_ui.widget.IconWithText
 import com.codandotv.streamplayerapp.feature_list_streams.R
 
 @Composable
-fun DetailStreamActionOption() {
+fun DetailStreamActionOption(
+    modifier: Modifier = Modifier.fillMaxWidth()
+) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = modifier,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         IconWithText(

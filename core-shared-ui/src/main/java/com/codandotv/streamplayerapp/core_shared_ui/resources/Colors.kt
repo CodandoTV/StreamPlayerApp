@@ -5,7 +5,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 object Colors {
-    val DarkDeepGray = Color(android.graphics.Color.parseColor("#262626"))
+    val DarkDeepGray = Color(0xFF262626)
 
     val LightColors = lightColorScheme(
         primary = Color(0xFFE50914),
