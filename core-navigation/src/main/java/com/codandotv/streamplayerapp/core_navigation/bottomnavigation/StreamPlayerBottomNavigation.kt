@@ -18,7 +18,10 @@ import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_navigation.helper.currentRoute
 
 private val bottomMenuItems = listOf(
-    BottomNavItem.Home, BottomNavItem.Games, BottomNavItem.News, BottomNavItem.Downloads
+    BottomNavItem.Home,
+    BottomNavItem.Games,
+    BottomNavItem.News,
+    BottomNavItem.Downloads
 )
 
 @Composable

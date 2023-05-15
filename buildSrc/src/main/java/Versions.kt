@@ -14,6 +14,7 @@ object Versions {
     const val androidCoreKtx = "1.7.0"
     const val support_version = "1.4.1"
     const val material_version = "1.5.0"
+    const val dynamic_animation = "1.0.0"
     const val retrofit_version = "2.9.0"
     const val moshi_version = "1.14.0"
     const val okhttp_version = "4.10.0"
@@ -31,6 +32,7 @@ object Versions {
     const val composeCompilerVersion = "1.4.2"
     const val composeMaterial3Version = "1.0.1"
     const val composeActivity = "1.5.0"
+    const val composeIcons = "1.4.3"
     const val composeNavigationVersion = "2.5.3"
 
     const val coilVersion = "2.3.0"
