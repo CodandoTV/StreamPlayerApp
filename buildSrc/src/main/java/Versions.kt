@@ -34,6 +34,7 @@ object Versions {
     const val composeActivity = "1.5.0"
     const val composeIcons = "1.4.3"
     const val composeNavigationVersion = "2.5.3"
+    const val lifecycleComposeRuntime = "2.6.1"
 
     const val coilVersion = "2.3.0"
 

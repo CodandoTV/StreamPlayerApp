@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors.DarkDeepGray
 import com.codandotv.streamplayerapp.feature_list_streams.R
@@ -31,17 +32,15 @@ fun DetailStreamScreen(
     navController: NavController,
     disposable: () -> Unit = {}
 ) {
-    val uiStateRemember = remember {
-        viewModel.uiState
-    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val lifecycleOwner = LocalLifecycleOwner.current
     Lifecycle(lifecycleOwner, viewModel, disposable)
 
     Box(modifier = Modifier.fillMaxSize()) {
-        when (val uiState = uiStateRemember.value) {
+        when (uiState) {
             is DetailStreamsLoadedUIState -> {
-                SetupDetailScreen(uiState, navController)
+                SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController)
             }
             else -> {
                 CircularProgressIndicator(

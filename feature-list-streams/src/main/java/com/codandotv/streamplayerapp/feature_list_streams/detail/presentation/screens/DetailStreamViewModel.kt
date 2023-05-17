@@ -1,7 +1,5 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
@@ -9,16 +7,24 @@ import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailStreamViewModel(
     private val useCase: DetailStreamUseCase,
 ) : ViewModel(), DefaultLifecycleObserver {
 
-    private val _uiState = mutableStateOf<DetailStreamsUIState>(LoadingStreamUIState)
-    val uiState: State<DetailStreamsUIState> = _uiState
+    private val _uiState = MutableStateFlow<DetailStreamsUIState>(LoadingStreamUIState)
+    val uiState : StateFlow<DetailStreamsUIState> = _uiState.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        initialValue = _uiState.value
+    )
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
@@ -29,15 +35,17 @@ class DetailStreamViewModel(
                 .catchFailure {
                     println(">>>> ${it.errorMessage}")
                 }
-                .collect {
-                    _uiState.value = DetailStreamsLoadedUIState(
-                        detailStream = it
-                    )
+                .collect { detailStream ->
+                    _uiState.update {
+                        DetailStreamsLoadedUIState(
+                            detailStream = detailStream
+                        )
+                    }
                 }
         }
     }
 
     private fun onLoading() {
-        _uiState.value = LoadingStreamUIState
+        _uiState.update { LoadingStreamUIState }
     }
 }
