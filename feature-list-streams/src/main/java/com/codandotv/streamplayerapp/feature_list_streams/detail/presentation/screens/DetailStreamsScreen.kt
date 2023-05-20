@@ -1,7 +1,9 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -35,7 +37,11 @@ fun DetailStreamScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     Lifecycle(lifecycleOwner, viewModel, disposable)
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(ScrollState(0))
+    ) {
         when (uiState) {
             is DetailStreamsLoadedUIState -> {
                 SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController)
