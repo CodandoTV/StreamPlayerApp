@@ -9,22 +9,21 @@ object Colors {
 
     val LightColors = lightColorScheme(
         primary = Color(0xFFE50914),
-        onBackground = Color(0xFFFFFFFF),
         secondary = Color(0xFFF5F5F1),
-        onSurface = Color(0xFFF5F5F1),
-        background = Color(0xFF000000),
-        surface = Color(0xFF121212),
-        onSurfaceVariant = Color(0XFF7b7b7b)
+        background = Color(0xFFFFFFFF),
+        onBackground = Color(0xFF070707),
+        surface = Color(0xFFFFFFFF),
+        onSurface = Color(0xFF121212),
+        onSurfaceVariant = Color(0xFF9B9B9B),
     )
 
     val DarkColors = darkColorScheme(
         primary = Color(0xFFE50914),
-        onBackground = Color(0xFFFFFFFF),
         secondary = Color(0xFFF5F5F1),
-        onSurface = Color(0xFFF5F5F1),
-        background = Color(0xFFFFFFFF),
+        background = Color(0xFF000000),
+        onBackground = Color(0xFFFFFFFF),
         surface = Color(0xFF121212),
+        onSurface = Color(0xFFF5F5F1),
         onSurfaceVariant = Color(0XFF7b7b7b)
     )
-
 }

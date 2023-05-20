@@ -10,7 +10,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors.DarkDeepGray
 import com.codandotv.streamplayerapp.feature_list_streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
@@ -77,42 +75,43 @@ private fun SetupDetailScreen(
                 Text(
                     text = uiState.detailStream.title,
                     style = MaterialTheme.typography.headlineMedium.copy(
-                        color = Color.White, fontWeight = FontWeight.Bold, fontSize = 28.sp
+                        fontWeight = FontWeight.Bold, fontSize = 28.sp
                     )
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = uiState.detailStream.releaseYear,
                     style = MaterialTheme.typography.headlineMedium.copy(
-                        color = Color.Gray, fontSize = 14.sp, fontWeight = FontWeight.Bold
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontSize = 14.sp, fontWeight = FontWeight.Bold
                     )
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 DetailStreamButtonAction(
                     buttonsColors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
+                        containerColor = MaterialTheme.colorScheme.surface
                     ),
                     imageVector = Icons.Filled.PlayArrow,
-                    imageVectorColor = Color.Black,
+                    imageVectorColor = MaterialTheme.colorScheme.onSurface,
                     text = stringResource(R.string.detail_watch_primary_button),
-                    textColor = Color.Black,
+                    textColor = MaterialTheme.colorScheme.onSurface,
                     onClick = {},
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 DetailStreamButtonAction(
                     buttonsColors = ButtonDefaults.buttonColors(
-                        containerColor = DarkDeepGray
+                        containerColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),
                     imageVector = Icons.Filled.FileDownload,
-                    imageVectorColor = Color.White,
+                    imageVectorColor = MaterialTheme.colorScheme.onSurface,
                     text = stringResource(id = R.string.detail_default_text_secondary_button),
-                    textColor = Color.White,
+                    textColor = MaterialTheme.colorScheme.onSurface,
                     onClick = {},
                 )
                 Text(
                     text = uiState.detailStream.overview,
                     style = MaterialTheme.typography.headlineMedium.copy(
-                        color = Color.White, fontSize = 16.sp, lineHeight = 1.25.em
+                        color = MaterialTheme.colorScheme.onSurface, fontSize = 16.sp, lineHeight = 1.25.em
                     ),
                     modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                 )
