@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">StreamPlayerApp</string>
+
+    <!-- region Topbar   -->
+    <string name="topbar_shows">Séries</string>
+    <string name="topbar_movies">Filmes</string>
+    <string name="topbar_categories">Categorias</string>
+    <!-- endregion Topbar   -->
+
 </resources>

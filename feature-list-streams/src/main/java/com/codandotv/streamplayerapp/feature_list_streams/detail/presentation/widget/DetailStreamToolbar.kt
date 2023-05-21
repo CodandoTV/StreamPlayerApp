@@ -39,7 +39,7 @@ fun DetailStreamToolbar(navController : NavController) {
             }
             IconButton(onClick = { }) {
                 Image(
-                    painter = painterResource(id = R.drawable.perfil_fake),
+                    painter = painterResource(id = com.codandotv.streamplayerapp.core_shared_ui.R.drawable.perfil_fake),
                     contentDescription = null
                 )
             }
