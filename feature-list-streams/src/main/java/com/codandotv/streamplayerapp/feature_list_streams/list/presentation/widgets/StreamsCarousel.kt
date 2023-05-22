@@ -27,7 +27,6 @@ fun StreamsCarousel(
         Text(
             title,
             style = MaterialTheme.typography.headlineMedium.copy(
-                color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
