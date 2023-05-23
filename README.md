@@ -1,4 +1,11 @@
 # StreamPlayerApp
+<h3 align="center"> 
+  
+[![Backers on Open Collective](https://opencollective.com/stremplayerapp/backers/badge.svg)](#backers)
+[![Sponsors on Open Collective](https://opencollective.com/stremplayerapp/sponsors/badge.svg)](#sponsors)
+<a href="https://www.linkedin.com/company/codandotv"><img src="https://user-images.githubusercontent.com/5540492/212076261-85e22389-eaae-4ac0-9c9d-06196f54ac70.png" height="20px"/></a>
+<a href="https://www.youtube.com/c/CodandoTV"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" height="20px"/></a>
+</h3> 
 
 ![Logo do Projeto](file_readme/codandotv.png)
 
@@ -12,49 +19,36 @@ Este projeto foi iniciado com o propósito de fornecer uma oportunidade de apren
 Toda a comunicação desse grupo será feita no nosso grupo do [Discord](https://discord.gg/fZMDmjKmju) no canal [#projeto-netflix](https://discord.gg/hSA4z6uXh5)
 
 ------------------------------------------
-### 🚨 Ahhhhhh se você esta entrando nesse repo, ou sendo mento(ra/r) ou sendo mentorad(a/o) e ainda não se inscreveu no canal, inscreva-se 🙏 
+
+### 🚨 Ahhhhhh se você esta entrando nesse repo, ou sendo mento(ra/r) ou sendo mentorad(a/o) e ainda não se inscreveu no canal, inscreva-se 🙏. 
 [![CodandoTV](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://bit.ly/3Ob3yPH)
+
+Acompanhe a série [Projeto Netflix](https://www.youtube.com/playlist?list=PL-7tME9TKyA4At5ze9i8-w_trk7nXMGRj) que é um conteúdo originado deste repositório
 
 ------------------------------------------
 
 ## ✨ Como Contribuir
 
-Se você deseja contribuir para o projeto as siga estas etapas:
+Se você deseja contribuir para o projeto veja, qual cenário que se adeque melhor a você:
 
-**1. Abra a parte de ISSUES do GitHub e escolha uma issue que você se identifica ou gostaria de explorá-la.**
-  - 1.1. Caso você queira aprender algo ou quer explorar o processo de mentoria ou está na dúvida sobre o que pegar.
+1. Caso você queira aprender algo ou quer explorar o processo de mentoria ou está na dúvida sobre o que pegar.
     - Fale com um dos membros apoiadores no grupo do Discord, no canal #projeto-netflix (Rods, Gabriel Moro ou Carlos Vacarri), para ajudar a instruí-l(a/o).
-    - Essa parte da dinâmica da mentoria será moldada junto com você, então tente/tenha paciência e vamos aprender juntos!
- - 1.2. Caso você queira ajudar a galera no processo de mentoria.
+    - Essa parte da dinâmica da mentoria será moldada junto com você, logo não sabemos como vai ser na pratica 😊, então tente/tenha paciência e vamos aprender juntos!
+    - O objetivo é utilizar o discord como principal meio de comunicação
+    
+2. Caso você queira ajudar a galera no processo de mentoria.
     - Fale com um dos membros apoiadores no grupo do Discord, no canal #projeto-netflix, e participe ajudando o pessoal lá.
     - Entre em contato conosco no Discord com Rods, Gabriel Moro ou Carlos Vacarri.
- - 1.3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
-    - Siga o resto dos passos e seja bem-vindo!
- - 1.4
-    - Sentiu falta de algo que não está mapeando, criei uma issue, e fale com nossos membros apoiadores;
 
-**2. Associe seu nome, caso não de, é porque vc precisa participar do grupo `Codevs`, entre em contato com nossos membros apoiadores do discord para adicionarem você nesse grupo;**
+3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
+    - Siga o resto dos [passos](https://github.com/CodandoTV/StreamPlayerApp/wiki/Contribuir-com-o-projeto) e seja bem-vindo!
 
-**3. Faça um fork deste repositório na sua máquina;**
+4. Caso tenha sentido falta de algo que não está mapeando, criei uma issue, e fale com nossos membros apoiadores;
 
-**4. Crie uma branch a partir da `master` para a sua feature;**
-```git
-git checkout -b feature/issue
-```
+5. Quer gravar vídeo no CodandoTV do que você fez?
+    - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
-**5. Desenvolva e teste sua feature;**
-
-**6. Faça commit das suas alterações:**
-```git
-git commit -m 'Adicionando minha feature'
-```
-
-**7. Faça push para o repositório remoto;**
-```git
-git push origin minha-feature`
-```
-
-**8. Abra um Pull Request explicando suas alterações e aguarde a revisão e aprovação.**
+Para todas as condições a continuaçõa estará na nossa wiki no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/wiki/Contribuir-com-o-projeto)
 
 ---
 
@@ -64,27 +58,7 @@ A ideia que a nossa wiki fique cade vez mais rica, então será um processo cont
 Lá estarão listadas, nossas tecnologias, e motivadores e mais alguma coisa que acharmos relevante.
 
 Se vc achou que faltou algo relevante ali, fique a vontade e faça um PR para wiki também!
-
-**1. Faça um fork do repositório**
-**2. Clone o repositório**
-```git
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.wiki.git
-```
-**3. Acessa a pasta wiki**
-```
-cd NOME_DO_REPOSITORIO.wiki
-```
-**4. Faça as alterações desejadas nos arquivos da wiki;**
-**5. Commit e push das alterações para o seu repositório forked:**
-```git
-git add .
-git commit -m "Descrição das alterações"
-git push origin master
-```
-**6. Crie um novo Pull Request, escolhendo o repositório original como base e a branch com as suas alterações.**
-**7. Preencha os detalhes do PR, fornecendo um título e uma descrição clara.**
-**8. Crie o PR e aguarde a revisão e possível aceitação das suas alterações.**
-**9. Certifique-se de substituir "SEU_USUARIO" pelo seu nome de usuário do GitHub e "NOME_DO_REPOSITORIO" pelo nome correto do repositório da wiki em questão.**
+[Passo a Passo](https://github.com/CodandoTV/StreamPlayerApp/wiki/Contribuir-na-WIKI)
 
 --- 
 
