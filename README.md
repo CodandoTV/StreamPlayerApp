@@ -48,7 +48,7 @@ Se você deseja contribuir para o projeto veja, qual cenário que se adeque melh
 5. Quer gravar vídeo no CodandoTV do que você fez?
     - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
-Para todas as condições a continuaçõa estará na nossa wiki no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
+Para todas as condições de contribuições do repo a continuaçõa está no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
 
 ---
 
