@@ -10,7 +10,9 @@
 ![Logo do Projeto](file_readme/codandotv.png)
 
 ## 🎯 Sobre o Projeto
-O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria.
+O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria. Por causa disso estaremos utilizando todas as tecnologias mais atuais de desenvolvimento android como:
+
+**Flow, Compose, Koin, NavigationCompose, Arquitetura MVVM com clean architecture entre outras ( ainda será separado um link para isso)**
 
 ## 🏋️‍♀️ Motivação
 Este projeto foi iniciado com o propósito de fornecer uma oportunidade de aprendizado prático e colaborativo para a comunidade. Através dele, os participantes podem aprimorar suas habilidades em desenvolvimento Android, Kotlin, arquitetura de aplicativos e trabalho em equipe.
@@ -41,14 +43,14 @@ Se você deseja contribuir para o projeto veja, qual cenário que se adeque melh
     - Entre em contato conosco no Discord com Rods, Gabriel Moro ou Carlos Vacarri.
 
 3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
-    - Siga o resto dos [passos](https://github.com/CodandoTV/StreamPlayerApp/wiki/Contribuir-com-o-projeto) e seja bem-vindo!
+    - Siga o resto dos [passos](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md) e seja bem-vindo!
 
 4. Caso tenha sentido falta de algo que não está mapeando, criei uma issue, e fale com nossos membros apoiadores;
 
 5. Quer gravar vídeo no CodandoTV do que você fez?
     - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
-Para todas as condições a continuaçõa estará na nossa wiki no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/wiki/Contribuir-com-o-projeto)
+Para todas as condições de contribuições do repo a continuaçõa está no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
 
 ---
 
@@ -58,7 +60,7 @@ A ideia que a nossa wiki fique cade vez mais rica, então será um processo cont
 Lá estarão listadas, nossas tecnologias, e motivadores e mais alguma coisa que acharmos relevante.
 
 Se vc achou que faltou algo relevante ali, fique a vontade e faça um PR para wiki também!
-[Passo a Passo](https://github.com/CodandoTV/StreamPlayerApp/wiki/Contribuir-na-WIKI)
+[Passo a Passo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_WIKI.md)
 
 --- 
 
