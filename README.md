@@ -20,7 +20,7 @@ Toda a comunicação desse grupo será feita no nosso grupo do [Discord](https:/
 
 ------------------------------------------
 
-### 🚨 Ahhhhhh se você esta entrando nesse repo, ou sendo mento(ra/r) ou sendo mentorad(a/o) e ainda não se inscreveu no canal, inscreva-se 🙏. 
+### 🚨 Ahhhhhh se você esta entrando nesse repo, ou sendo mento(ra/r) ou sendo mentorad(a/o) ou passando aqui por a caso só para pegar um café ☕ e ainda não se inscreveu no canal, inscreva-se 🙏. 
 [![CodandoTV](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://bit.ly/3Ob3yPH)
 
 Acompanhe a série [Projeto Netflix](https://www.youtube.com/playlist?list=PL-7tME9TKyA4At5ze9i8-w_trk7nXMGRj) que é um conteúdo originado deste repositório
