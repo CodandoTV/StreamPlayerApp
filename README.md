@@ -18,7 +18,7 @@ O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colabora
 Este projeto foi iniciado com o propósito de fornecer uma oportunidade de aprendizado prático e colaborativo para a comunidade. Através dele, os participantes podem aprimorar suas habilidades em desenvolvimento Android, Kotlin, arquitetura de aplicativos e trabalho em equipe.
 
 ## 💬 Comunicação:
-Toda a comunicação desse grupo será feita no nosso grupo do [Discord](https://discord.gg/fZMDmjKmju) no canal [#projeto-netflix](https://discord.gg/hSA4z6uXh5)
+Toda a comunicação desse grupo será feita no nosso grupo do [Discord](https://discord.gg/fZMDmjKmju) no canal [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351))
 
 ------------------------------------------
 
@@ -34,13 +34,13 @@ Acompanhe a série [Projeto Netflix](https://www.youtube.com/playlist?list=PL-7t
 Se você deseja contribuir para o projeto veja, qual cenário que se adeque melhor a você:
 
 1. Caso você queira aprender algo ou quer explorar o processo de mentoria ou está na dúvida sobre o que pegar.
-    - Fale com um dos membros apoiadores no grupo do Discord, no canal #projeto-netflix (Rods, Gabriel Moro ou Carlos Vacarri), para ajudar a instruí-l(a/o).
+    - Fale com um dos membros apoiadores no grupo do [Discord](https://discord.gg/fZMDmjKmju), no canal [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)(Rods, Gabriel Moro ou Carlos Vaccari), para ajudar a instruí-l(a/o).
     - Essa parte da dinâmica da mentoria será moldada junto com você, logo não sabemos como vai ser na pratica 😊, então tente/tenha paciência e vamos aprender juntos!
     - O objetivo é utilizar o discord como principal meio de comunicação
     
 2. Caso você queira ajudar a galera no processo de mentoria.
     - Fale com um dos membros apoiadores no grupo do Discord, no canal #projeto-netflix, e participe ajudando o pessoal lá.
-    - Entre em contato conosco no Discord com Rods, Gabriel Moro ou Carlos Vacarri.
+    - Entre em contato conosco no [Discord](https://discord.gg/fZMDmjKmju) com Rods, Gabriel Moro ou Carlos Vaccari.
 
 3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
     - Siga o resto dos [passos](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md) e seja bem-vindo!
