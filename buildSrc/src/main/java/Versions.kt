@@ -7,7 +7,7 @@ object Versions {
     const val test_espresso_version = "3.4.0"
     const val test_espresso_version_contrib = "3.5.1"
     const val test_rules_version = "1.2.0"
-    const val test_hamcrest = "1.3"
+    const val test_hamcrest = "1.4"
     const val test_uiautomator = "2.2.0"
     const val test_ext = "1.1.1"
 
