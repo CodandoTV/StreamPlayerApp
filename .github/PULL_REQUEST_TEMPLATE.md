@@ -15,6 +15,7 @@
 - [ ] Os testes foram executados e passaram com sucesso.
 - [ ] As alterações de código seguem as diretrizes de estilo do projeto.
 - [ ] Foram adicionados testes, se aplicável.
+- [ ] Se inscreveu no canal?😛
 
 ## Issues Relacionadas
 
