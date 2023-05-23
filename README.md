@@ -10,7 +10,7 @@
 ![Logo do Projeto](file_readme/codandotv.png)
 
 ## 🎯 Sobre o Projeto
-O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria.
+O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria. Por causa disso estaremos utilizando todas as tecnologias mais atuais de desenvolvimento android como: Flow, Compose, Koin, NavigationCompose entre outras ( ainda será separado um link para isso)
 
 ## 🏋️‍♀️ Motivação
 Este projeto foi iniciado com o propósito de fornecer uma oportunidade de aprendizado prático e colaborativo para a comunidade. Através dele, os participantes podem aprimorar suas habilidades em desenvolvimento Android, Kotlin, arquitetura de aplicativos e trabalho em equipe.
