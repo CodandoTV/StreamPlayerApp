@@ -12,6 +12,7 @@
     - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
 **2. Associe seu nome, caso não de, é porque vc precisa participar do grupo `Codevs`, entre em contato com nossos membros apoiadores do discord para adicionarem você nesse grupo;**
+- 2.2. Se vc quer fazer algo que ainda não tem uma issue fale com Rods para instrui-lo
 
 **3. Faça um fork deste repositório na sua máquina;**
 
