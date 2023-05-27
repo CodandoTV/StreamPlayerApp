@@ -1,8 +1,8 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -40,7 +40,7 @@ fun DetailStreamScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(ScrollState(0))
+            .verticalScroll(rememberScrollState())
     ) {
         when (uiState) {
             is DetailStreamsLoadedUIState -> {

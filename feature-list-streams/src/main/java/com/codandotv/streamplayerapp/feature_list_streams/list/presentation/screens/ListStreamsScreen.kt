@@ -1,9 +1,9 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -76,7 +76,7 @@ fun ListStreamsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.TopCenter)
-                        .verticalScroll(ScrollState(0))
+                        .verticalScroll(rememberScrollState())
                 ) {
                     uiState.carousels.forEach {
                         StreamsCarousel(
