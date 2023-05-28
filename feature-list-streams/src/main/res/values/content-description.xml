@@ -2,7 +2,7 @@
 <resources>
     <string name="icon_play">Ícone Reprodução</string>
     <string name="icon_add">Ícone adicionar</string>
-    <string name="icon_info">Ícone informaçoes</string>
-    <string name="highligh_banner_content">Poster de conteudo em destaque</string>
+    <string name="icon_info">Ícone informações</string>
+    <string name="highligh_banner_content">Poster de conteúdo em destaque</string>
     <string name="icon_highligh_banner_ranking">Ícone top 10</string>
 </resources>
