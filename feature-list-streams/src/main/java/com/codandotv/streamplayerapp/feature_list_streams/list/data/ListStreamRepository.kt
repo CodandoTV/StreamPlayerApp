@@ -1,9 +1,10 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.data
 
 import com.codandotv.streamplayerapp.core_networking.handleError.toFlow
-import com.codandotv.streamplayerapp.core_networking.handleError.toResult
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.ListStream
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.toListStream
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 interface ListStreamRepository {
@@ -11,7 +12,8 @@ interface ListStreamRepository {
 }
 
 class ListStreamRepositoryImpl(
-    private val service: ListStreamService
+    private val service: ListStreamService,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : ListStreamRepository {
 
     override suspend fun getMovies(): Flow<List<ListStream>> =
@@ -30,5 +32,5 @@ class ListStreamRepositoryImpl(
                             )
                         }.first()
                 }
-            }
+            }.flowOn(dispatcher)
 }
