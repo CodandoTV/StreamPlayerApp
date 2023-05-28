@@ -19,7 +19,6 @@ class ListStreamUiModelImpl(
     private val resources: Resources
 ) : ListStreamUimodel {
     override fun convertToCardContent(listStream: List<ListStream>): ListStreamsUIState {
-        val item = listStream.random().streams.random()
         return ListStreamsUIState(
             isLoading = false,
             carousels = listStream.map {
@@ -32,16 +31,27 @@ class ListStreamUiModelImpl(
                         )
                     })
             },
-            highlightBanner = HighlightBanner(
-                name = item.name,
-                imageUrl = item.posterPathUrl,
-                contentType = ContentType.getContentName(ContentType.FILM),
-                contentTypeAsPlural = ContentType.getContentNameAsPlural(ContentType.FILM),
-                extraInfo = IconAndTextInfo(R.drawable.ic_top_10, R.string.highlight_banner_stream_ranking),
-                leftButton = IconAndTextInfo(drawable.ic_add, R.string.highlight_banner_add),
-                centralButton = IconAndTextInfo(drawable.ic_play, R.string.highlight_banner_watch),
-                rightButton = IconAndTextInfo(drawable.ic_info, R.string.highlight_banner_info),
-            )
+            highlightBanner = getHighlightBanner(listStream)
+        )
+    }
+
+    private fun getHighlightBanner(listStream: List<ListStream>): HighlightBanner? {
+        if (listStream.isEmpty()) return null
+
+        val item = listStream.random().streams.random()
+
+        return HighlightBanner(
+            name = item.name,
+            imageUrl = item.posterPathUrl,
+            contentType = ContentType.getContentName(ContentType.FILM),
+            contentTypeAsPlural = ContentType.getContentNameAsPlural(ContentType.FILM),
+            extraInfo = IconAndTextInfo(
+                R.drawable.ic_top_10,
+                R.string.highlight_banner_stream_ranking
+            ),
+            leftButton = IconAndTextInfo(drawable.ic_add, R.string.highlight_banner_add),
+            centralButton = IconAndTextInfo(drawable.ic_play, R.string.highlight_banner_watch),
+            rightButton = IconAndTextInfo(drawable.ic_info, R.string.highlight_banner_info),
         )
     }
 }
