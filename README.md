@@ -45,12 +45,12 @@ Se você deseja contribuir para o projeto veja, qual cenário que se adeque melh
 3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
     - Siga o resto dos [passos](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md) e seja bem-vindo!
 
-4. Caso tenha sentido falta de algo que não está mapeando, criei uma issue, e fale com nossos membros apoiadores;
+4. Caso tenha sentido falta de algo que não está mapeando, crie uma issue e fale com nossos membros apoiadores;
 
 5. Quer gravar vídeo no CodandoTV do que você fez?
     - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
-Para todas as condições de contribuições do repo a continuaçõa está no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
+Para todas as condições de contribuições do repo, a continuação está no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
 
 ---
 
@@ -68,7 +68,7 @@ Se vc achou que faltou algo relevante ali, fique a vontade e faça um PR para wi
 
 Pode ser que existam threads no discord interminaveis e as vezes a comunicação como em qualquer empresa tem uma falha, imagina um projeto que fazemos no nosso tempo vago.
 
-Criei um `discussions` e la além de ficar no histórico, se quiser olhar o exemplo [Discussion](https://github.com/CodandoTV/StreamPlayerApp/discussions/48), podemos fazer threads mais longas e tudo guardado para as pessoas verem, parecido com as threads do `redit` vamos ver se funciona bem isso, contamos com sua compreensão e apoio.
+Criei um `discussions` e la além de ficar no histórico, se quiser olhar o exemplo [Discussion](https://github.com/CodandoTV/StreamPlayerApp/discussions/48), podemos fazer threads mais longas e tudo guardado para as pessoas verem, parecido com as threads do `reddit` vamos ver se funciona bem isso, contamos com sua compreensão e apoio.
 
 ---
 
