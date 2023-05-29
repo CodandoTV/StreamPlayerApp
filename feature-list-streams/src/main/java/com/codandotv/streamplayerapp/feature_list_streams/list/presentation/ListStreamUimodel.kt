@@ -47,11 +47,11 @@ class ListStreamUiModelImpl(
             contentTypeAsPlural = ContentType.getContentNameAsPlural(ContentType.FILM),
             extraInfo = IconAndTextInfo(
                 R.drawable.ic_top_10,
-                R.string.highlight_banner_stream_ranking
+                R.string.list_highlight_banner_stream_ranking
             ),
-            leftButton = IconAndTextInfo(drawable.ic_add, R.string.highlight_banner_add),
-            centralButton = IconAndTextInfo(drawable.ic_play, R.string.highlight_banner_watch),
-            rightButton = IconAndTextInfo(drawable.ic_info, R.string.highlight_banner_info),
+            leftButton = IconAndTextInfo(drawable.ic_add, R.string.list_highlight_banner_add),
+            centralButton = IconAndTextInfo(drawable.ic_play, R.string.list_highlight_banner_watch),
+            rightButton = IconAndTextInfo(drawable.ic_info, R.string.list_highlight_banner_info),
         )
     }
 }

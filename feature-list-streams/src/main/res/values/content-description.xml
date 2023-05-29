@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="icon_play">Ícone Reprodução</string>
-    <string name="icon_add">Ícone adicionar</string>
-    <string name="icon_info">Ícone informações</string>
-    <string name="highligh_banner_content">Poster de conteúdo em destaque</string>
-    <string name="icon_highligh_banner_ranking">Ícone top 10</string>
+    <string name="list_icon_play">Ícone Reprodução</string>
+    <string name="list_icon_add">Ícone adicionar</string>
+    <string name="list_icon_info">Ícone informações</string>
+    <string name="list_highligh_banner_content">Poster de conteúdo em destaque</string>
+    <string name="list_icon_highligh_banner_ranking">Ícone top 10</string>
 </resources>

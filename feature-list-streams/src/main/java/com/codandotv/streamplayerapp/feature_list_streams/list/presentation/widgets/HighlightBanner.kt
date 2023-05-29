@@ -74,7 +74,7 @@ fun ContentImage(modifier: Modifier = Modifier, imageUrl: String) {
         modifier = modifier.fillMaxSize(),
         model = imageUrl,
         contentScale = ContentScale.Crop,
-        contentDescription = stringResource(id = R.string.highligh_banner_content)
+        contentDescription = stringResource(id = R.string.list_highligh_banner_content)
     )
 }
 
@@ -116,7 +116,7 @@ fun ContentRanking(
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
             painter = painterResource(id = extraInfo.icon),
-            contentDescription = stringResource(id = R.string.icon_highligh_banner_ranking),
+            contentDescription = stringResource(id = R.string.list_icon_highligh_banner_ranking),
             modifier = Modifier.size(24.dp),
             tint = Color.Unspecified
         )
@@ -186,7 +186,7 @@ fun AddToListButton(
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
                 painter = painterResource(id = drawable.ic_add),
-                contentDescription = stringResource(id = R.string.icon_add),
+                contentDescription = stringResource(id = R.string.list_icon_add),
                 tint = Color.White,
             )
             Text(
@@ -208,7 +208,7 @@ fun InfoButton(
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
                 painter = painterResource(id = drawable.ic_info),
-                contentDescription = stringResource(id = R.string.icon_info),
+                contentDescription = stringResource(id = R.string.list_icon_info),
                 tint = Color.White
             )
             Text(
@@ -239,13 +239,13 @@ fun PlayButton(
     ) {
         Icon(
             painter = painterResource(drawable.ic_play),
-            contentDescription = stringResource(id = R.string.icon_play),
+            contentDescription = stringResource(id = R.string.list_icon_play),
             tint = Color.Black,
             modifier = Modifier.padding(vertical = 8.dp)
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
-            text = stringResource(id = R.string.highlight_banner_watch),
+            text = stringResource(id = R.string.list_highlight_banner_watch),
             color = Color.Black,
             fontSize = 14.sp,
             modifier = Modifier
@@ -268,9 +268,9 @@ fun HighlightBannerPreview() {
                 R.drawable.ic_top_10,
                 ContentType.getContentName(ContentType.SHOW)
             ),
-            leftButton = IconAndTextInfo(drawable.ic_add, R.string.highlight_banner_add),
-            centralButton = IconAndTextInfo(drawable.ic_play, R.string.highlight_banner_watch),
-            rightButton = IconAndTextInfo(drawable.ic_info, R.string.highlight_banner_info),
+            leftButton = IconAndTextInfo(drawable.ic_add, R.string.list_highlight_banner_add),
+            centralButton = IconAndTextInfo(drawable.ic_play, R.string.list_highlight_banner_watch),
+            rightButton = IconAndTextInfo(drawable.ic_info, R.string.list_highlight_banner_info),
         )
     )
 }

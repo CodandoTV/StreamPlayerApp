@@ -9,6 +9,7 @@ object Colors {
 
     val LightColors = lightColorScheme(
         primary = Color(0xFFE50914),
+        secondary = Color(0xFFF5F5F1),
         background = Color(0xFF000000),
         onBackground = Color(0xFFFFFFFF),
         surface = Color(0xFF121212),
