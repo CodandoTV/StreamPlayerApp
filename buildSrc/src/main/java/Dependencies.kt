@@ -156,6 +156,7 @@ object Dependencies {
         const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
         const val composeIcons = "androidx.compose.material:material-icons-extended:${Versions.composeIcons}"
         const val lifecycleComposeRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleComposeRuntime}"
+        const val pagingCompose = "androidx.paging:paging-compose:${Versions.paging_compose}"
 
         override val list: List<String>
             get() = listOf(
@@ -166,7 +167,8 @@ object Dependencies {
                 Compose.composeMaterial3,
                 Compose.composeNavigation,
                 Compose.composeIcons,
-                Compose.lifecycleComposeRuntime
+                Compose.lifecycleComposeRuntime,
+                Compose.pagingCompose
             )
     }
 }
