@@ -11,6 +11,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.List
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.ListStreamUimodel
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.ListStreamViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -34,7 +35,8 @@ object ListStreamModule {
 
         factory<ListStreamRepository> {
             ListStreamRepositoryImpl(
-                service = get()
+                service = get(),
+                dispatcher = get(named("DispatcherIO"))
             )
         }
 

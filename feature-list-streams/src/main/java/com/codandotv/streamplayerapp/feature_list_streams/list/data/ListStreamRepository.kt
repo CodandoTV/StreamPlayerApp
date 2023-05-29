@@ -13,7 +13,7 @@ interface ListStreamRepository {
 
 class ListStreamRepositoryImpl(
     private val service: ListStreamService,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val dispatcher: CoroutineDispatcher,
 ) : ListStreamRepository {
 
     override suspend fun getMovies(): Flow<List<ListStream>> =
