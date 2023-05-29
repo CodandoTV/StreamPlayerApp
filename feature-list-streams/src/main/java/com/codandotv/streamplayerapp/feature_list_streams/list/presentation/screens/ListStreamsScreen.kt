@@ -79,7 +79,7 @@ fun ListStreamsScreen(
                         .align(Alignment.TopCenter)
                         .verticalScroll(ScrollState(0))
                 ) {
-                    HighlightBanner(uiState.highlightBanner)
+                    HighlightBanner(data = uiState.highlightBanner)
                     uiState.carousels.forEach {
                         StreamsCarousel(
                             title = it.categoryName,

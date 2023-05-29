@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,15 +43,15 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.High
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.IconAndTextInfo
 
 @Composable
-fun HighlightBanner(data: HighlightBanner?) {
+fun HighlightBanner(modifier: Modifier = Modifier, data: HighlightBanner?) {
     data ?: return
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(500.dp)
     ) {
-        ContentImage(data)
+        ContentImage(imageUrl = data.imageUrl)
         BackgroundGradient()
         Column(
             modifier = Modifier
@@ -59,28 +60,28 @@ fun HighlightBanner(data: HighlightBanner?) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.weight(1F))
-            ContentType(data)
-            ContentName(data)
-            ContentRanking(data)
+            ContentType(contentType = data.contentType)
+            ContentName(name = data.name)
+            ContentRanking(extraInfo = data.extraInfo, contentTypeAsPlural = data.contentTypeAsPlural)
             ActionButtons(Modifier.weight(0.3F), data)
         }
     }
 }
 
 @Composable
-fun ContentImage(data: HighlightBanner) {
+fun ContentImage(modifier: Modifier = Modifier, imageUrl: String) {
     AsyncImage(
-        modifier = Modifier.fillMaxSize(),
-        model = data.imageUrl,
+        modifier = modifier.fillMaxSize(),
+        model = imageUrl,
         contentScale = ContentScale.Crop,
         contentDescription = stringResource(id = R.string.highligh_banner_content)
     )
 }
 
 @Composable
-fun BackgroundGradient() {
+fun BackgroundGradient(modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(
                 brush = Brush.verticalGradient(
@@ -94,11 +95,11 @@ fun BackgroundGradient() {
 }
 
 @Composable
-fun ContentName(data: HighlightBanner) {
+fun ContentName(modifier: Modifier = Modifier, name: String) {
     Text(
-        text = data.name,
+        text = name,
         fontSize = 24.sp,
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 50.dp)
             .padding(vertical = 4.dp),
         textAlign = TextAlign.Center,
@@ -107,18 +108,22 @@ fun ContentName(data: HighlightBanner) {
 }
 
 @Composable
-fun ContentRanking(data: HighlightBanner) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+fun ContentRanking(
+    modifier: Modifier = Modifier,
+    extraInfo: IconAndTextInfo,
+    @StringRes contentTypeAsPlural: Int
+) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
-            painter = painterResource(id = data.extraInfo.icon),
+            painter = painterResource(id = extraInfo.icon),
             contentDescription = stringResource(id = R.string.icon_highligh_banner_ranking),
             modifier = Modifier.size(24.dp),
             tint = Color.Unspecified
         )
         Text(
             text = stringResource(
-                id = data.extraInfo.text,
-                stringResource(data.contentTypeAsPlural).lowercase()
+                id = extraInfo.text,
+                stringResource(contentTypeAsPlural).lowercase()
             ),
             Modifier.padding(start = 4.dp),
             style = TextStyle(fontWeight = FontWeight.Bold),
@@ -129,8 +134,8 @@ fun ContentRanking(data: HighlightBanner) {
 }
 
 @Composable
-fun ContentType(data: HighlightBanner) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+fun ContentType(modifier: Modifier = Modifier, @StringRes contentType: Int) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
             painter = painterResource(id = drawable.ic_netflix),
             contentDescription = stringResource(id = string.icon_netflix),
@@ -138,7 +143,7 @@ fun ContentType(data: HighlightBanner) {
             tint = Color.Unspecified
         )
         Text(
-            text = stringResource(data.contentType).uppercase(),
+            text = stringResource(contentType).uppercase(),
             Modifier.padding(start = 4.dp),
             fontSize = 12.sp,
             color = MaterialTheme.colorScheme.onBackground,
@@ -217,6 +222,7 @@ fun InfoButton(
 
 @Composable
 fun PlayButton(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Button(
@@ -224,32 +230,28 @@ fun PlayButton(
         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
         shape = RoundedCornerShape(4.dp),
         contentPadding = PaddingValues(horizontal = 8.dp),
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .defaultMinSize(
                 minWidth = 28.dp,
                 minHeight = 28.dp
             )
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        Icon(
+            painter = painterResource(drawable.ic_play),
+            contentDescription = stringResource(id = R.string.icon_play),
+            tint = Color.Black,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = stringResource(id = R.string.highlight_banner_watch),
+            color = Color.Black,
+            fontSize = 14.sp,
             modifier = Modifier
-                .padding(vertical = 4.dp)
-                .padding(end = 4.dp)
-        ) {
-            Icon(
-                painter = painterResource(drawable.ic_play),
-                contentDescription = stringResource(id = R.string.icon_play),
-                tint = Color.Black,
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Text(
-                text = stringResource(id = R.string.highlight_banner_watch),
-                color = Color.Black,
-                fontSize = 14.sp,
-                modifier = Modifier.padding(bottom = 2.dp)
-            )
-        }
+                .padding(bottom = 2.dp)
+                .padding(end = 8.dp)
+        )
     }
 }
 
@@ -257,7 +259,7 @@ fun PlayButton(
 @Composable
 fun HighlightBannerPreview() {
     HighlightBanner(
-        HighlightBanner(
+        data = HighlightBanner(
             name = stringResource(id = string.app_name),
             imageUrl = String(),
             contentType = ContentType.getContentName(ContentType.SHOW),
