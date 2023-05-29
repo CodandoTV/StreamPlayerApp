@@ -1,7 +1,9 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.domain
 
 import com.codandotv.streamplayerapp.core_networking.Url
+import com.codandotv.streamplayerapp.feature_list_streams.list.data.model.GenresResponse
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.model.ListStreamResponse
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Genre
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.ListStream
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Stream
 
@@ -17,3 +19,7 @@ fun ListStreamResponse.toListStream(genre: String): ListStream =
             )
         }
     )
+
+fun GenresResponse.toGenres(): List<Genre> = this.genres.map { genreResponse ->
+    Genre(id = genreResponse.id, name = genreResponse.name)
+}

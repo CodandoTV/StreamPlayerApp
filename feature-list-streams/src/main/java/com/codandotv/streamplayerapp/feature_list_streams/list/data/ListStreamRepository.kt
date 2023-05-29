@@ -1,13 +1,16 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.data
 
 import com.codandotv.streamplayerapp.core_networking.handleError.toFlow
-import com.codandotv.streamplayerapp.core_networking.handleError.toResult
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Genre
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.ListStream
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.toGenres
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.toListStream
 import kotlinx.coroutines.flow.*
 
 interface ListStreamRepository {
     suspend fun getMovies(): Flow<List<ListStream>>
+
+    suspend fun getGenres(): Flow<List<Genre>>
 }
 
 class ListStreamRepositoryImpl(
@@ -31,4 +34,8 @@ class ListStreamRepositoryImpl(
                         }.first()
                 }
             }
+
+    override suspend fun getGenres(): Flow<List<Genre>> {
+        return service.getGenres().toFlow().map { it.toGenres() }
+    }
 }
