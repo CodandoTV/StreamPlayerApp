@@ -28,16 +28,16 @@ object Versions {
     const val compose_version = "1.4.2"
     const val retrofit = "2.9.0"
 
-    const val composeBomVersion = "2023.01.00"
-    const val composeCompilerVersion = "1.4.2"
-    const val composeMaterial3Version = "1.0.1"
-    const val composeActivity = "1.5.0"
-    const val composeIcons = "1.4.3"
-    const val composeNavigationVersion = "2.5.3"
-    const val lifecycleComposeRuntime = "2.6.1"
+    const val compose_bom_version = "2023.01.00"
+    const val compose_compiler_version = "1.4.2"
+    const val compose_material_3_version = "1.0.1"
+    const val compose_activity = "1.5.0"
+    const val compose_icons = "1.4.3"
+    const val compose_navigation_version = "2.5.3"
+    const val lifecycle_compose_runtime = "2.6.1"
     const val paging_compose = "1.0.0-alpha20"
 
-    const val coilVersion = "2.3.0"
+    const val coil_version = "2.3.0"
 
     const val lottie = "5.2.0"
 }
