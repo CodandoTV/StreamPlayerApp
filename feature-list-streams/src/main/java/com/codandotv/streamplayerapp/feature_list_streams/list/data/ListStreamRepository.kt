@@ -12,40 +12,20 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.domain.toListStre
 import kotlinx.coroutines.flow.*
 
 interface ListStreamRepository {
-    suspend fun getMovies(): Flow<List<ListStream>>
-
     suspend fun getGenres(): Flow<List<Genre>>
 
-    suspend fun loadMovies(genre: Genre): Flow<PagingData<Stream>>
+    fun loadMovies(genre: Genre): Flow<PagingData<Stream>>
 }
 
 class ListStreamRepositoryImpl(
     private val service: ListStreamService
 ) : ListStreamRepository {
 
-    override suspend fun getMovies(): Flow<List<ListStream>> =
-        service.getGenres()
-            .toFlow()
-            .map {
-                it.genres
-            }
-            .map { genres ->
-                genres.map { genre ->
-                    service.getMovies(genre.id.toString())
-                        .toFlow()
-                        .map {
-                            it.toListStream(
-                                genre.name
-                            )
-                        }.first()
-                }
-            }
-
     override suspend fun getGenres(): Flow<List<Genre>> {
         return service.getGenres().toFlow().map { it.toGenres() }
     }
 
-    override suspend fun loadMovies(genre: Genre): Flow<PagingData<Stream>> {
+    override fun loadMovies(genre: Genre): Flow<PagingData<Stream>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -53,7 +33,8 @@ class ListStreamRepositoryImpl(
             ),
             pagingSourceFactory = {
                 StreamDataSource(service, genreName = genre.name, genreId = genre.id)
-            }
+            },
+            initialKey = 1
         ).flow
     }
 }

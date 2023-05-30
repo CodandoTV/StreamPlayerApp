@@ -35,7 +35,7 @@ object Versions {
     const val composeIcons = "1.4.3"
     const val composeNavigationVersion = "2.5.3"
     const val lifecycleComposeRuntime = "2.6.1"
-    const val paging_compose = "1.0.0-alpha02"
+    const val paging_compose = "1.0.0-alpha20"
 
     const val coilVersion = "2.3.0"
 

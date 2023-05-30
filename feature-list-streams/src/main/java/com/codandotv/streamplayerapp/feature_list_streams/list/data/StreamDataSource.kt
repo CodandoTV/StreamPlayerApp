@@ -1,6 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.data
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.codandotv.streamplayerapp.core_networking.handleError.NetworkResponse
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Stream
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.toListStream
@@ -10,11 +11,15 @@ class StreamDataSource(
     private val genreId: Long,
     private val genreName: String,
 ) : PagingSource<Int, Stream>() {
+
+    override val keyReuseSupported: Boolean
+        get() = true
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Stream> {
         return try {
             val response = service.getPaginatedMovies(
                 genres = genreId.toString(),
-                page = params.key ?: START_PAGE_INDEX
+                page = params.key!!
             )
 
             if (response is NetworkResponse.Success) {
@@ -30,6 +35,8 @@ class StreamDataSource(
             LoadResult.Error(exception)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, Stream>): Int? = null
 
     companion object {
         private const val START_PAGE_INDEX = 1

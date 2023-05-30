@@ -78,14 +78,13 @@ fun ListStreamsScreen(
                         .align(Alignment.TopCenter)
                         .verticalScroll(rememberScrollState())
                 ) {
-                    uiState.carousels.forEach {
+                    uiState.genres.forEach { genre ->
                         StreamsCarousel(
-                            title = it.categoryName,
-                            contentList = it.cards,
-                            onNavigateDetailList = onNavigateDetailList
+                            title = genre.name,
+                            contentList = viewModel.loadMovies(genre),
+                            onNavigateDetailList = onNavigateDetailList,
                         )
                     }
-
                     Spacer(modifier = Modifier.height(12.dp))
                 }
             }

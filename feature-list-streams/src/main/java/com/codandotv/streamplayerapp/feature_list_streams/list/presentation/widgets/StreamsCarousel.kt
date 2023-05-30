@@ -9,20 +9,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.paging.PagingData
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun StreamsCarousel(
     title: String,
-    contentList: List<StreamsCardContent>,
+    contentList: Flow<PagingData<StreamsCardContent>>,
     modifier: Modifier = Modifier,
     onNavigateDetailList: (String) -> Unit = {},
 ) {
+
+    val list = contentList.collectAsLazyPagingItems()
+
     Column(modifier = modifier) {
         Text(
             title,
@@ -35,11 +42,19 @@ fun StreamsCarousel(
         Spacer(modifier = Modifier.size(8.dp))
 
         LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(contentList.size) {
-                StreamsCard(
-                    contentList[it],
-                    onNavigateDetailList,
+            items(
+                count = list.itemCount,
+                key = list.itemKey(),
+                contentType = list.itemContentType(
                 )
+            ) { index ->
+                val item = list[index]
+                item?.let {
+                    StreamsCard(
+                        content = it,
+                        onNavigateDetailList
+                    )
+                }
             }
         }
     }
@@ -50,6 +65,6 @@ fun StreamsCarousel(
 fun StreamsCarouselPreview() {
     StreamsCarousel(
         title = "Ação",
-        contentList = emptyList()
+        contentList = emptyFlow()
     )
 }
