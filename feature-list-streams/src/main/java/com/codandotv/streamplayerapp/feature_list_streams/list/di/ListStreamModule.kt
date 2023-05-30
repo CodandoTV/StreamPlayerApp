@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.di
 
+import com.codandotv.streamplayerapp.core_shared.qualifier.QualifierDispatcherIO
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRepository
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRepositoryImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamService
@@ -34,7 +35,8 @@ object ListStreamModule {
 
         factory<ListStreamRepository> {
             ListStreamRepositoryImpl(
-                service = get()
+                service = get(),
+                dispatcher = get(QualifierDispatcherIO)
             )
         }
 

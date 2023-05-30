@@ -12,6 +12,7 @@ object Dependencies {
     object Module {
         const val core_networking = ":core-networking"
         const val core_shared_ui = ":core-shared-ui"
+        const val core_shared = ":core-shared"
         const val feature_list_streams = ":feature-list-streams"
         const val core_navigation = ":core-navigation"
     }
