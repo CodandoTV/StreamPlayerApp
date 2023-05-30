@@ -1,5 +1,6 @@
 include(":app")
 include(":feature-list-streams")
+include(":core-shared")
 include(":core-networking")
 include(":core-shared-ui")
 include(":core-navigation")
