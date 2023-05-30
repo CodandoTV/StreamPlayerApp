@@ -3,8 +3,10 @@ package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.wid
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +30,8 @@ fun StreamsCarousel(
     onNavigateDetailList: (String) -> Unit = {},
 ) {
 
-    val list = contentList.collectAsLazyPagingItems()
+    val lazyPagingItems = contentList.collectAsLazyPagingItems()
+    val lazyListState = rememberLazyListState()
 
     Column(modifier = modifier) {
         Text(
@@ -41,14 +44,18 @@ fun StreamsCarousel(
 
         Spacer(modifier = Modifier.size(8.dp))
 
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
+        LazyRow(
+            state = lazyListState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(140.dp)
+        ) {
             items(
-                count = list.itemCount,
-                key = list.itemKey(),
-                contentType = list.itemContentType(
-                )
+                count = lazyPagingItems.itemCount,
+                key = lazyPagingItems.itemKey(),
+                contentType = lazyPagingItems.itemContentType()
             ) { index ->
-                val item = list[index]
+                val item = lazyPagingItems[index]
                 item?.let {
                     StreamsCard(
                         content = it,
