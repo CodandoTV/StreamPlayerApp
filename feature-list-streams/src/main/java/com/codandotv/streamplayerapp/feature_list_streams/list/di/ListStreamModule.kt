@@ -1,8 +1,11 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.di
 
+import com.codandotv.streamplayerapp.core_shared.qualifier.QualifierDispatcherIO
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRepository
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRepositoryImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamService
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStreamImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListGenresUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListGenresUseCaseImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamAnalytics
@@ -19,7 +22,8 @@ object ListStreamModule {
         viewModel {
             ListStreamViewModel(
                 listStreams = get(),
-                listGenres = get()
+                listGenres = get(),
+                latestStream = get()
             )
         }
 
@@ -35,13 +39,20 @@ object ListStreamModule {
             )
         }
 
+        factory<GetTopRatedStream> {
+            GetTopRatedStreamImpl(
+                repository = get()
+            )
+        }
+
         factory<ListStreamAnalytics> {
             ListStreamAnalyticsImpl()
         }
 
         factory<ListStreamRepository> {
             ListStreamRepositoryImpl(
-                service = get()
+                service = get(),
+                dispatcher = get(QualifierDispatcherIO)
             )
         }
 

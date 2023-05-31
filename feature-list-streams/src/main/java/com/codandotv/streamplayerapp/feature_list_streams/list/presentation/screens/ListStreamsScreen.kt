@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.codandotv.streamplayerapp.core_navigation.bottomnavigation.StreamPlayerBottomNavigation
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 import com.codandotv.streamplayerapp.core_shared_ui.widget.StreamPlayerTopBar
+import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.HighlightBanner
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.StreamsCarousel
 import org.koin.androidx.compose.koinViewModel
 
@@ -79,6 +80,9 @@ fun ListStreamsScreen(
                         .align(Alignment.TopCenter)
                         .verticalScroll(rememberScrollState())
                 ) {
+
+                    HighlightBanner(data = uiState.highlightBanner)
+
                     uiState.genres.forEach { genre ->
                         StreamsCarousel(
                             title = genre.name,

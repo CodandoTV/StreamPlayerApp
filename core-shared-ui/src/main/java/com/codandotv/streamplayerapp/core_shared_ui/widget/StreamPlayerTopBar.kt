@@ -35,7 +35,7 @@ import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StreamPlayerTopBar(scrollBehavior: TopAppBarScrollBehavior) {
-    Box(modifier = Modifier.background(color = Colors.Dark80)) {
+    Box(modifier = Modifier.background(color = Colors.Dark10)) {
         StreamPlayerTopBar()
         StreamPlayerOptionsTopBar(modifier = Modifier.padding(top = 50.dp), scrollBehavior)
     }

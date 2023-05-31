@@ -9,4 +9,17 @@
     <string name="detail_download">Baixar completo</string>
     <string name="detail_search">Pesquisar</string>
     <string name="detail_back">Voltar</string>
+
+    <!-- region Highlight banner -->
+    <string name="list_content_type_show">Série</string>
+    <string name="list_content_type_show_plural">Séries</string>
+    <string name="list_content_type_film">Filme</string>
+    <string name="list_content_type_film_plural">Filmes</string>
+
+    <string name="list_highlight_banner_add">Minha lista</string>
+    <string name="list_highlight_banner_info">Saiba mais</string>
+    <string name="list_highlight_banner_watch">Assistir</string>
+    <string name="list_highlight_banner_stream_ranking">Top 1 em %s hoje</string>
+    <!-- endregion Highlight banner -->
+
 </resources>
