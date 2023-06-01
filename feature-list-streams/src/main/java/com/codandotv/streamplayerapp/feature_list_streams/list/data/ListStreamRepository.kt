@@ -28,20 +28,25 @@ class ListStreamRepositoryImpl(
         return service.getGenres().toFlow().map { it.toGenres() }
     }
 
-    override suspend fun topRatedStream(): Flow<Stream> {
-        return service.getTopRatedMovies().toFlow().map { it.results.first().toStream() }
+    override suspend fun topRatedStream() = service.getTopRatedMovies().toFlow().map {
+        it.results.first().toStream()
     }
 
     override fun loadMovies(genre: Genre): Flow<PagingData<Stream>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 500,
+                pageSize = PAGE_SIZE,
+                maxSize = MAX_SIZE,
             ),
             pagingSourceFactory = {
                 StreamDataSource(service, genreName = genre.name, genreId = genre.id)
             },
             initialKey = 1
         ).flow
+    }
+
+    companion object {
+        private const val PAGE_SIZE = 20
+        private const val MAX_SIZE = 500
     }
 }

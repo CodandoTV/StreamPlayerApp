@@ -19,7 +19,7 @@ class StreamDataSource(
         return try {
             val response = service.getPaginatedMovies(
                 genres = genreId.toString(),
-                page = params.key!!
+                page = params.key ?: START_PAGE_INDEX
             )
 
             if (response is NetworkResponse.Success) {

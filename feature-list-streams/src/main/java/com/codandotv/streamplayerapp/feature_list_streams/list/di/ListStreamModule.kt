@@ -6,8 +6,8 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRe
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamService
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStreamImpl
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListGenresUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListGenresUseCaseImpl
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetGenresUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetGenresUseCaseImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamAnalytics
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamAnalyticsImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamUseCase
@@ -33,8 +33,8 @@ object ListStreamModule {
             )
         }
 
-        factory<ListGenresUseCase> {
-            ListGenresUseCaseImpl(
+        factory<GetGenresUseCase> {
+            GetGenresUseCaseImpl(
                 repository = get()
             )
         }

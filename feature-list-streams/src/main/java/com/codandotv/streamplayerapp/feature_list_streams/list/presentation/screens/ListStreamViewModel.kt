@@ -11,7 +11,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.R
 import com.codandotv.streamplayerapp.core_shared_ui.R.*
 import com.codandotv.streamplayerapp.feature_list_streams.core.ContentType
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListGenresUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetGenresUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Genre
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.HighlightBanner
@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 
 class ListStreamViewModel(
     private val listStreams: ListStreamUseCase,
-    private val listGenres: ListGenresUseCase,
+    private val listGenres: GetGenresUseCase,
     private val latestStream: GetTopRatedStream
 ) : ViewModel(), DefaultLifecycleObserver {
 

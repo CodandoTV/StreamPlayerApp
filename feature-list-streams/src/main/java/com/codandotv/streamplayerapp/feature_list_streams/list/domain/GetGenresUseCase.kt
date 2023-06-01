@@ -4,13 +4,13 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRe
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Genre
 import kotlinx.coroutines.flow.Flow
 
-interface ListGenresUseCase {
+interface GetGenresUseCase {
     suspend operator fun invoke(): Flow<List<Genre>>
 }
 
-class ListGenresUseCaseImpl(
+class GetGenresUseCaseImpl(
     private val repository: ListStreamRepository
-) : ListGenresUseCase {
+) : GetGenresUseCase {
     override suspend fun invoke(): Flow<List<Genre>> {
         return repository.getGenres()
     }
