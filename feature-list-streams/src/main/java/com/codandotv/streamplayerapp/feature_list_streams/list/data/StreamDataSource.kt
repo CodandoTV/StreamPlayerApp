@@ -12,21 +12,20 @@ class StreamDataSource(
     private val genreName: String,
 ) : PagingSource<Int, Stream>() {
 
-    override val keyReuseSupported: Boolean
-        get() = true
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Stream> {
+        val nextPageNumber = params.key ?: START_PAGE_INDEX
+
         return try {
             val response = service.getPaginatedMovies(
                 genres = genreId.toString(),
-                page = params.key ?: START_PAGE_INDEX
+                page = nextPageNumber
             )
 
             if (response is NetworkResponse.Success) {
                 LoadResult.Page(
                     data = response.value.toListStream(genreName).streams,
-                    prevKey = params.key ?: START_PAGE_INDEX,
-                    nextKey = params.key?.plus(1) ?: START_PAGE_INDEX.plus(1)
+                    prevKey = if (nextPageNumber > 1) nextPageNumber - 1 else null,
+                    nextKey = nextPageNumber.plus(1)
                 )
             } else {
                 throw IllegalStateException("Something wrong")
