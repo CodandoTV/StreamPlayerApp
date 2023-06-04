@@ -40,6 +40,7 @@ fun ListStreamsScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val baseScrollState = rememberScrollState()
 
     DisposableEffect(lifecycleOwner) {
         val lifecycle = lifecycleOwner.lifecycle
@@ -78,7 +79,7 @@ fun ListStreamsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.TopCenter)
-                        .verticalScroll(rememberScrollState())
+                        .verticalScroll(baseScrollState)
                 ) {
 
                     HighlightBanner(data = uiState.highlightBanner)
