@@ -40,6 +40,7 @@ fun ListStreamsScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val baseScrollState = rememberScrollState()
 
     DisposableEffect(lifecycleOwner) {
         val lifecycle = lifecycleOwner.lifecycle
@@ -77,18 +78,19 @@ fun ListStreamsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.TopCenter)
-                        .verticalScroll(rememberScrollState())
+                        .verticalScroll(baseScrollState)
                 ) {
-                    HighlightBanner(data = uiState.highlightBanner)
-                    uiState.carousels.forEach {
-                        StreamsCarousel(
-                            title = it.categoryName,
-                            contentList = it.cards,
-                            onNavigateDetailList = onNavigateDetailList
-                        )
-                    }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    HighlightBanner(data = uiState.highlightBanner)
+
+                    uiState.genres.forEach { genre ->
+                        StreamsCarousel(
+                            title = genre.name,
+                            contentList = viewModel.loadMovies(genre),
+                            onNavigateDetailList = onNavigateDetailList,
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
                 }
             }
         }

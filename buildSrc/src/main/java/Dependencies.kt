@@ -6,7 +6,7 @@ interface GroupLibs {
 
 object Dependencies {
     const val runnerPackage = "androidx.test.runner.AndroidJUnitRunner"
-    const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
+    const val coil = "io.coil-kt:coil-compose:${Versions.coil_version}"
     const val lottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
 
     object Module {
@@ -147,16 +147,17 @@ object Dependencies {
     }
 
     object Compose : GroupLibs {
-        const val composeBomVersion = "androidx.compose:compose-bom:${Versions.composeBomVersion}"
+        const val composeBomVersion = "androidx.compose:compose-bom:${Versions.compose_bom_version}"
         const val composeUI = "androidx.compose.ui:ui"
         const val coposeUIToolingPreview = "androidx.compose.ui:ui-tooling-preview"
         const val composeActivityCompose =
-            "androidx.activity:activity-compose:${Versions.composeActivity}"
+            "androidx.activity:activity-compose:${Versions.compose_activity}"
         const val composeUITooling = "androidx.compose.ui:ui-tooling"
-        const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
-        const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
-        const val composeIcons = "androidx.compose.material:material-icons-extended:${Versions.composeIcons}"
-        const val lifecycleComposeRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleComposeRuntime}"
+        const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.compose_material_3_version}"
+        const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.compose_navigation_version}"
+        const val composeIcons = "androidx.compose.material:material-icons-extended:${Versions.compose_icons}"
+        const val lifecycleComposeRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycle_compose_runtime}"
+        const val pagingCompose = "androidx.paging:paging-compose:${Versions.paging_compose}"
 
         override val list: List<String>
             get() = listOf(
@@ -167,7 +168,8 @@ object Dependencies {
                 Compose.composeMaterial3,
                 Compose.composeNavigation,
                 Compose.composeIcons,
-                Compose.lifecycleComposeRuntime
+                Compose.lifecycleComposeRuntime,
+                Compose.pagingCompose
             )
     }
 }
