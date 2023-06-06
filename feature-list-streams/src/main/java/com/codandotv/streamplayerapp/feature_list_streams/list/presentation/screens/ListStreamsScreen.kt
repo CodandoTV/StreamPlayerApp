@@ -61,11 +61,10 @@ fun ListStreamsScreen(
         bottomBar = {
             StreamPlayerBottomNavigation(navController = navController)
         }
-    ) { innerPadding ->
+    ) { _ ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             if (uiState.isLoading) {
