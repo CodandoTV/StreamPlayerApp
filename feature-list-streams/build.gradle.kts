@@ -1,31 +1,28 @@
 @file:Suppress("UnstableApiUsage")
-android {
-    namespace = "${Config.packageName}feature_list_streams"
 
-    buildFeatures {
-        compose = true
-    }
+import extensions.setupCompose
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeCompilerVersion
-    }
+plugins {
+    id("com.streamplayer.android-library")
+    id("com.streamplayer.compose")
+}
 
-    dependencies {
-        implementation(project(Dependencies.Module.core_networking))
-        implementation(project(Dependencies.Module.core_shared_ui))
-        implementation(project(Dependencies.Module.core_navigation))
-        implementation(project(Dependencies.Module.core_shared))
-        Dependencies.Koin.list.forEach { implementation(it) }
-        Dependencies.Retrofit.list.forEach { implementation(it) }
-        Dependencies.Kotlin.list.forEach { implementation(it) }
-        Dependencies.Support.list.forEach { implementation(it) }
+val catalog: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-        val composeBom = platform(Dependencies.Compose.composeBomVersion)
-        implementation(composeBom)
-        Dependencies.Compose.list.forEach { implementation(it) }
+android{
+    setupCompose(catalog)
+}
 
-        Dependencies.UnitTest.list.forEach { testImplementation(it) }
+dependencies {
+    implementation(projects.coreNetworking)
+    implementation(projects.coreNavigation)
+    implementation(projects.coreShared)
+    implementation(projects.coreSharedUi)
 
-        implementation(Dependencies.coil)
-    }
+    implementation(libs.bundles.koin)
+    implementation(libs.bundles.networking)
+    implementation(libs.bundles.androidSupport)
+    implementation(libs.coil)
+
+    testImplementation(libs.bundles.test)
 }

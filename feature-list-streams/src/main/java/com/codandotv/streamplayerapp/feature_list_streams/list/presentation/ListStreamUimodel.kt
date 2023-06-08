@@ -1,8 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation
 
 import android.content.res.Resources
-import com.codandotv.streamplayerapp.core_shared_ui.R.*
-import com.codandotv.streamplayerapp.feature_list_streams.R
+import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.core.ContentType
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.HighlightBanner
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.IconAndTextInfo
@@ -10,6 +9,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.List
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.CarouselData
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.ListStreamsUIState
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.StreamsCardContent
+import com.codandotv.streamplayerapp.core.shared.ui.R as SharedUiR
 
 interface ListStreamUimodel {
     fun convertToCardContent(listStream: List<ListStream>): ListStreamsUIState
@@ -49,9 +49,9 @@ class ListStreamUiModelImpl(
                 R.drawable.ic_top_10,
                 R.string.list_highlight_banner_stream_ranking
             ),
-            leftButton = IconAndTextInfo(drawable.ic_add, R.string.list_highlight_banner_add),
-            centralButton = IconAndTextInfo(drawable.ic_play, R.string.list_highlight_banner_watch),
-            rightButton = IconAndTextInfo(drawable.ic_info, R.string.list_highlight_banner_info),
+            leftButton = IconAndTextInfo(SharedUiR.drawable.ic_add, R.string.list_highlight_banner_add),
+            centralButton = IconAndTextInfo(SharedUiR.drawable.ic_play, R.string.list_highlight_banner_watch),
+            rightButton = IconAndTextInfo(SharedUiR.drawable.ic_info, R.string.list_highlight_banner_info),
         )
     }
 }

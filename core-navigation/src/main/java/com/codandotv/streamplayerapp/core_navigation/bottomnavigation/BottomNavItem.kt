@@ -2,7 +2,7 @@ package com.codandotv.streamplayerapp.core_navigation.bottomnavigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.codandotv.streamplayerapp.core_navigation.R
+import com.codandotv.streamplayerapp.core.navigation.R
 import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes
 
 sealed class BottomNavItem(

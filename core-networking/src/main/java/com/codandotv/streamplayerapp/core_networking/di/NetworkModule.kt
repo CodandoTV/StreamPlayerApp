@@ -1,6 +1,6 @@
 package com.codandotv.streamplayerapp.core_networking.di
 
-import com.codandotv.streamplayerapp.core_networking.BuildConfig
+import com.codandotv.streamplayerapp.core.networking.BuildConfig
 import com.codandotv.streamplayerapp.core_networking.coroutines.NetworkResponseAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
