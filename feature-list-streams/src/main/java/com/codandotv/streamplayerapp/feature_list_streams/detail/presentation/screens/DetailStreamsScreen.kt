@@ -30,6 +30,7 @@ import org.koin.androidx.compose.koinViewModel
 fun DetailStreamScreen(
     viewModel: DetailStreamViewModel = koinViewModel(),
     navController: NavController,
+    onNavigateSharingOption: () -> Unit = {},
     disposable: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -44,7 +45,7 @@ fun DetailStreamScreen(
     ) {
         when (uiState) {
             is DetailStreamsLoadedUIState -> {
-                SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController)
+                SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController, onNavigateSharingOption)
             }
             else -> {
                 CircularProgressIndicator(
@@ -61,7 +62,9 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
-    uiState: DetailStreamsLoadedUIState, navController: NavController
+    uiState: DetailStreamsLoadedUIState,
+    navController: NavController,
+    onNavigateSharingOption: () -> Unit
 ) {
     Scaffold(topBar = {
         DetailStreamToolbar(navController = navController)
@@ -112,7 +115,7 @@ private fun SetupDetailScreen(
                     imageVectorColor = MaterialTheme.colorScheme.onSurface,
                     text = stringResource(id = R.string.detail_default_text_secondary_button),
                     textColor = MaterialTheme.colorScheme.onSurface,
-                    onClick = {},
+                    onClick = {onNavigateSharingOption.invoke()},
                 )
                 Text(
                     text = uiState.detailStream.overview,
@@ -122,7 +125,7 @@ private fun SetupDetailScreen(
                     modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                DetailStreamActionOption()
+                DetailStreamActionOption(onNavigateSharingOption)
             }
         }
     })

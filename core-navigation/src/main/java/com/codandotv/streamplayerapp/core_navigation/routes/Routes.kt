@@ -6,6 +6,7 @@ object Routes {
     const val DETAIL = "DetailList/"
     const val DETAIL_COMPLETE = "${DETAIL}{${ID}}"
     const val Splash = "splash"
+    const val SHARING = "sharing"
 
     object PARAM {
         const val ID = "id"

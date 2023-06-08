@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.core_shared_ui.widget
 
+import android.view.View.OnClickListener
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -21,6 +22,7 @@ fun IconWithText(
     imageColor: Color,
     text: String,
     textColor: Color,
+    onClick: OnClickListener,
     modifier: Modifier = Modifier
 ) {
     Column(

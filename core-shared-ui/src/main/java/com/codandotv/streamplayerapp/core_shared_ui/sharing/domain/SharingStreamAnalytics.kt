@@ -1,4 +1,4 @@
-package com.codandotv.streamplayerapp.feature_list_streams.sharing.domain
+package com.codandotv.streamplayerapp.core_shared_ui.sharing.domain
 
 interface SharingStreamAnalytics{}
 

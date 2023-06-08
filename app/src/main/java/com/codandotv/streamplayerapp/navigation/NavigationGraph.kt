@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import com.codandotv.streamplayerapp.core_navigation.bottomnavigation.StreamPlayerBottomNavigation
 import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes
+import com.codandotv.streamplayerapp.core_shared_ui.sharing.presentation.navigation.sharingStreamNavGraph
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.navigation.detailStreamNavGraph
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.navigation.listStreamsNavGraph
 import com.codandotv.streamplayerapp.splah.presentation.navigation.splashNavGraph
@@ -25,6 +26,7 @@ fun NavigationGraph(navController: NavHostController) {
         splashNavGraph(navController = navController)
         listStreamsNavGraph(navController = navController)
         detailStreamNavGraph(navController = navController)
+        sharingStreamNavGraph(navController = navController)
         temporaryFun(BottomNavRoutes.GAMES, navController)
         temporaryFun(BottomNavRoutes.NEWS, navController)
         temporaryFun(BottomNavRoutes.SCENES, navController)

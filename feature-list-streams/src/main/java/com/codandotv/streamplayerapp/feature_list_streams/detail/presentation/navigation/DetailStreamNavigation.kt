@@ -3,8 +3,10 @@ package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.n
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes.DETAIL_COMPLETE
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes.PARAM.ID
+import com.codandotv.streamplayerapp.core_navigation.routes.Routes.SHARING
 import com.codandotv.streamplayerapp.feature_list_streams.detail.di.DetailStreamModule
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamScreen
 import org.koin.androidx.compose.koinViewModel
@@ -21,7 +23,8 @@ fun NavGraphBuilder.detailStreamNavGraph(navController: NavHostController) {
             koinViewModel {
                 parametersOf(nav.arguments?.getString(ID) ?: DEFAULT_ID)
             },
-            navController
+            navController,
+            onNavigateSharingOption = { navController.navigate(SHARING) }
         ) {
             unloadKoinModules(DetailStreamModule.module)
         }
