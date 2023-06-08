@@ -2,6 +2,7 @@
 import extensions.getBundle
 import extensions.getLibrary
 import extensions.setupCompose
+
 plugins {
     id("com.streamplayer.android-library")
 }
