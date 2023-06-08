@@ -1,6 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.navigation
 
 import androidx.activity.compose.BackHandler
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -13,9 +14,11 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
 fun NavGraphBuilder.listStreamsNavGraph(navController: NavHostController) {
-    composable(BottomNavRoutes.HOME) {
+    composable(BottomNavRoutes.HOME) { nav ->
         BackHandler(true) {}
-        loadKoinModules(ListStreamModule.module)
+        if (nav.getLifecycle().currentState == Lifecycle.State.STARTED) {
+            loadKoinModules(ListStreamModule.module)
+        }
         ListStreamsScreen(navController = navController,
             onNavigateDetailList = { id ->
                 navController.navigate("${DETAIL}${id}")
