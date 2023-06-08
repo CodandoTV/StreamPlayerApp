@@ -2,6 +2,7 @@
 
 import extensions.setupAndroidDefaultConfig
 import extensions.setupCompileOptions
+import extensions.setupCompose
 import extensions.setupPackingOptions
 
 plugins {
@@ -10,6 +11,8 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
 }
+val catalog: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
 
 android {
     namespace = Config.applicationId
@@ -17,6 +20,8 @@ android {
     setupCompileOptions()
     setupPackingOptions()
     setupAndroidDefaultConfig()
+    setupCompose(catalog)
+
     defaultConfig {
         applicationId = Config.applicationId
         minSdk = Config.minSdkVersion

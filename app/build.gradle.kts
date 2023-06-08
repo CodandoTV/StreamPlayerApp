@@ -1,15 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
-import extensions.setupCompose
-
 plugins {
     id("com.streamplayer.application")
-}
-
-val catalog: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
-android {
-    setupCompose(catalog)
 }
 
 dependencies {
