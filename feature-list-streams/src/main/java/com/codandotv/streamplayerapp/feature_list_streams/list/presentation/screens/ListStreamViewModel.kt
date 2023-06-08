@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
-import com.codandotv.streamplayerapp.feature_list_streams.R
-import com.codandotv.streamplayerapp.core_shared_ui.R.*
+import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.core.ContentType
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetGenresUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Genre
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.HighlightBanner
@@ -28,6 +27,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.codandotv.streamplayerapp.core.shared.ui.R as SharedUiR
 
 class ListStreamViewModel(
     private val listStreams: ListStreamUseCase,
@@ -101,15 +101,15 @@ class ListStreamViewModel(
                 R.string.list_highlight_banner_stream_ranking
             ),
             leftButton = IconAndTextInfo(
-                drawable.ic_add,
+                SharedUiR.drawable.ic_add,
                 R.string.list_highlight_banner_add
             ),
             centralButton = IconAndTextInfo(
-                drawable.ic_play,
+                SharedUiR.drawable.ic_play,
                 R.string.list_highlight_banner_watch
             ),
             rightButton = IconAndTextInfo(
-                drawable.ic_info,
+                SharedUiR.drawable.ic_info,
                 R.string.list_highlight_banner_info
             ),
         )

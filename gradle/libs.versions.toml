@@ -37,6 +37,7 @@ compose_activity = "1.5.0"
 compose_icons = "1.4.3"
 compose_navigation = "2.5.3"
 lifecycle_compose_runtime = "2.6.1"
+compose_pagging="1.0.0-alpha20"
 
 coil = "2.3.0"
 lottie = "5.2.0"
@@ -88,6 +89,7 @@ compose_icons = { module = "androidx.compose.material:material-icons-extended" }
 compose_lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle_compose_runtime" }
 compose_material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose_material_3" }
 compose_navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose_navigation" }
+compose_pagging = { group = "androidx.paging", name = "paging-compose", version.ref = "compose_pagging" }
 compose_activity = { module = "androidx.activity:activity-compose" }
 compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose_ui_test = { module = "androidx.compose.ui:ui-test-junit4" }
@@ -108,7 +110,7 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 [bundles]
-compose = ["compose.ui", "compose.icons", "compose.material3", "compose.lifecycle", "compose.navigation", "compose.activity", "compose.ui.tooling"]
+compose = ["compose.ui", "compose.icons", "compose.material3","compose_pagging", "compose.lifecycle", "compose.navigation", "compose.activity", "compose.ui.tooling"]
 composetest = ["compose.uitest", "compose.junit4", "compose.manifest", "compose.ui.test"]
 networking = ["retrofit", "moshi", "moshi_converter", "okhttp", "interceptor"]
 koin = ["koin_android", "koin_compose"]
