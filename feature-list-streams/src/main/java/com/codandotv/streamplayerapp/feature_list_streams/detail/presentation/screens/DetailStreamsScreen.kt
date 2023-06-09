@@ -1,6 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
@@ -73,20 +74,22 @@ private fun SetupDetailScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+            val showDialog = remember { mutableStateOf(false) }
+
+            if (showDialog.value) {
+                println(">>>> passa no showdialog value ${showDialog.value}")
+                SharingStreamDialog(value = "", setShowDialog = {
+                    showDialog.value = it
+                }) {
+                    Log.i("HomePage","HomePage : $it")
+                }
+            }
             DetailStreamImagePreview(uiState)
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 16.dp, end = 16.dp, top = 8.dp)
             ) {
-                val showDialog = remember { mutableStateOf(false) }
-
-                if (showDialog.value) {
-                    println(">>>> passa no showdialog value ${showDialog.value}")
-                    SharingStreamDialog(setShowDialog = {
-                        showDialog.value = it
-                    })
-                }
                 DetailStreamRowHeader()
                 Text(
                     text = uiState.detailStream.title,
@@ -122,10 +125,7 @@ private fun SetupDetailScreen(
                     imageVectorColor = MaterialTheme.colorScheme.onSurface,
                     text = stringResource(id = R.string.detail_default_text_secondary_button),
                     textColor = MaterialTheme.colorScheme.onSurface,
-                    onClick = {
-                        println(">>>> passa no clique")
-                        showDialog.value = true
-                    },
+                    onClick = {},
                 )
                 Text(
                     text = uiState.detailStream.overview,
@@ -135,7 +135,7 @@ private fun SetupDetailScreen(
                     modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                DetailStreamActionOption(onNavigateSharingOption)
+                DetailStreamActionOption({ showDialog.value = true })
             }
         }
     })

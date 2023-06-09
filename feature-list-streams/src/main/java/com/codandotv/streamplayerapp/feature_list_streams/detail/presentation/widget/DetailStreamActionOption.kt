@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,8 +44,9 @@ fun DetailStreamActionOption(
             imageVector = Icons.Filled.Share,
             imageColor = Color.White,
             text = stringResource(id = R.string.detail_share),
-            onClick = { onNavigateSharingOption.invoke() },
+            onClick = {},
             textColor = Color.Gray,
+            modifier = Modifier.clickable { onNavigateSharingOption.invoke() }
         )
         IconWithText(
             imageVector = Icons.Filled.Download,

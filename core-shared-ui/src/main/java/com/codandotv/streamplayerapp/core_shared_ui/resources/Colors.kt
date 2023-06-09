@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 
 object Colors {
     val DarkDeepGray = Color(0xFF262626)
-    val AlphaBlack = Color(0x40000000)
+    val AlphaBlack = Color(0x80000000)
 
     val LightColors = lightColorScheme(
         primary = Color(0xFFE50914),
