@@ -23,7 +23,7 @@ fun DetailStreamButtonAction(
     onClick: () -> Unit,
 ) {
     Button(
-        onClick = { },
+        onClick = { onClick.invoke() },
         shape = RoundedCornerShape(4.dp),
         modifier = modifier,
         colors = buttonsColors,

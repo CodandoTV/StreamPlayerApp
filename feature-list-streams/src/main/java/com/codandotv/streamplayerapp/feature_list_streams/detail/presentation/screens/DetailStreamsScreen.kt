@@ -7,9 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -21,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamDialog
 import com.codandotv.streamplayerapp.feature_list_streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
@@ -80,6 +79,14 @@ private fun SetupDetailScreen(
                     .fillMaxSize()
                     .padding(start = 16.dp, end = 16.dp, top = 8.dp)
             ) {
+                val showDialog = remember { mutableStateOf(false) }
+
+                if (showDialog.value) {
+                    println(">>>> passa no showdialog value ${showDialog.value}")
+                    SharingStreamDialog(setShowDialog = {
+                        showDialog.value = it
+                    })
+                }
                 DetailStreamRowHeader()
                 Text(
                     text = uiState.detailStream.title,
@@ -115,7 +122,10 @@ private fun SetupDetailScreen(
                     imageVectorColor = MaterialTheme.colorScheme.onSurface,
                     text = stringResource(id = R.string.detail_default_text_secondary_button),
                     textColor = MaterialTheme.colorScheme.onSurface,
-                    onClick = {onNavigateSharingOption.invoke()},
+                    onClick = {
+                        println(">>>> passa no clique")
+                        showDialog.value = true
+                    },
                 )
                 Text(
                     text = uiState.detailStream.overview,
