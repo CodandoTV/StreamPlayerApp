@@ -1,12 +1,14 @@
-android{
+android {
     namespace = "${Config.packageName}core_networking"
 
-    buildTypes{
-        getByName("debug"){
-            buildConfigField("String","HOST",Config.BuildField.host_debug)
+    buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "HOST", Config.BuildField.host_debug)
+            buildConfigField("String", "API_AUTH", Config.BuildField.api_auth_debug)
         }
-        getByName("release"){
-            buildConfigField("String","HOST",Config.BuildField.host_release)
+        getByName("release") {
+            buildConfigField("String", "HOST", Config.BuildField.host_release)
+            buildConfigField("String", "API_AUTH", Config.BuildField.api_auth_release)
         }
     }
 }
