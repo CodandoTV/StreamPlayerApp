@@ -77,12 +77,9 @@ private fun SetupDetailScreen(
             val showDialog = remember { mutableStateOf(false) }
 
             if (showDialog.value) {
-                println(">>>> passa no showdialog value ${showDialog.value}")
                 SharingStreamDialog(value = "", setShowDialog = {
                     showDialog.value = it
-                }) {
-                    Log.i("HomePage","HomePage : $it")
-                }
+                })
             }
             DetailStreamImagePreview(uiState)
             Column(

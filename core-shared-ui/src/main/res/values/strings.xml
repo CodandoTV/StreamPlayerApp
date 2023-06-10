@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StreamPlayerApp</string>
+    <string name="sharing_title_message">Compartilhar em...</string>
+    <string name="sharing_title_whatsapp">WhatsApp</string>
+    <string name="sharing_title_facebook">Mensagens</string>
+    <string name="sharing_title_instagram">Stories do Instagram</string>
+    <string name="sharing_title_link">Copiar Link</string>
+    <string name="sharing_title_more_options">Mais Opções</string>
 </resources>
