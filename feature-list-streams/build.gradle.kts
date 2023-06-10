@@ -7,13 +7,14 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeCompilerVersion
+        kotlinCompilerExtensionVersion = Versions.compose_compiler_version
     }
 
     dependencies {
         implementation(project(Dependencies.Module.core_networking))
         implementation(project(Dependencies.Module.core_shared_ui))
         implementation(project(Dependencies.Module.core_navigation))
+        implementation(project(Dependencies.Module.core_shared))
         Dependencies.Koin.list.forEach { implementation(it) }
         Dependencies.Retrofit.list.forEach { implementation(it) }
         Dependencies.Kotlin.list.forEach { implementation(it) }

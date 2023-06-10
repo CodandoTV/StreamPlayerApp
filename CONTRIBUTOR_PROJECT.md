@@ -7,11 +7,12 @@
     - Entre em contato conosco no Discord com Rods, Gabriel Moro ou Carlos Vacarri.
 - 1.3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
     - Siga o resto dos passos e seja bem-vindo!
-- 1.4 Caso tenha sentido falta de algo que não está mapeando, criei uma issue, e fale com nossos membros apoiadores;
+- 1.4 Caso tenha sentido falta de algo que não está mapeando, crie uma issue, e fale com nossos membros apoiadores;
 - 1.5 Quer gravar video no CodandoTV do que você fez?
     - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
-**2. Associe seu nome, caso não de, é porque vc precisa participar do grupo `Codevs`, entre em contato com nossos membros apoiadores do discord para adicionarem você nesse grupo;**
+**2. Associe seu nome, se não der, é porque você precisa participar do grupo `Codevs`, entre em contato com nossos membros apoiadores do discord para adicionarem você nesse grupo;**
+- 2.2. Se você quer fazer algo que ainda não tem uma issue fale com Rods para instrui-lo
 
 **3. Faça um fork deste repositório na sua máquina;**
 
@@ -29,7 +30,7 @@ git commit -m 'Adicionando minha feature'
 
 **7. Faça push para o repositório remoto;**
 ```git
-git push origin minha-feature`
+git push origin minha-feature
 ```
 
 **8. Abra um Pull Request explicando suas alterações e aguarde a revisão e aprovação.**

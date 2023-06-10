@@ -1,17 +1,20 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -19,6 +22,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.codandotv.streamplayerapp.core_navigation.bottomnavigation.StreamPlayerBottomNavigation
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
+import com.codandotv.streamplayerapp.core_shared_ui.widget.StreamPlayerTopBar
+import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.HighlightBanner
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.StreamsCarousel
 import org.koin.androidx.compose.koinViewModel
 
@@ -33,6 +38,9 @@ fun ListStreamsScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val scrollBehavior =
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val baseScrollState = rememberScrollState()
 
     DisposableEffect(lifecycleOwner) {
         val lifecycle = lifecycleOwner.lifecycle
@@ -46,6 +54,10 @@ fun ListStreamsScreen(
     }
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            StreamPlayerTopBar(scrollBehavior)
+        },
         bottomBar = {
             StreamPlayerBottomNavigation(navController = navController)
         }
@@ -66,17 +78,19 @@ fun ListStreamsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.TopCenter)
-                        .verticalScroll(ScrollState(0))
+                        .verticalScroll(baseScrollState)
                 ) {
-                    uiState.carousels.forEach {
-                        StreamsCarousel(
-                            title = it.categoryName,
-                            contentList = it.cards,
-                            onNavigateDetailList = onNavigateDetailList
-                        )
-                    }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    HighlightBanner(data = uiState.highlightBanner)
+
+                    uiState.genres.forEach { genre ->
+                        StreamsCarousel(
+                            title = genre.name,
+                            contentList = viewModel.loadMovies(genre),
+                            onNavigateDetailList = onNavigateDetailList,
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
                 }
             }
         }

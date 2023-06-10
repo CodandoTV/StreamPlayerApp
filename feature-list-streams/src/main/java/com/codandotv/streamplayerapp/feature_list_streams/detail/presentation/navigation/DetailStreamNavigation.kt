@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.navigation
 
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -18,7 +19,9 @@ internal const val DEFAULT_ID = "0"
 
 fun NavGraphBuilder.detailStreamNavGraph(navController: NavHostController) {
     composable(DETAIL_COMPLETE) { nav ->
-        loadKoinModules(DetailStreamModule.module)
+        if (nav.getLifecycle().currentState == Lifecycle.State.STARTED) {
+            loadKoinModules(DetailStreamModule.module)
+        }
         DetailStreamScreen(
             koinViewModel {
                 parametersOf(nav.arguments?.getString(ID) ?: DEFAULT_ID)
