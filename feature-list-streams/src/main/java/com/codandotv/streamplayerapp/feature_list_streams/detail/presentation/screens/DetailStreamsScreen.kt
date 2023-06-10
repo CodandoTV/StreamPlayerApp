@@ -29,7 +29,6 @@ import org.koin.androidx.compose.koinViewModel
 fun DetailStreamScreen(
     viewModel: DetailStreamViewModel = koinViewModel(),
     navController: NavController,
-    onNavigateSharingOption: () -> Unit = {},
     disposable: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -39,7 +38,7 @@ fun DetailStreamScreen(
 
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
-            SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController, onNavigateSharingOption)
+            SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController)
         }
         else -> {
             Box(Modifier.fillMaxSize()) {
@@ -59,8 +58,7 @@ fun DetailStreamScreen(
 @Composable
 private fun SetupDetailScreen(
     uiState: DetailStreamsLoadedUIState,
-    navController: NavController,
-    onNavigateSharingOption: () -> Unit
+    navController: NavController
 ) {
     val showDialog = remember { mutableStateOf(false) }
 
