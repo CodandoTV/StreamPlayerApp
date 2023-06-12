@@ -63,9 +63,12 @@ private fun SetupDetailScreen(
     val showDialog = remember { mutableStateOf(false) }
 
     if (showDialog.value) {
-        SharingStreamDialog(value = "", setShowDialog = {
-            showDialog.value = it
-        })
+        SharingStreamDialog(
+            contentTitle = uiState.detailStream.title,
+            contentUrl = uiState.detailStream.url,
+            setShowDialog = {
+                showDialog.value = it
+            })
     }
     Scaffold(
         topBar = {

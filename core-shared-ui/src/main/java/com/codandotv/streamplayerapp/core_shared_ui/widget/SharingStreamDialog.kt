@@ -1,7 +1,11 @@
 package com.codandotv.streamplayerapp.core_shared_ui.widget
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.provider.Telephony
 import android.widget.Toast
 import androidx.compose.animation.*
 import androidx.compose.foundation.Image
@@ -10,9 +14,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,21 +37,39 @@ import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import com.codandotv.streamplayerapp.core_shared_ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_NAME_MESSAGE
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_TITLE_MESSAGE
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SHARING_DATA_TYPE_TEXT
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_BODY
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_TYPE
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.WHATSAPP_PACKAGE_SHARING
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun SharingStreamDialog(
-    value: String, setShowDialog: (Boolean) -> Unit
+    contentTitle: String,
+    contentUrl: String,
+    setShowDialog: (Boolean) -> Unit
 ) {
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
     val animateTrigger = remember { mutableStateOf(false) }
     val context = LocalContext.current
+
     val linkCopiedMessage = stringResource(id = R.string.sharing_link_copied_message)
+    val contentMessage =
+        stringResource(id = R.string.sharing_whatsapp_message, contentTitle, contentUrl)
+    val whatsAppNotInstalledMessage = stringResource(id = R.string.whatsapp_not_installed_message)
+    val smsErrorMessage = stringResource(id = R.string.sms_app_error_message)
+
     LaunchedEffect(key1 = Unit) {
         launch {
-            delay(300)
+            delay(100)
             animateTrigger.value = true
         }
     }
@@ -84,7 +108,11 @@ fun SharingStreamDialog(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
                                         .clickable {
-                                            shareWhatsAppMessage(context)
+                                            shareWhatsAppMessage(
+                                                context,
+                                                contentMessage,
+                                                whatsAppNotInstalledMessage
+                                            )
                                         }
                                 ) {
                                     IconButton(onClick = { }) {
@@ -110,7 +138,11 @@ fun SharingStreamDialog(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
                                         .clickable {
-                                            shareSmsMessage(context)
+                                            shareSmsMessage(
+                                                context,
+                                                contentMessage,
+                                                smsErrorMessage
+                                            )
                                         }
                                 ) {
                                     IconButton(onClick = { }) {
@@ -157,17 +189,13 @@ fun SharingStreamDialog(
                                         )
                                     )
                                 }
-                                Spacer(modifier = Modifier.height(16.dp))
+                                Spacer(modifier = Modifier.height(12.dp))
                                 Row(
                                     horizontalArrangement = Arrangement.SpaceBetween,
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
                                         .clickable {
-                                            Toast.makeText(
-                                                context,
-                                                linkCopiedMessage,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            copyContentLink(context, linkCopiedMessage, contentUrl)
                                         }
                                 ) {
                                     Icon(
@@ -178,7 +206,7 @@ fun SharingStreamDialog(
                                             .width(24.dp)
                                             .height(24.dp)
                                     )
-                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Spacer(modifier = Modifier.width(12.dp))
                                     Text(
                                         text = stringResource(id = R.string.sharing_title_link),
                                         style = TextStyle(
@@ -197,7 +225,10 @@ fun SharingStreamDialog(
                                         color = Color.White
                                     ),
                                     modifier = Modifier.clickable {
-                                        callSharingOptions(context)
+                                        callSharingOptions(
+                                            context,
+                                            contentMessage
+                                        )
                                     }
                                 )
                                 Spacer(modifier = Modifier.height(48.dp))
@@ -210,7 +241,9 @@ fun SharingStreamDialog(
                                         .background(
                                             colorResource(id = android.R.color.white)
                                         )
-                                        .clickable { setShowDialog(false) }
+                                        .clickable {
+                                            setShowDialog(false)
+                                        }
                                 ) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_close),
@@ -263,28 +296,71 @@ private fun shareInstagramStory(context: Context) {
 //    context.startActivity(storiesIntent)
 }
 
-private fun shareWhatsAppMessage(context: Context) {
-    val intent = Intent(Intent.ACTION_SEND)
-    intent.type = "text/plain"
-    intent.setPackage("com.whatsapp")
-    intent.putExtra(Intent.EXTRA_TEXT, "mensagem de teste")
-    context.startActivity(intent)
+private fun shareWhatsAppMessage(
+    context: Context,
+    message: String,
+    errorMessage: String
+) {
+    if (isPackageInstalled(WHATSAPP_PACKAGE_SHARING, context)) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = SHARING_DATA_TYPE_TEXT
+        intent.setPackage(WHATSAPP_PACKAGE_SHARING)
+        intent.putExtra(Intent.EXTRA_TEXT, message)
+        context.startActivity(intent)
+    } else {
+        Toast.makeText(
+            context,
+            errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 }
 
-private fun shareSmsMessage(context: Context) {
-    val sendIntent = Intent(Intent.ACTION_VIEW)
-    sendIntent.putExtra("sms_body", "default content")
-    sendIntent.type = "vnd.android-dir/mms-sms"
-    context.startActivity(sendIntent)
+fun isPackageInstalled(packageName: String?, context: Context): Boolean {
+    return try {
+        context.packageManager.getApplicationInfo(packageName!!, 0).enabled
+    } catch (e: PackageManager.NameNotFoundException) {
+        false
+    }
 }
 
-fun callSharingOptions(context: Context) {
+private fun copyContentLink(context: Context, linkCopiedMessage: String, contentUrl: String) {
+    val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData = ClipData.newPlainText("text", contentUrl)
+    clipboardManager.setPrimaryClip(clipData)
+    Toast.makeText(
+        context,
+        linkCopiedMessage,
+        Toast.LENGTH_SHORT
+    ).show()
+}
+
+private fun shareSmsMessage(
+    context: Context,
+    message: String,
+    errorMessage: String
+) {
+    if (Telephony.Sms.getDefaultSmsPackage(context) != null) {
+        val sendIntent = Intent(Intent.ACTION_VIEW)
+        sendIntent.putExtra(SMS_CONTENT_BODY, message)
+        sendIntent.type = SMS_CONTENT_TYPE
+        context.startActivity(sendIntent)
+    } else {
+        Toast.makeText(
+            context,
+            errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+}
+
+fun callSharingOptions(context: Context, message: String) {
     val intent = Intent(Intent.ACTION_SEND)
-        .putExtra("File Download Link", "https://wwww.google.com")
-        .setType("text/plain")
+        .putExtra(OPTIONS_NAME_MESSAGE, message)
+        .setType(SHARING_DATA_TYPE_TEXT)
     ContextCompat.startActivity(
         context,
-        Intent.createChooser(intent, "Share Using"),
+        Intent.createChooser(intent, OPTIONS_TITLE_MESSAGE),
         null
     )
 }
@@ -294,6 +370,6 @@ suspend fun startDismissWithExitAnimation(
     onDismissRequest: () -> Unit
 ) {
     animateTrigger.value = false
-    delay(1000)
+    delay(100)
     onDismissRequest()
 }
