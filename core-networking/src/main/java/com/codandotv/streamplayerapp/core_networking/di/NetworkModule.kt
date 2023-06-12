@@ -31,7 +31,7 @@ object NetworkModule {
                         .newBuilder()
                         .addHeader(
                             "Authorization",
-                            BuildConfig.API_AUTH
+                            BuildConfig.API_BEARER_AUTH
                         )
                         .addHeader("Content-Type", "application/json;charset=utf-8")
                         .build()
