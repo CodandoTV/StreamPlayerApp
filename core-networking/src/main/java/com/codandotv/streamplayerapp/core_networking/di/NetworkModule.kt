@@ -31,7 +31,7 @@ object NetworkModule {
                         .newBuilder()
                         .addHeader(
                             "Authorization",
-                            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNDg2NWM4YTAzNzhmM2I4NjI0OWU1ZjNiYWFiMjU2NyIsInN1YiI6IjY0Mjk4YTg5YTNlNGJhMWM0NDgzM2U4OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9cIxv29vkaZ2yW88DIFRUFK_nXbK2b6KS8t96kA8WAE"
+                            BuildConfig.API_BEARER_AUTH
                         )
                         .addHeader("Content-Type", "application/json;charset=utf-8")
                         .build()
