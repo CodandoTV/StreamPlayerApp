@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_navigation.helper.currentRoute
+import com.codandotv.streamplayerapp.core_navigation.routes.Routes
 
 private val bottomMenuItems = listOf(
     BottomNavItem.Home,

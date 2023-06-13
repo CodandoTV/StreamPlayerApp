@@ -3,7 +3,7 @@ package com.codandotv.streamplayerapp.core_navigation.bottomnavigation
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.codandotv.streamplayerapp.core_navigation.R
-import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes
+import com.codandotv.streamplayerapp.core_navigation.routes.Routes
 
 sealed class BottomNavItem(
     @StringRes var title: Int,
@@ -16,7 +16,7 @@ sealed class BottomNavItem(
             R.string.bottom_nav_home,
             R.drawable.ic_home_unselected,
             R.drawable.ic_home_selected,
-            BottomNavRoutes.HOME
+            Routes.Home.route
         )
 
     object Games :
@@ -24,7 +24,7 @@ sealed class BottomNavItem(
             R.string.bottom_nav_games,
             R.drawable.ic_games_unselected,
             R.drawable.ic_games_selected,
-            BottomNavRoutes.GAMES
+            Routes.Games.route
         )
 
     object News :
@@ -32,13 +32,13 @@ sealed class BottomNavItem(
             R.string.bottom_nav_news,
             R.drawable.ic_news_unselected,
             R.drawable.ic_news_selected,
-            BottomNavRoutes.NEWS
+            Routes.News.route
         )
 
     object Downloads : BottomNavItem(
         R.string.bottom_nav_downloads,
         R.drawable.ic_downloads_unselected,
         R.drawable.ic_downloads_selected,
-        BottomNavRoutes.DOWNLOADS
+        Routes.Downloads.route
     )
 }

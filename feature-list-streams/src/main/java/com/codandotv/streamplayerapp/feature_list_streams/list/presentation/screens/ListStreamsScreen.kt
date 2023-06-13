@@ -32,7 +32,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ListStreamsScreen(
     viewModel: ListStreamViewModel = koinViewModel(),
-    navController: NavController,
     onNavigateDetailList: (String) -> Unit = {},
     disposable: () -> Unit = {}
 ) {
@@ -58,9 +57,6 @@ fun ListStreamsScreen(
         topBar = {
             StreamPlayerTopBar(scrollBehavior)
         },
-        bottomBar = {
-            StreamPlayerBottomNavigation(navController = navController)
-        }
     ) { _ ->
         Box(
             modifier = Modifier
@@ -100,5 +96,5 @@ fun ListStreamsScreen(
 @ThemePreviews
 @Composable
 fun ListStreamsScreenPreview() {
-    ListStreamsScreen(navController = rememberNavController())
+    ListStreamsScreen()
 }
