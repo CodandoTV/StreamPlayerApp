@@ -1,6 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -62,14 +63,6 @@ private fun SetupDetailScreen(
 ) {
     val showDialog = remember { mutableStateOf(false) }
 
-    if (showDialog.value) {
-        SharingStreamDialog(
-            contentTitle = uiState.detailStream.title,
-            contentUrl = uiState.detailStream.url,
-            setShowDialog = {
-                showDialog.value = it
-            })
-    }
     Scaffold(
         topBar = {
             DetailStreamToolbar(navController = navController)
@@ -136,6 +129,21 @@ private fun SetupDetailScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     DetailStreamActionOption({ showDialog.value = true })
                     Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
+            if (showDialog.value) {
+                SharingStreamDialog(
+                    contentTitle = uiState.detailStream.title,
+                    contentUrl = uiState.detailStream.url,
+                    setShowDialog = {
+                        showDialog.value = it
+                    })
+            }
+            BackHandler {
+                if (showDialog.value) {
+                    showDialog.value = false
+                } else {
+                    navController.navigateUp()
                 }
             }
         })

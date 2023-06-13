@@ -4,7 +4,9 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.provider.Telephony
 import android.widget.Toast
 import androidx.compose.animation.*
@@ -13,10 +15,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -25,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,7 +31,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import com.codandotv.streamplayerapp.core_shared_ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
@@ -45,9 +42,6 @@ import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_TY
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.WHATSAPP_PACKAGE_SHARING
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -73,189 +67,190 @@ fun SharingStreamDialog(
             animateTrigger.value = true
         }
     }
-    Dialog(onDismissRequest = {
-        coroutineScope.launch {
-            startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
-        }
-    }) {
-        Surface(
-            color = Color.Transparent,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Box(
-                contentAlignment = Alignment.BottomCenter
+//    Dialog(onDismissRequest = {
+//        coroutineScope.launch {
+//            startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
+//        }
+//    }) {
+//        Surface(
+//            color = Colors.AlphaBlack,
+//            modifier = Modifier.fillMaxSize()
+//        ) {
+    Box(
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        AnimatedSlideInTransition(visible = animateTrigger.value) {
+            Surface(
+                color = Colors.AlphaBlack,
+                modifier = Modifier.fillMaxSize()
             ) {
-                AnimatedSlideInTransition(visible = animateTrigger.value) {
-                    Surface(
-                        color = Colors.AlphaBlack,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.BottomCenter
+                Box(
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = stringResource(id = R.string.sharing_title_message),
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily.Default,
+                                color = Color.White
+                            )
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clickable {
+                                    shareWhatsAppMessage(
+                                        context,
+                                        contentMessage,
+                                        whatsAppNotInstalledMessage
+                                    )
+                                }
                         ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = stringResource(id = R.string.sharing_title_message),
-                                    style = TextStyle(
-                                        fontSize = 16.sp,
-                                        fontFamily = FontFamily.Default,
-                                        color = Color.White
-                                    )
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_whatsapp),
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .width(24.dp)
+                                    .height(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(id = R.string.sharing_title_whatsapp),
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily.Default,
+                                    color = Color.White
                                 )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                Row(
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .clickable {
-                                            shareWhatsAppMessage(
-                                                context,
-                                                contentMessage,
-                                                whatsAppNotInstalledMessage
-                                            )
-                                        }
-                                ) {
-                                    IconButton(onClick = { }) {
-                                        Image(
-                                            painter = painterResource(id = R.drawable.ic_whatsapp),
-                                            contentDescription = "",
-                                            modifier = Modifier
-                                                .width(24.dp)
-                                                .height(24.dp)
-                                        )
-                                    }
-                                    Text(
-                                        text = stringResource(id = R.string.sharing_title_whatsapp),
-                                        style = TextStyle(
-                                            fontSize = 18.sp,
-                                            fontFamily = FontFamily.Default,
-                                            color = Color.White
-                                        )
-                                    )
-                                }
-                                Row(
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .clickable {
-                                            shareSmsMessage(
-                                                context,
-                                                contentMessage,
-                                                smsErrorMessage
-                                            )
-                                        }
-                                ) {
-                                    IconButton(onClick = { }) {
-                                        Image(
-                                            painter = painterResource(id = R.drawable.ic_message),
-                                            contentDescription = "",
-                                            modifier = Modifier
-                                                .width(24.dp)
-                                                .height(24.dp)
-                                        )
-                                    }
-                                    Text(
-                                        text = stringResource(id = R.string.sharing_title_sms),
-                                        style = TextStyle(
-                                            fontSize = 18.sp,
-                                            fontFamily = FontFamily.Default,
-                                            color = Color.White
-                                        )
-                                    )
-                                }
-                                Row(
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .clickable {
-                                            shareInstagramStory(context)
-                                        }
-                                ) {
-                                    IconButton(onClick = { }) {
-                                        Image(
-                                            painter = painterResource(id = R.drawable.ic_instagram),
-                                            contentDescription = "",
-                                            modifier = Modifier
-                                                .width(24.dp)
-                                                .height(24.dp)
-                                        )
-                                    }
-                                    Text(
-                                        text = stringResource(id = R.string.sharing_title_instagram),
-                                        style = TextStyle(
-                                            fontSize = 18.sp,
-                                            fontFamily = FontFamily.Default,
-                                            color = Color.White
-                                        )
-                                    )
-                                }
-                                Spacer(modifier = Modifier.height(12.dp))
-                                Row(
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .clickable {
-                                            copyContentLink(context, linkCopiedMessage, contentUrl)
-                                        }
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Filled.ContentCopy,
-                                        contentDescription = "",
-                                        tint = colorResource(android.R.color.darker_gray),
-                                        modifier = Modifier
-                                            .width(24.dp)
-                                            .height(24.dp)
-                                    )
-                                    Spacer(modifier = Modifier.width(12.dp))
-                                    Text(
-                                        text = stringResource(id = R.string.sharing_title_link),
-                                        style = TextStyle(
-                                            fontSize = 18.sp,
-                                            fontFamily = FontFamily.Default,
-                                            color = Color.White
-                                        )
-                                    )
-                                }
-                                Spacer(modifier = Modifier.height(20.dp))
-                                Text(
-                                    text = stringResource(id = R.string.sharing_title_more_options),
-                                    style = TextStyle(
-                                        fontSize = 18.sp,
-                                        fontFamily = FontFamily.Default,
-                                        color = Color.White
-                                    ),
-                                    modifier = Modifier.clickable {
-                                        callSharingOptions(
-                                            context,
-                                            contentMessage
-                                        )
-                                    }
-                                )
-                                Spacer(modifier = Modifier.height(48.dp))
-                                Box(
-                                    contentAlignment = Alignment.Center,
-                                    modifier = Modifier
-                                        .width(64.dp)
-                                        .height(64.dp)
-                                        .clip(CircleShape)
-                                        .background(
-                                            colorResource(id = android.R.color.white)
-                                        )
-                                        .clickable {
-                                            setShowDialog(false)
-                                        }
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_close),
-                                        contentDescription = "",
-                                        modifier = Modifier
-                                            .width(32.dp)
-                                            .height(32.dp)
-                                    )
-                                }
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
+                            )
                         }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clickable {
+                                    shareSmsMessage(
+                                        context,
+                                        contentMessage,
+                                        smsErrorMessage
+                                    )
+                                }
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_message),
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .width(24.dp)
+                                    .height(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(id = R.string.sharing_title_sms),
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily.Default,
+                                    color = Color.White
+                                )
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clickable {
+                                    shareInstagramStory()
+                                }
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_instagram),
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .width(24.dp)
+                                    .height(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(id = R.string.sharing_title_instagram),
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily.Default,
+                                    color = Color.White
+                                )
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clickable {
+                                    copyContentLink(context, linkCopiedMessage, contentUrl)
+                                }
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_copy_content),
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .width(28.dp)
+                                    .height(28.dp)
+                                    .background(
+                                        color = Color.DarkGray,
+                                        shape = RoundedCornerShape(6.dp)
+                                    )
+                                    .padding(4.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(id = R.string.sharing_title_link),
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily.Default,
+                                    color = Color.White
+                                )
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            text = stringResource(id = R.string.sharing_title_more_options),
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily.Default,
+                                color = Color.White
+                            ),
+                            modifier = Modifier.clickable {
+                                callSharingOptions(
+                                    context,
+                                    contentMessage
+                                )
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(48.dp))
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .width(64.dp)
+                                .height(64.dp)
+                                .clip(CircleShape)
+                                .background(
+                                    colorResource(id = android.R.color.white)
+                                )
+                                .clickable {
+                                    setShowDialog(false)
+                                }
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_close),
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .width(32.dp)
+                                    .height(32.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
                     }
                 }
             }
@@ -268,32 +263,18 @@ internal fun AnimatedSlideInTransition(
     visible: Boolean,
     content: @Composable AnimatedVisibilityScope.() -> Unit
 ) {
-    val density = LocalDensity.current
     AnimatedVisibility(
         visible = visible,
-        enter = slideInVertically {
-            with(density) { -40.dp.roundToPx() }
-        } + expandVertically(
-            expandFrom = Alignment.Top
-        ) + fadeIn(
-            initialAlpha = 0.3f
-        ),
-        exit = slideOutVertically() + shrinkVertically() + fadeOut(),
+        enter = slideInVertically(initialOffsetY = { fullHeight -> fullHeight }) + fadeIn(),
+        exit = slideOutVertically() + shrinkVertically(
+            shrinkTowards = Alignment.Top
+        ) + fadeOut(),
         content = content
     )
 }
 
-private fun shareInstagramStory(context: Context) {
-//    val backgroundAssetUri: Uri =
-//        FileProvider.getUriForFile(context, "com.codandotv.streamplayerapp.provider", File())
-//    val storiesIntent = Intent("com.instagram.share.ADD_TO_STORY")
-//    storiesIntent.setDataAndType(backgroundAssetUri, "image/*")
-//    storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//    storiesIntent.setPackage("com.instagram.android")
-//    context.grantUriPermission(
-//        "com.instagram.android", backgroundAssetUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
-//    )
-//    context.startActivity(storiesIntent)
+private fun shareInstagramStory() {
+    TODO("Discussão aberta https://github.com/CodandoTV/StreamPlayerApp/discussions/65")
 }
 
 private fun shareWhatsAppMessage(
@@ -316,13 +297,30 @@ private fun shareWhatsAppMessage(
     }
 }
 
-fun isPackageInstalled(packageName: String?, context: Context): Boolean {
+//fun isPackageInstalled(packageName: String?, context: Context): Boolean {
+//    return try {
+//        context.packageManager.getApplicationInfo(packageName!!, PackageManager.GET_META_DATA).enabled
+//    } catch (e: PackageManager.NameNotFoundException) {
+//        false
+//    }
+//}
+
+fun isPackageInstalled(packageName: String, context: Context): Boolean {
+    val pm = context.packageManager
     return try {
-        context.packageManager.getApplicationInfo(packageName!!, 0).enabled
+        pm.getPackageInfoCompat(packageName)
+        true
     } catch (e: PackageManager.NameNotFoundException) {
         false
     }
 }
+
+fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
+    } else {
+        @Suppress("DEPRECATION") getPackageInfo(packageName, flags)
+    }
 
 private fun copyContentLink(context: Context, linkCopiedMessage: String, contentUrl: String) {
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
