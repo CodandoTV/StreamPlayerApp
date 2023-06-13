@@ -4,9 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.os.Build
 import android.provider.Telephony
 import android.widget.Toast
 import androidx.compose.animation.*
@@ -18,7 +15,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,18 +40,17 @@ import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SHARING_DATA_T
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_BODY
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_TYPE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.WHATSAPP_PACKAGE_SHARING
-import kotlinx.coroutines.CoroutineScope
+import com.codandotv.streamplayerapp.core_shared_ui.utils.isPackageInstalled
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun SharingStreamDialog(
+fun SharingStreamCustomView(
     contentTitle: String,
     contentUrl: String,
     setShowDialog: (Boolean) -> Unit
 ) {
-    val coroutineScope: CoroutineScope = rememberCoroutineScope()
+
     val animateTrigger = remember { mutableStateOf(false) }
     val context = LocalContext.current
 
@@ -67,15 +66,6 @@ fun SharingStreamDialog(
             animateTrigger.value = true
         }
     }
-//    Dialog(onDismissRequest = {
-//        coroutineScope.launch {
-//            startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
-//        }
-//    }) {
-//        Surface(
-//            color = Colors.AlphaBlack,
-//            modifier = Modifier.fillMaxSize()
-//        ) {
     Box(
         contentAlignment = Alignment.BottomCenter
     ) {
@@ -297,31 +287,6 @@ private fun shareWhatsAppMessage(
     }
 }
 
-//fun isPackageInstalled(packageName: String?, context: Context): Boolean {
-//    return try {
-//        context.packageManager.getApplicationInfo(packageName!!, PackageManager.GET_META_DATA).enabled
-//    } catch (e: PackageManager.NameNotFoundException) {
-//        false
-//    }
-//}
-
-fun isPackageInstalled(packageName: String, context: Context): Boolean {
-    val pm = context.packageManager
-    return try {
-        pm.getPackageInfoCompat(packageName)
-        true
-    } catch (e: PackageManager.NameNotFoundException) {
-        false
-    }
-}
-
-fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
-    } else {
-        @Suppress("DEPRECATION") getPackageInfo(packageName, flags)
-    }
-
 private fun copyContentLink(context: Context, linkCopiedMessage: String, contentUrl: String) {
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText("text", contentUrl)
@@ -361,13 +326,4 @@ fun callSharingOptions(context: Context, message: String) {
         Intent.createChooser(intent, OPTIONS_TITLE_MESSAGE),
         null
     )
-}
-
-suspend fun startDismissWithExitAnimation(
-    animateTrigger: MutableState<Boolean>,
-    onDismissRequest: () -> Unit
-) {
-    animateTrigger.value = false
-    delay(100)
-    onDismissRequest()
 }

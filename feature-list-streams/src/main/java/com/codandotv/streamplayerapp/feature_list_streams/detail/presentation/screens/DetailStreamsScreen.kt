@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamDialog
+import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamCustomView
 import com.codandotv.streamplayerapp.feature_list_streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
@@ -132,7 +132,7 @@ private fun SetupDetailScreen(
                 }
             }
             if (showDialog.value) {
-                SharingStreamDialog(
+                SharingStreamCustomView(
                     contentTitle = uiState.detailStream.title,
                     contentUrl = uiState.detailStream.url,
                     setShowDialog = {
