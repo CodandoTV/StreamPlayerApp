@@ -6,7 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Telephony
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
+import androidx.compose.animation.core.keyframes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,10 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,6 +33,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.codandotv.streamplayerapp.core_shared_ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_DURATION
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_EXECUTION_DELAY
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.COPY_CONTENT_TYPE_TEXT
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_NAME_MESSAGE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_TITLE_MESSAGE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SHARING_DATA_TYPE_TEXT
@@ -41,6 +43,7 @@ import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_BO
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_TYPE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.WHATSAPP_PACKAGE_SHARING
 import com.codandotv.streamplayerapp.core_shared_ui.utils.isPackageInstalled
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -51,6 +54,7 @@ fun SharingStreamCustomView(
     setShowDialog: (Boolean) -> Unit
 ) {
 
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
     val animateTrigger = remember { mutableStateOf(false) }
     val context = LocalContext.current
 
@@ -62,7 +66,7 @@ fun SharingStreamCustomView(
 
     LaunchedEffect(key1 = Unit) {
         launch {
-            delay(100)
+            delay(ANIMATION_EXECUTION_DELAY)
             animateTrigger.value = true
         }
     }
@@ -101,7 +105,7 @@ fun SharingStreamCustomView(
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_whatsapp),
-                                contentDescription = "",
+                                contentDescription = null,
                                 modifier = Modifier
                                     .width(24.dp)
                                     .height(24.dp)
@@ -131,7 +135,7 @@ fun SharingStreamCustomView(
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_message),
-                                contentDescription = "",
+                                contentDescription = null,
                                 modifier = Modifier
                                     .width(24.dp)
                                     .height(24.dp)
@@ -157,7 +161,7 @@ fun SharingStreamCustomView(
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_instagram),
-                                contentDescription = "",
+                                contentDescription = null,
                                 modifier = Modifier
                                     .width(24.dp)
                                     .height(24.dp)
@@ -183,7 +187,7 @@ fun SharingStreamCustomView(
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_copy_content),
-                                contentDescription = "",
+                                contentDescription = null,
                                 modifier = Modifier
                                     .width(28.dp)
                                     .height(28.dp)
@@ -229,12 +233,18 @@ fun SharingStreamCustomView(
                                     colorResource(id = android.R.color.white)
                                 )
                                 .clickable {
-                                    setShowDialog(false)
+                                    coroutineScope.launch {
+                                        startDismissWithExitAnimation(animateTrigger) {
+                                            setShowDialog(
+                                                false
+                                            )
+                                        }
+                                    }
                                 }
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_close),
-                                contentDescription = "",
+                                contentDescription = null,
                                 modifier = Modifier
                                     .width(32.dp)
                                     .height(32.dp)
@@ -243,6 +253,11 @@ fun SharingStreamCustomView(
                         Spacer(modifier = Modifier.height(12.dp))
                     }
                 }
+            }
+        }
+        BackHandler {
+            coroutineScope.launch {
+                startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
             }
         }
     }
@@ -255,10 +270,12 @@ internal fun AnimatedSlideInTransition(
 ) {
     AnimatedVisibility(
         visible = visible,
-        enter = slideInVertically(initialOffsetY = { fullHeight -> fullHeight }) + fadeIn(),
-        exit = slideOutVertically() + shrinkVertically(
-            shrinkTowards = Alignment.Top
-        ) + fadeOut(),
+        enter = slideInVertically(animationSpec = keyframes {
+            this.durationMillis = ANIMATION_DURATION
+        }, initialOffsetY = { fullHeight -> fullHeight }),
+        exit = slideOutVertically(animationSpec = keyframes {
+            this.durationMillis = ANIMATION_DURATION
+        }, targetOffsetY = { fullHeight -> fullHeight }),
         content = content
     )
 }
@@ -289,7 +306,7 @@ private fun shareWhatsAppMessage(
 
 private fun copyContentLink(context: Context, linkCopiedMessage: String, contentUrl: String) {
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clipData = ClipData.newPlainText("text", contentUrl)
+    val clipData = ClipData.newPlainText(COPY_CONTENT_TYPE_TEXT, contentUrl)
     clipboardManager.setPrimaryClip(clipData)
     Toast.makeText(
         context,
@@ -319,11 +336,20 @@ private fun shareSmsMessage(
 
 fun callSharingOptions(context: Context, message: String) {
     val intent = Intent(Intent.ACTION_SEND)
-        .putExtra(OPTIONS_NAME_MESSAGE, message)
+        .putExtra(Intent.EXTRA_TEXT, message)
         .setType(SHARING_DATA_TYPE_TEXT)
     ContextCompat.startActivity(
         context,
         Intent.createChooser(intent, OPTIONS_TITLE_MESSAGE),
         null
     )
+}
+
+suspend fun startDismissWithExitAnimation(
+    animateTrigger: MutableState<Boolean>,
+    onDismissRequest: () -> Unit
+) {
+    animateTrigger.value = false
+    delay(ANIMATION_EXECUTION_DELAY)
+    onDismissRequest()
 }

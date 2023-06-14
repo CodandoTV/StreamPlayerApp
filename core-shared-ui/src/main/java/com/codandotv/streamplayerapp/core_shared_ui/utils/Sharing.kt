@@ -8,11 +8,13 @@ import android.os.Build
 object Sharing {
 
     const val SHARING_DATA_TYPE_TEXT = "text/plain"
+    const val COPY_CONTENT_TYPE_TEXT = "text"
     const val WHATSAPP_PACKAGE_SHARING = "com.whatsapp"
     const val SMS_CONTENT_TYPE = "vnd.android-dir/mms-sms"
     const val SMS_CONTENT_BODY = "sms_body"
     const val OPTIONS_TITLE_MESSAGE = "Compartilhar usando"
-    const val OPTIONS_NAME_MESSAGE = "Link Download"
+    const val ANIMATION_EXECUTION_DELAY = 100L
+    const val ANIMATION_DURATION = 300
 }
 
 fun isPackageInstalled(packageName: String, context: Context): Boolean {
