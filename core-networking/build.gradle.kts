@@ -1,13 +1,15 @@
 plugins {
     id("com.streamplayer.android-library")
 }
-android{
-    buildTypes{
-        getByName("debug"){
-            buildConfigField("String","HOST",Config.BuildField.host_debug)
+android {
+    buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "HOST", Config.BuildField.host_debug)
+            buildConfigField("String", "API_BEARER_AUTH", Keys.BuildField.api_bearer_debug)
         }
-        getByName("release"){
-            buildConfigField("String","HOST",Config.BuildField.host_release)
+        getByName("release") {
+            buildConfigField("String", "HOST", Config.BuildField.host_release)
+            buildConfigField("String", "API_BEARER_AUTH", Keys.BuildField.api_bearer_release)
         }
     }
 }
