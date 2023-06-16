@@ -1,10 +1,7 @@
 package com.codandotv.streamplayerapp.core_shared_ui.widget
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
-import android.provider.Telephony
+import android.content.*
+import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
@@ -36,7 +33,6 @@ import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_DURATION
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_EXECUTION_DELAY
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.COPY_CONTENT_TYPE_TEXT
-import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_NAME_MESSAGE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_TITLE_MESSAGE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SHARING_DATA_TYPE_TEXT
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_BODY
@@ -46,6 +42,7 @@ import com.codandotv.streamplayerapp.core_shared_ui.utils.isPackageInstalled
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun SharingStreamCustomView(
@@ -320,12 +317,12 @@ private fun shareSmsMessage(
     message: String,
     errorMessage: String
 ) {
-    if (Telephony.Sms.getDefaultSmsPackage(context) != null) {
-        val sendIntent = Intent(Intent.ACTION_VIEW)
-        sendIntent.putExtra(SMS_CONTENT_BODY, message)
-        sendIntent.type = SMS_CONTENT_TYPE
-        context.startActivity(sendIntent)
-    } else {
+    try {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.putExtra(SMS_CONTENT_BODY, message)
+        intent.data = Uri.parse(SMS_CONTENT_TYPE)
+        context.startActivity(intent)
+    } catch (anfe: ActivityNotFoundException) {
         Toast.makeText(
             context,
             errorMessage,
