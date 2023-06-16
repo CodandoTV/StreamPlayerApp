@@ -3,11 +3,11 @@ plugins {
 }
 android {
     buildTypes {
-        getByName("debug") {
+        debug {
             buildConfigField("String", "HOST", Config.BuildField.host_debug)
             buildConfigField("String", "API_BEARER_AUTH", Keys.BuildField.api_bearer_debug)
         }
-        getByName("release") {
+        release {
             buildConfigField("String", "HOST", Config.BuildField.host_release)
             buildConfigField("String", "API_BEARER_AUTH", Keys.BuildField.api_bearer_release)
         }
