@@ -2,14 +2,14 @@ package com.codandotv.streamplayerapp.core_shared_ui.widget
 
 import android.app.Activity
 import android.content.*
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,13 +32,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import com.codandotv.streamplayerapp.core_shared.extension.getUriFromUrlImage
 import com.codandotv.streamplayerapp.core_shared_ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_DURATION
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_EXECUTION_DELAY
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.COPY_CONTENT_TYPE_TEXT
-import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_IMAGE_BOUND
-import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_IMAGE_PREFIX
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_PACKAGE_SHARING
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_STORY_DESTINATION
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_TITLE_MESSAGE
@@ -51,13 +50,6 @@ import com.codandotv.streamplayerapp.core_shared_ui.utils.isPackageInstalled
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.IOException
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
-import java.util.*
-import kotlin.concurrent.thread
 
 
 @Composable
@@ -75,6 +67,7 @@ fun SharingStreamCustomView(
     val contentMessage =
         stringResource(id = R.string.sharing_whatsapp_message, contentTitle, contentUrl)
     val whatsAppNotInstalledMessage = stringResource(id = R.string.whatsapp_not_installed_message)
+    val instagramNotInstalledMessage = stringResource(id = R.string.instagram_not_installed_message)
     val smsErrorMessage = stringResource(id = R.string.sms_app_error_message)
 
     LaunchedEffect(key1 = Unit) {
@@ -175,7 +168,7 @@ fun SharingStreamCustomView(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .clickable {
-                                    shareInstagramStory(context, contentUrl)
+                                    shareInstagramStory(context, contentUrl, instagramNotInstalledMessage)
                                     coroutineScope.launch {
                                         startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
                                     }
@@ -291,75 +284,34 @@ fun SharingStreamCustomView(
     }
 }
 
-@Composable
-internal fun AnimatedSlideInTransition(
-    visible: Boolean,
-    content: @Composable AnimatedVisibilityScope.() -> Unit
-) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = slideInVertically(animationSpec = keyframes {
-            this.durationMillis = ANIMATION_DURATION
-        }, initialOffsetY = { fullHeight -> fullHeight }),
-        exit = slideOutVertically(animationSpec = keyframes {
-            this.durationMillis = ANIMATION_DURATION
-        }, targetOffsetY = { fullHeight -> fullHeight }),
-        content = content
-    )
-}
-
 private fun shareInstagramStory(
     context: Context,
-    contentUrl: String
+    contentUrl: String,
+    errorMessage: String
 ) {
-    Thread {
-        var url: URL? = null
-        try {
-            url = URL(contentUrl)
-        } catch (e: MalformedURLException) {
-            e.printStackTrace()
-        }
-        var connection: HttpURLConnection? = null
-        try {
-            assert(url != null)
-            connection = url!!.openConnection() as HttpURLConnection
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        assert(connection != null)
-        connection!!.doInput = true
-        try {
-            connection.connect()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        var input: InputStream? = null
-        try {
-            input = connection.inputStream
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        val imgBitmap = BitmapFactory.decodeStream(input)
-        val rand = Random()
-        val randNo = rand.nextInt(INSTAGRAM_IMAGE_BOUND)
-        val imgBitmapPath = MediaStore.Images.Media.insertImage(
-            context.contentResolver, imgBitmap,
-            "$INSTAGRAM_IMAGE_PREFIX$randNo", null
-        )
-        val imgBitmapUri = Uri.parse(imgBitmapPath)
+    if (isPackageInstalled(WHATSAPP_PACKAGE_SHARING, context)) {
+        Thread {
+            val imgBitmapUri = getUriFromUrlImage(contentUrl, context)
 
-        val storiesIntent = Intent(INSTAGRAM_STORY_DESTINATION)
-        storiesIntent.setDataAndType(imgBitmapUri, SHARING_DATA_TYPE_IMAGE)
-        storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        storiesIntent.setPackage(INSTAGRAM_PACKAGE_SHARING)
+            val storiesIntent = Intent(INSTAGRAM_STORY_DESTINATION)
+            storiesIntent.setDataAndType(imgBitmapUri, SHARING_DATA_TYPE_IMAGE)
+            storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            storiesIntent.setPackage(INSTAGRAM_PACKAGE_SHARING)
 
-        context.grantUriPermission(
-            INSTAGRAM_PACKAGE_SHARING, imgBitmapUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
-        )
-        (context as Activity).runOnUiThread {
-            context.startActivity(storiesIntent)
-        }
-    }.start()
+            context.grantUriPermission(
+                INSTAGRAM_PACKAGE_SHARING, imgBitmapUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+            (context as Activity).runOnUiThread {
+                context.startActivity(storiesIntent)
+            }
+        }.start()
+    } else {
+        Toast.makeText(
+            context,
+            errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 }
 
 private fun shareWhatsAppMessage(
@@ -403,7 +355,7 @@ private fun shareSmsMessage(
         intent.putExtra(SMS_CONTENT_BODY, message)
         intent.data = Uri.parse(SMS_CONTENT_TYPE)
         context.startActivity(intent)
-    } catch (anfe: ActivityNotFoundException) {
+    } catch (e: ActivityNotFoundException) {
         Toast.makeText(
             context,
             errorMessage,
@@ -412,7 +364,7 @@ private fun shareSmsMessage(
     }
 }
 
-fun callSharingOptions(context: Context, message: String) {
+private fun callSharingOptions(context: Context, message: String) {
     val intent = Intent(Intent.ACTION_SEND)
         .putExtra(Intent.EXTRA_TEXT, message)
         .setType(SHARING_DATA_TYPE_TEXT)
@@ -420,6 +372,23 @@ fun callSharingOptions(context: Context, message: String) {
         context,
         Intent.createChooser(intent, OPTIONS_TITLE_MESSAGE),
         null
+    )
+}
+
+@Composable
+internal fun AnimatedSlideInTransition(
+    visible: Boolean,
+    content: @Composable AnimatedVisibilityScope.() -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically(animationSpec = keyframes {
+            this.durationMillis = ANIMATION_DURATION
+        }, initialOffsetY = { fullHeight -> fullHeight }),
+        exit = slideOutVertically(animationSpec = keyframes {
+            this.durationMillis = ANIMATION_DURATION
+        }, targetOffsetY = { fullHeight -> fullHeight }),
+        content = content
     )
 }
 
