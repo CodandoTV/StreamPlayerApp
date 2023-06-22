@@ -1,7 +1,11 @@
 package com.codandotv.streamplayerapp.core_shared_ui.widget
 
+import android.app.Activity
 import android.content.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
@@ -33,7 +37,12 @@ import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_DURATION
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.ANIMATION_EXECUTION_DELAY
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.COPY_CONTENT_TYPE_TEXT
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_IMAGE_BOUND
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_IMAGE_PREFIX
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_PACKAGE_SHARING
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.INSTAGRAM_STORY_DESTINATION
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.OPTIONS_TITLE_MESSAGE
+import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SHARING_DATA_TYPE_IMAGE
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SHARING_DATA_TYPE_TEXT
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_BODY
 import com.codandotv.streamplayerapp.core_shared_ui.utils.Sharing.SMS_CONTENT_TYPE
@@ -42,6 +51,13 @@ import com.codandotv.streamplayerapp.core_shared_ui.utils.isPackageInstalled
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
+import java.util.*
+import kotlin.concurrent.thread
 
 
 @Composable
@@ -98,6 +114,9 @@ fun SharingStreamCustomView(
                                         contentMessage,
                                         whatsAppNotInstalledMessage
                                     )
+                                    coroutineScope.launch {
+                                        startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
+                                    }
                                 }
                         ) {
                             Image(
@@ -128,6 +147,9 @@ fun SharingStreamCustomView(
                                         contentMessage,
                                         smsErrorMessage
                                     )
+                                    coroutineScope.launch {
+                                        startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
+                                    }
                                 }
                         ) {
                             Image(
@@ -153,7 +175,10 @@ fun SharingStreamCustomView(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .clickable {
-                                    shareInstagramStory()
+                                    shareInstagramStory(context, contentUrl)
+                                    coroutineScope.launch {
+                                        startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
+                                    }
                                 }
                         ) {
                             Image(
@@ -180,6 +205,9 @@ fun SharingStreamCustomView(
                             modifier = Modifier
                                 .clickable {
                                     copyContentLink(context, linkCopiedMessage, contentUrl)
+                                    coroutineScope.launch {
+                                        startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
+                                    }
                                 }
                         ) {
                             Image(
@@ -217,6 +245,9 @@ fun SharingStreamCustomView(
                                     context,
                                     contentMessage
                                 )
+                                coroutineScope.launch {
+                                    startDismissWithExitAnimation(animateTrigger) { setShowDialog(false) }
+                                }
                             }
                         )
                         Spacer(modifier = Modifier.height(48.dp))
@@ -277,8 +308,58 @@ internal fun AnimatedSlideInTransition(
     )
 }
 
-private fun shareInstagramStory() {
-    TODO("Discussão aberta https://github.com/CodandoTV/StreamPlayerApp/discussions/65")
+private fun shareInstagramStory(
+    context: Context,
+    contentUrl: String
+) {
+    Thread {
+        var url: URL? = null
+        try {
+            url = URL(contentUrl)
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+        var connection: HttpURLConnection? = null
+        try {
+            assert(url != null)
+            connection = url!!.openConnection() as HttpURLConnection
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        assert(connection != null)
+        connection!!.doInput = true
+        try {
+            connection.connect()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        var input: InputStream? = null
+        try {
+            input = connection.inputStream
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        val imgBitmap = BitmapFactory.decodeStream(input)
+        val rand = Random()
+        val randNo = rand.nextInt(INSTAGRAM_IMAGE_BOUND)
+        val imgBitmapPath = MediaStore.Images.Media.insertImage(
+            context.contentResolver, imgBitmap,
+            "$INSTAGRAM_IMAGE_PREFIX$randNo", null
+        )
+        val imgBitmapUri = Uri.parse(imgBitmapPath)
+
+        val storiesIntent = Intent(INSTAGRAM_STORY_DESTINATION)
+        storiesIntent.setDataAndType(imgBitmapUri, SHARING_DATA_TYPE_IMAGE)
+        storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        storiesIntent.setPackage(INSTAGRAM_PACKAGE_SHARING)
+
+        context.grantUriPermission(
+            INSTAGRAM_PACKAGE_SHARING, imgBitmapUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+        )
+        (context as Activity).runOnUiThread {
+            context.startActivity(storiesIntent)
+        }
+    }.start()
 }
 
 private fun shareWhatsAppMessage(
