@@ -13,6 +13,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Dependencies.Module.core_shared))
     implementation(platform(Dependencies.Compose.composeBomVersion))
     Dependencies.Compose.list.forEach { implementation(it) }
     Dependencies.Kotlin.list.forEach { implementation(it) }
