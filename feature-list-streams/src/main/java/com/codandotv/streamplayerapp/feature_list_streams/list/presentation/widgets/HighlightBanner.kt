@@ -35,12 +35,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.codandotv.streamplayerapp.core_shared_ui.R.*
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
-import com.codandotv.streamplayerapp.feature_list_streams.R
+import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.core.ContentType
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.HighlightBanner
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.IconAndTextInfo
+import com.codandotv.streamplayerapp.core.shared.ui.R as RSharedUI
 
 @Composable
 fun HighlightBanner(modifier: Modifier = Modifier, data: HighlightBanner?) {
@@ -62,7 +62,10 @@ fun HighlightBanner(modifier: Modifier = Modifier, data: HighlightBanner?) {
             Spacer(modifier = Modifier.weight(1F))
             ContentType(contentType = data.contentType)
             ContentName(name = data.name)
-            ContentRanking(extraInfo = data.extraInfo, contentTypeAsPlural = data.contentTypeAsPlural)
+            ContentRanking(
+                extraInfo = data.extraInfo,
+                contentTypeAsPlural = data.contentTypeAsPlural
+            )
             ActionButtons(Modifier.weight(0.3F), data)
         }
     }
@@ -137,8 +140,8 @@ fun ContentRanking(
 fun ContentType(modifier: Modifier = Modifier, @StringRes contentType: Int) {
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
-            painter = painterResource(id = drawable.ic_netflix),
-            contentDescription = stringResource(id = string.icon_netflix),
+            painter = painterResource(id = RSharedUI.drawable.ic_netflix),
+            contentDescription = stringResource(id = RSharedUI.string.icon_netflix),
             modifier = Modifier.size(16.dp),
             tint = Color.Unspecified
         )
@@ -185,7 +188,7 @@ fun AddToListButton(
     IconButton(onClick = { onClick.invoke() }, modifier = modifier) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
-                painter = painterResource(id = drawable.ic_add),
+                painter = painterResource(id = RSharedUI.drawable.ic_add),
                 contentDescription = stringResource(id = R.string.list_icon_add),
                 tint = Color.White,
             )
@@ -207,7 +210,7 @@ fun InfoButton(
     IconButton(onClick = { onClick.invoke() }, modifier = modifier) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
-                painter = painterResource(id = drawable.ic_info),
+                painter = painterResource(id = RSharedUI.drawable.ic_info),
                 contentDescription = stringResource(id = R.string.list_icon_info),
                 tint = Color.White
             )
@@ -238,7 +241,7 @@ fun PlayButton(
             )
     ) {
         Icon(
-            painter = painterResource(drawable.ic_play),
+            painter = painterResource(RSharedUI.drawable.ic_play),
             contentDescription = stringResource(id = R.string.list_icon_play),
             tint = Color.Black,
             modifier = Modifier.padding(vertical = 8.dp)
@@ -260,7 +263,7 @@ fun PlayButton(
 fun HighlightBannerPreview() {
     HighlightBanner(
         data = HighlightBanner(
-            name = stringResource(id = string.app_name),
+            name = stringResource(id = RSharedUI.string.app_name),
             imageUrl = String(),
             contentType = ContentType.getContentName(ContentType.SHOW),
             contentTypeAsPlural = ContentType.getContentNameAsPlural(ContentType.SHOW),
@@ -268,9 +271,9 @@ fun HighlightBannerPreview() {
                 R.drawable.ic_top_10,
                 ContentType.getContentName(ContentType.SHOW)
             ),
-            leftButton = IconAndTextInfo(drawable.ic_add, R.string.list_highlight_banner_add),
-            centralButton = IconAndTextInfo(drawable.ic_play, R.string.list_highlight_banner_watch),
-            rightButton = IconAndTextInfo(drawable.ic_info, R.string.list_highlight_banner_info),
+            leftButton = IconAndTextInfo(RSharedUI.drawable.ic_add, R.string.list_highlight_banner_add),
+            centralButton = IconAndTextInfo(RSharedUI.drawable.ic_play, R.string.list_highlight_banner_watch),
+            rightButton = IconAndTextInfo(RSharedUI.drawable.ic_info, R.string.list_highlight_banner_info),
         )
     )
 }

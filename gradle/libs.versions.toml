@@ -1,0 +1,127 @@
+[versions]
+kotlin = "1.8.10"
+android_gradle_plugin = "7.4.2"
+koin = "3.4.0"
+
+#Test
+test_junit = "4.13.2"
+androidx_core_testing = "2.2.0"
+mockk = "1.10.0"
+
+#Android Test
+androidx_test_core = "1.5.0"
+androidx_test_rules = "1.5.0"
+androidx_test_runner = "1.5.2"
+androidx_test_junit_ext = "1.1.5"
+mockWebServer = "4.10.0"
+
+#Android Support
+android_core_ktx = "1.7.0"
+androidx_appcompat = "1.4.1"
+material = "1.5.0"
+dynamic_animation = "1.0.0"
+constraint_motion = "2.1.3"
+viewmodel = "2.2.0"
+androidx_core_ktx = "1.1.0"
+
+#Networking
+moshi = "1.14.0"
+okhttp = "4.10.0"
+retrofit = "2.9.0"
+
+#Compose
+compose = "1.4.2"
+compose_bom = "2023.01.00"
+compose_material_3 = "1.0.1"
+compose_activity = "1.5.0"
+compose_icons = "1.4.3"
+compose_navigation = "2.5.3"
+lifecycle_compose_runtime = "2.6.1"
+compose_pagging="1.0.0-alpha20"
+
+coil = "2.3.0"
+lottie = "5.2.0"
+
+[libraries]
+kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+android_gradle_plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android_gradle_plugin" }
+
+#Coil
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+#Lottie
+lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+
+# Kotlin
+kotlin_stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
+kotlin_reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+
+# Android Support
+androidx_core = { group = "androidx.core", name = "core-ktx", version.ref = "androidx_core_ktx" }
+androidx_appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx_appcompat" }
+androidx_dynamicanimation = { group = "androidx.dynamicanimation", name = "dynamicanimation", version.ref = "dynamic_animation" }
+
+# Test
+junit = { group = "junit", name = "junit", version.ref = "test_junit" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mockk_android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+viewmodel_test = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx_core_testing" }
+
+# AndroidX Lifecycle
+androidx_viewmodel_lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "viewmodel" }
+androidx_common_java = { group = "androidx.lifecycle", name = "lifecycle-reactivestreams", version.ref = "viewmodel" }
+
+# AndroidX test
+androidx_test_core = { group = "androidx.test", name = "core-ktx", version.ref = "androidx_test_core" }
+androidx_test_rules = { group = "androidx.test", name = "rules", version.ref = "androidx_test_rules" }
+androidx_test_runner = { group = "androidx.test", name = "runner", version.ref = "androidx_test_runner" }
+androidx_test_junit_ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx_test_junit_ext" }
+android_test_mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockWebServer" }
+
+# Google
+google_material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Compose
+compose_bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose_bom" }
+compose_ui = { module = "androidx.compose.ui:ui" }
+compose_toolingpreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose_icons = { module = "androidx.compose.material:material-icons-extended" }
+compose_lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle_compose_runtime" }
+compose_material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose_material_3" }
+compose_navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose_navigation" }
+compose_pagging = { group = "androidx.paging", name = "paging-compose", version.ref = "compose_pagging" }
+compose_activity = { module = "androidx.activity:activity-compose" }
+compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose_ui_test = { module = "androidx.compose.ui:ui-test-junit4" }
+compose_manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose_uitest = { module = "androidx.compose.ui:ui-test" }
+compose_junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+
+# Koin
+koin_test = { group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koin" }
+koin_android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin_compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+
+#Networking
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+moshi_converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+[bundles]
+compose = ["compose.ui", "compose.icons", "compose.material3","compose_pagging", "compose.lifecycle", "compose.navigation", "compose.activity", "compose.ui.tooling"]
+composetest = ["compose.uitest", "compose.junit4", "compose.manifest", "compose.ui.test"]
+networking = ["retrofit", "moshi", "moshi_converter", "okhttp", "interceptor"]
+koin = ["koin_android", "koin_compose"]
+test = ["junit", "mockk", "mockk_android", "viewmodel_test", "koin_test"]
+androidSupport = ["androidx_core", "androidx_appcompat", "androidx_dynamicanimation","google_material"]
+kotlin = ["androidx_core", "kotlin_stdlib", "kotlin_reflect"]
+
+[plugins]
+android_application = { id = "com.android.application", version.ref = "android_gradle_plugin" }
+android_library = { id = "com.android.library", version.ref = "android_gradle_plugin" }
+
+kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin_kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin_parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
