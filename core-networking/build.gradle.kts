@@ -5,11 +5,11 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "HOST", Config.BuildField.host_debug)
-            buildConfigField("String", "API_BEARER_AUTH", Keys.BuildField.api_bearer_debug)
+            buildConfigField("String", "API_BEARER_AUTH", Config.BuildField.api_bearer_debug)
         }
-        release {
+        getByName("release") {
             buildConfigField("String", "HOST", Config.BuildField.host_release)
-            buildConfigField("String", "API_BEARER_AUTH", Keys.BuildField.api_bearer_release)
+            buildConfigField("String", "API_BEARER_AUTH", Config.BuildField.api_bearer_release)
         }
     }
 }
