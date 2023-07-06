@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.derivedStateOf
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.codandotv.streamplayerapp.core.shared.ui.R
@@ -38,6 +40,16 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
         mutableStateOf(true)
     }
 
+    val playerControlData by remember {
+        derivedStateOf {
+            if (isPlayerPlaying) {
+                PlayerIconData(R.drawable.ic_pause, R.string.player_pause)
+            } else {
+                PlayerIconData(R.drawable.ic_play, R.string.player_continue)
+            }
+        }
+    }
+
     val exoplayer = remember {
         val mediaItem = MediaItem.Builder()
             .setUri(url)
@@ -48,18 +60,16 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
             prepare()
 
             playWhenReady = true
+
+            addListener(object : Player.Listener {
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    isPlayerPlaying = isPlaying
+                }
+            })
         }
     }
 
-    val playerControlData by remember {
-        derivedStateOf {
-            if (isPlayerPlaying) {
-                PlayerIconData(R.drawable.ic_pause, R.string.player_pause)
-            } else {
-                PlayerIconData(R.drawable.ic_play, R.string.player_continue)
-            }
-        }
-    }
+    var playerProgress = remember { mutableStateOf(0f) }
 
     Box(modifier = modifier) {
         AndroidView(
@@ -82,8 +92,6 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
                 } else {
                     exoplayer.play()
                 }
-
-                isPlayerPlaying = isPlayerPlaying.not()
             }
         ) {
             Icon(
@@ -91,6 +99,14 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
                 contentDescription = stringResource(id = playerControlData.contentDescriptionRes)
             )
         }
+
+        Slider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter),
+            value = 0.5f,
+            onValueChange = {}
+        )
     }
 
     DisposableEffect(key1 = Unit, effect = {
