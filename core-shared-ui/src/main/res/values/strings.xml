@@ -7,4 +7,9 @@
     <string name="topbar_categories">Categorias</string>
     <!-- endregion Topbar   -->
 
+
+    <!-- region Player -->
+    <string name="player_pause">Pausar</string>
+    <string name="player_continue">Continuar</string>
+    <!-- endregion Player -->
 </resources>
