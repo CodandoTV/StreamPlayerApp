@@ -9,7 +9,6 @@
 
 
     <!-- region Player -->
-    <string name="player_pause">Pausar</string>
-    <string name="player_continue">Continuar</string>
+    <string name="player_preview">Preview</string>
     <!-- endregion Player -->
 </resources>
