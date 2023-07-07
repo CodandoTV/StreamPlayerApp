@@ -14,7 +14,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +28,6 @@ import androidx.media3.ui.PlayerView
 import com.codandotv.streamplayerapp.core.shared.ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 data class PlayerIconData(
     @DrawableRes val iconRes: Int,
@@ -79,8 +77,6 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
         derivedStateOf { (playerPosition / exoplayer.contentDuration.toDouble()).toFloat() }
     }
 
-    val coroutineScope = rememberCoroutineScope()
-
     Box(modifier = modifier) {
         AndroidView(
             modifier = Modifier
@@ -122,11 +118,9 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
     LaunchedEffect(
         key1 = isPlayerPlaying,
         block = {
-            coroutineScope.launch {
-                while (isPlayerPlaying) {
-                    delay(500L)
-                    playerPosition += 500L
-                }
+            while (isPlayerPlaying) {
+                delay(500L)
+                playerPosition += 500L
             }
         }
     )
