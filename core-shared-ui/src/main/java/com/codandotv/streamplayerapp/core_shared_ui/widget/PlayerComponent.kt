@@ -1,12 +1,13 @@
 package com.codandotv.streamplayerapp.core_shared_ui.widget
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Slider
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -18,21 +19,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-import com.codandotv.streamplayerapp.core.shared.ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
+import com.codandotv.streamplayerapp.core_shared_ui.widget.player.PlayerTracker
+import com.codandotv.streamplayerapp.core_shared_ui.widget.player.PreviewBadge
 import kotlinx.coroutines.delay
-
-data class PlayerIconData(
-    @DrawableRes val iconRes: Int,
-    @StringRes val contentDescriptionRes: Int,
-)
 
 @Composable
 fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
@@ -41,16 +37,6 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
     var isPlayerPlaying by remember { mutableStateOf(true) }
 
     var playerPosition by remember { mutableStateOf(0L) }
-
-    val playerControlData by remember {
-        derivedStateOf {
-            if (isPlayerPlaying) {
-                PlayerIconData(R.drawable.ic_pause, R.string.player_pause)
-            } else {
-                PlayerIconData(R.drawable.ic_play, R.string.player_continue)
-            }
-        }
-    }
 
     val exoplayer = remember {
         val mediaItem = MediaItem.Builder()
@@ -77,43 +63,52 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
         derivedStateOf { (playerPosition / exoplayer.contentDuration.toDouble()).toFloat() }
     }
 
-    Box(modifier = modifier) {
-        AndroidView(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.Center),
-            factory = {
-                PlayerView(it).apply {
-                    player = exoplayer
-                    useController = false
+    Column(
+        modifier = modifier
+            .height(225.dp)
+            .fillMaxWidth()
+    ) {
+        Box {
+            AndroidView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .align(Alignment.TopCenter),
+                factory = {
+                    PlayerView(it).apply {
+                        player = exoplayer
+                        useController = false
+                    }
                 }
-            }
-        )
+            )
 
-        IconButton(
-            modifier = Modifier.align(Alignment.Center),
-            onClick = {
-                if (isPlayerPlaying) {
-                    exoplayer.pause()
-                } else {
-                    exoplayer.play()
-                }
-            }
-        ) {
-            Icon(
-                painter = painterResource(id = playerControlData.iconRes),
-                contentDescription = stringResource(id = playerControlData.contentDescriptionRes)
+            PreviewBadge(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(
+                        start = 8.dp,
+                        bottom = 8.dp
+                    )
             )
         }
 
-        Slider(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter),
-            value = playerProgress,
-            onValueChange = {}
-        )
+                .height(25.dp)
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            PlayerTracker(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(18.dp)
+                    .padding(horizontal = 0.dp),
+                percentage = playerProgress,
+                expanded = false
+            )
+        }
     }
+
 
     LaunchedEffect(
         key1 = isPlayerPlaying,
