@@ -9,10 +9,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +28,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.codandotv.streamplayerapp.core.shared.ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 data class PlayerIconData(
     @DrawableRes val iconRes: Int,
@@ -36,9 +40,9 @@ data class PlayerIconData(
 fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
     val context = LocalContext.current
 
-    var isPlayerPlaying by remember {
-        mutableStateOf(true)
-    }
+    var isPlayerPlaying by remember { mutableStateOf(true) }
+
+    var playerPosition by remember { mutableStateOf(0L) }
 
     val playerControlData by remember {
         derivedStateOf {
@@ -61,15 +65,21 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
 
             playWhenReady = true
 
-            addListener(object : Player.Listener {
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    isPlayerPlaying = isPlaying
+            addListener(
+                object : Player.Listener {
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        isPlayerPlaying = isPlaying
+                    }
                 }
-            })
+            )
         }
     }
 
-    var playerProgress = remember { mutableStateOf(0f) }
+    val playerProgress by remember {
+        derivedStateOf { (playerPosition / exoplayer.contentDuration.toDouble()).toFloat() }
+    }
+
+    val coroutineScope = rememberCoroutineScope()
 
     Box(modifier = modifier) {
         AndroidView(
@@ -104,10 +114,22 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
-            value = 0.5f,
+            value = playerProgress,
             onValueChange = {}
         )
     }
+
+    LaunchedEffect(
+        key1 = isPlayerPlaying,
+        block = {
+            coroutineScope.launch {
+                while (isPlayerPlaying) {
+                    delay(500L)
+                    playerPosition += 500L
+                }
+            }
+        }
+    )
 
     DisposableEffect(key1 = Unit, effect = {
         onDispose {
