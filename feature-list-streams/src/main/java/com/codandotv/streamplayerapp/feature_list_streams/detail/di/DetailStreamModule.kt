@@ -5,6 +5,8 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.data.DetailStre
 import com.codandotv.streamplayerapp.feature_list_streams.detail.data.DetailStreamService
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCaseImpl
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCaseImpl
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
@@ -15,13 +17,23 @@ object DetailStreamModule {
     val module = module {
         viewModel { (id: String) ->
             DetailStreamViewModel(
-                useCase = get {
+                detailStreamUseCase = get {
+                    parametersOf(id)
+                },
+                videoStreamsUseCase = get {
                     parametersOf(id)
                 }
             )
         }
         factory<DetailStreamUseCase> { (id: String) ->
             DetailStreamUseCaseImpl(
+                detailStreamRepository = get {
+                    parametersOf(id)
+                }
+            )
+        }
+        factory<VideoStreamsUseCase> { (id: String) ->
+            VideoStreamsUseCaseImpl(
                 detailStreamRepository = get {
                     parametersOf(id)
                 }
