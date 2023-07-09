@@ -17,4 +17,6 @@ dependencies {
     implementation(libs.coil)
 
     testImplementation(libs.bundles.test)
+
+    implementation(libs.android.youtubeExtractor)
 }

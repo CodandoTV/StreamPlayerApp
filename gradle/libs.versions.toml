@@ -1,4 +1,5 @@
 [versions]
+androidYoutubeextractor = "v2.1.0"
 kotlin = "1.8.10"
 android_gradle_plugin = "7.4.2"
 koin = "3.4.0"
@@ -45,6 +46,7 @@ lottie = "5.2.0"
 media3 = "1.1.0"
 
 [libraries]
+android-youtubeExtractor = { module = "com.github.HaarigerHarald:android-youtubeExtractor", version.ref = "androidYoutubeextractor" }
 kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 android_gradle_plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android_gradle_plugin" }
 
