@@ -37,7 +37,7 @@ class DetailStreamViewModel(
                 .zip(videoStreamsUseCase.getVideoStreams()) { detailStream, videoUrl ->
                     DetailStreamsLoadedUIState(
                         detailStream = detailStream,
-                        videoUrl = videoUrl.firstOrNull()?.youtubeUrl
+                        videoId = videoUrl.firstOrNull()?.videoId
                     )
                 }
                 .onStart { onLoading() }

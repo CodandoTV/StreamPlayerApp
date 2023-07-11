@@ -35,7 +35,7 @@ fun DetailStreamImagePreview(
     ) {
         if (showPlayer) {
             PlayerComponent(
-                url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                videoId = uiState.videoId ?: ""
             )
         } else {
             AsyncImage(

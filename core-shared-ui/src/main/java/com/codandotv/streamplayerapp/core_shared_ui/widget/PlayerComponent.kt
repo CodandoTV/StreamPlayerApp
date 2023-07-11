@@ -13,27 +13,67 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.MediaItem
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 @Composable
-fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
+fun PlayerComponent(videoId: String, modifier: Modifier = Modifier) {
+
     val context = LocalContext.current
 
-    val exoplayer = remember {
-        val mediaItem = MediaItem.Builder()
-            .setUri(url)
-            .build()
+    val youtubePlayerView = remember {
+        YouTubePlayerView(context).apply {
+            enableAutomaticInitialization = false
 
-        ExoPlayer.Builder(context).build().apply {
-            setMediaItem(mediaItem)
-            prepare()
+            addYouTubePlayerListener(object : YouTubePlayerListener {
+                override fun onApiChange(youTubePlayer: YouTubePlayer) {}
 
-            playWhenReady = true
+                override fun onCurrentSecond(youTubePlayer: YouTubePlayer, second: Float) {}
+
+                override fun onError(
+                    youTubePlayer: YouTubePlayer,
+                    error: PlayerConstants.PlayerError
+                ) {
+                }
+
+                override fun onPlaybackQualityChange(
+                    youTubePlayer: YouTubePlayer,
+                    playbackQuality: PlayerConstants.PlaybackQuality
+                ) {
+                }
+
+                override fun onPlaybackRateChange(
+                    youTubePlayer: YouTubePlayer,
+                    playbackRate: PlayerConstants.PlaybackRate
+                ) {
+                }
+
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    youTubePlayer.loadVideo(videoId, 0f)
+                }
+
+                override fun onStateChange(
+                    youTubePlayer: YouTubePlayer,
+                    state: PlayerConstants.PlayerState
+                ) {
+                }
+
+                override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {}
+
+                override fun onVideoId(youTubePlayer: YouTubePlayer, videoId: String) {}
+
+                override fun onVideoLoadedFraction(
+                    youTubePlayer: YouTubePlayer,
+                    loadedFraction: Float
+                ) {
+                }
+            })
         }
     }
+
 
     Column(
         modifier = modifier
@@ -46,27 +86,25 @@ fun PlayerComponent(url: String, modifier: Modifier = Modifier) {
                     .height(200.dp)
                     .align(Alignment.TopCenter),
                 factory = {
-                    PlayerView(it).apply {
-                        player = exoplayer
-                        useController = true
-                    }
+                    youtubePlayerView
                 }
             )
         }
     }
 
-    DisposableEffect(key1 = Unit, effect = {
-        onDispose {
-            exoplayer.release()
-        }
-    })
+    DisposableEffect(
+        key1 = Unit,
+        effect = {
+            onDispose { youtubePlayerView.release() }
+        },
+    )
 }
 
 @Composable
 @ThemePreviews
 fun PlayerComponentPreview() {
     PlayerComponent(
-        url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        videoId = "BigBuckBunny.mp4",
         modifier = Modifier.fillMaxWidth()
     )
 }

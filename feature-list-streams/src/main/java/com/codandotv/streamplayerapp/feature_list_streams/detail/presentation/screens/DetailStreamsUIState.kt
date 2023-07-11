@@ -5,7 +5,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailSt
 sealed class DetailStreamsUIState {
     data class DetailStreamsLoadedUIState(
         val detailStream: DetailStream,
-        val videoUrl: String?,
+        val videoId: String?,
     ) : DetailStreamsUIState()
 
     object LoadingStreamUIState : DetailStreamsUIState()

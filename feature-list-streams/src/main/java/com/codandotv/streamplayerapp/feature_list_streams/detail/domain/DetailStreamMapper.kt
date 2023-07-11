@@ -17,7 +17,7 @@ fun DetailStreamResponse.toDetailStream(): DetailStream =
 fun VideoStreamsResponse.toVideoStreams(): List<VideoStream> =
     results.map {
         VideoStream(
-            youtubeUrl = "http://youtube.com/watch?v=".plus(it.key),
+            videoId = it.key,
             movieId = this.id
         )
     }
