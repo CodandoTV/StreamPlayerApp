@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import com.codandotv.streamplayerapp.feature_list_streams.R
+import com.codandotv.streamplayerapp.feature.list.streams.R
 
 @Composable
 fun DetailStreamRowHeader(

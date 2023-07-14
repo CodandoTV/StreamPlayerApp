@@ -1,6 +1,6 @@
 package com.codandotv.streamplayerapp.core_networking.handleError
 
-import com.codandotv.streamplayerapp.core_networking.R
+import com.codandotv.streamplayerapp.core.networking.R
 import org.koin.core.component.KoinComponent
 
 /**

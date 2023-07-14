@@ -1,6 +1,7 @@
-android{
-    namespace = "${Config.packageName}core_shared"
+plugins {
+    id("com.streamplayer.android-library")
 }
+
 dependencies {
-    implementation(Dependencies.Koin.koin)
+    implementation(libs.bundles.koin)
 }

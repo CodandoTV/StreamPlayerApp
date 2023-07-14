@@ -14,8 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.codandotv.streamplayerapp.core_shared_ui.R.*
-import com.codandotv.streamplayerapp.feature_list_streams.R
+import com.codandotv.streamplayerapp.feature.list.streams.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,7 +39,7 @@ fun DetailStreamToolbar(navController : NavController) {
             }
             IconButton(onClick = { }) {
                 Image(
-                    painter = painterResource(id = drawable.perfil_fake),
+                    painter = painterResource(id = com.codandotv.streamplayerapp.core.shared.ui.R.drawable.perfil_fake),
                     contentDescription = null
                 )
             }

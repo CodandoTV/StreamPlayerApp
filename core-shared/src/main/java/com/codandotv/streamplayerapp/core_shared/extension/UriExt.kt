@@ -26,20 +26,20 @@ fun getUriFromUrlImage(
         assert(url != null)
         connection = url!!.openConnection() as HttpURLConnection
     } catch (e: IOException) {
-        e.printStackTrace()
+        showErrorMessage(context, "Erro de conexão")
     }
     assert(connection != null)
     connection!!.doInput = true
     try {
         connection.connect()
     } catch (e: IOException) {
-        e.printStackTrace()
+        showErrorMessage(context, "Erro de conexão")
     }
     var input: InputStream? = null
     try {
         input = connection.inputStream
     } catch (e: IOException) {
-        e.printStackTrace()
+        showErrorMessage(context, "Erro de conexão")
     }
     val imgBitmap = BitmapFactory.decodeStream(input)
     val rand = Random()

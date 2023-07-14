@@ -1,8 +1,9 @@
+plugins {
+    id("com.streamplayer.android-library")
+}
 android {
-    namespace = "${Config.packageName}core_networking"
-
     buildTypes {
-        getByName("debug") {
+        debug {
             buildConfigField("String", "HOST", Config.BuildField.host_debug)
             buildConfigField("String", "API_BEARER_AUTH", Config.BuildField.api_bearer_debug)
         }
@@ -13,9 +14,8 @@ android {
     }
 }
 dependencies {
-    implementation(Dependencies.Koin.koin)
-    Dependencies.Retrofit.list.forEach { implementation(it) }
-    Dependencies.Kotlin.list.forEach { implementation(it) }
-    Dependencies.UnitTest.list.forEach { testImplementation(it) }
-    Dependencies.AndroidTest.list.forEach { androidTestImplementation(it) }
+    implementation(libs.bundles.kotlin)
+    implementation(libs.bundles.networking)
+    implementation(libs.bundles.koin)
+    testImplementation(libs.bundles.test)
 }

@@ -14,7 +14,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.codandotv.streamplayerapp.core_shared_ui.R
+import com.codandotv.streamplayerapp.core.shared.ui.R as SharedUiR
 
 @Composable
 fun SplashScreen(
@@ -29,7 +29,7 @@ fun SplashScreen(
                 .fillMaxSize()
                 .background(Color.Black)
         ) {
-            val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.logo))
+            val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(SharedUiR.raw.logo))
             val logoAnimationState = animateLottieCompositionAsState(composition = composition)
             LottieAnimation(composition = composition, progress = { logoAnimationState.progress })
             if (logoAnimationState.isAtEnd && logoAnimationState.isPlaying) {
