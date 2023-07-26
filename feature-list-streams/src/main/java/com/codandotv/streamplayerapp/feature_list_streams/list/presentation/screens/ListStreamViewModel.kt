@@ -1,10 +1,9 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens
 
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.paging.map
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
 import com.codandotv.streamplayerapp.feature.list.streams.R
@@ -17,7 +16,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.High
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.IconAndTextInfo
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Stream
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.StreamsCardContent
-import kotlinx.coroutines.flow.Flow
+import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.widgets.StreamsCarouselContent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -37,7 +36,7 @@ class ListStreamViewModel(
 
     private val _uiState = MutableStateFlow(
         ListStreamsUIState(
-            genres = emptyList(),
+            streamsCarouselContent = emptyList(),
             isLoading = false
         )
     )
@@ -47,9 +46,7 @@ class ListStreamViewModel(
         initialValue = _uiState.value
     )
 
-    override fun onCreate(owner: LifecycleOwner) {
-        super.onCreate(owner)
-
+    init {
         viewModelScope.launch {
             latestStream()
                 .combine(
@@ -64,29 +61,18 @@ class ListStreamViewModel(
                 .catchFailure {
                     println(">>>> ${it.errorMessage}")
                 }
-                .collect {
-                    val (latest, genres) = it
+                .collect { pair ->
+                    val (latest, genres) = pair
+
                     _uiState.update {
                         it.copy(
-                            genres = genres,
+                            streamsCarouselContent = genres.map { genreTarget ->
+                                getStreamsByGenre(genreTarget)
+                            },
                             highlightBanner = getHighlightBanner(latest)
                         )
                     }
                 }
-
-            if (uiState.value.genres.isEmpty()) {
-                listGenres()
-                    .onStart { onLoading() }
-                    .catchFailure {
-                        println(">>>> ${it.errorMessage}")
-                    }
-                    .onCompletion { loaded() }
-                    .collect { genres ->
-                        _uiState.update {
-                            it.copy(genres = genres)
-                        }
-                    }
-            }
         }
     }
 
@@ -114,16 +100,19 @@ class ListStreamViewModel(
             ),
         )
 
-    fun loadMovies(genre: Genre): Flow<PagingData<StreamsCardContent>> {
-        return listStreams(genre).map {
-            it.map { stream ->
-                StreamsCardContent(
-                    contentDescription = stream.name,
-                    url = stream.posterPathUrl,
-                    id = stream.id
-                )
-            }
-        }
+    private fun getStreamsByGenre(genre: Genre): StreamsCarouselContent {
+        return StreamsCarouselContent(
+            genre.name,
+            listStreams(genre).map {
+                it.map { stream ->
+                    StreamsCardContent(
+                        contentDescription = stream.name,
+                        url = stream.posterPathUrl,
+                        id = stream.id
+                    )
+                }
+            }.cachedIn(viewModelScope)
+        )
     }
 
     private fun loaded() {
