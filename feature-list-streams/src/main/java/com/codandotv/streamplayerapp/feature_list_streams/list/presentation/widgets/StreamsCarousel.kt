@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,21 +22,23 @@ import androidx.paging.compose.itemKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
+data class StreamsCarouselContent(
+    val genreTitle: String,
+    val contentList: Flow<PagingData<StreamsCardContent>>
+)
+
 @Composable
 fun StreamsCarousel(
-    title: String,
-    contentList: Flow<PagingData<StreamsCardContent>>,
+    content: StreamsCarouselContent,
     modifier: Modifier = Modifier,
     onNavigateDetailList: (String) -> Unit = {},
 ) {
-    val flow = remember { contentList }
-
-    val lazyPagingItems = flow.collectAsLazyPagingItems()
+    val lazyPagingItems = content.contentList.collectAsLazyPagingItems()
     val lazyListState = rememberLazyListState()
 
     Column(modifier = modifier) {
         Text(
-            title,
+            content.genreTitle,
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
@@ -73,7 +74,9 @@ fun StreamsCarousel(
 @Preview
 fun StreamsCarouselPreview() {
     StreamsCarousel(
-        title = "Ação",
-        contentList = emptyFlow()
+        content = StreamsCarouselContent(
+            genreTitle = "Ação",
+            contentList = emptyFlow()
+        )
     )
 }
