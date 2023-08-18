@@ -1,18 +1,15 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
+import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.LoadingStreamUIState
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailStreamViewModel(
@@ -20,7 +17,7 @@ class DetailStreamViewModel(
 ) : ViewModel(), DefaultLifecycleObserver {
 
     private val _uiState = MutableStateFlow<DetailStreamsUIState>(LoadingStreamUIState)
-    val uiState : StateFlow<DetailStreamsUIState> = _uiState.stateIn(
+    val uiState: StateFlow<DetailStreamsUIState> = _uiState.stateIn(
         viewModelScope,
         SharingStarted.Eagerly,
         initialValue = _uiState.value
@@ -47,5 +44,12 @@ class DetailStreamViewModel(
 
     private fun onLoading() {
         _uiState.update { LoadingStreamUIState }
+    }
+
+    fun addToMyList(detailStreamId: String) {
+        viewModelScope.launch {
+            Log.d("getDetailStreamId", detailStreamId)
+            useCase.insertToFavorites(detailStreamId)
+        }
     }
 }
