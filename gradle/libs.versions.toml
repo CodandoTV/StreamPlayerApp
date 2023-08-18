@@ -2,6 +2,7 @@
 kotlin = "1.8.10"
 android_gradle_plugin = "7.4.2"
 koin = "3.4.0"
+ksp = "1.8.10-1.0.9"
 
 #Test
 test_junit = "4.13.2"
@@ -41,6 +42,9 @@ compose_pagging="1.0.0-alpha20"
 
 coil = "2.3.0"
 lottie = "5.2.0"
+
+#Room Database
+room = "2.5.2"
 
 [libraries]
 kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -109,6 +113,11 @@ moshi_converter = { group = "com.squareup.retrofit2", name = "converter-moshi", 
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
+#Room
+roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
+roomCompiler = { group = "androidx.room", name= "room-compiler", version.ref = "room"}
+roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
+
 [bundles]
 compose = ["compose.ui", "compose.icons", "compose.material3","compose_pagging", "compose.lifecycle", "compose.navigation", "compose.activity", "compose.ui.tooling"]
 composetest = ["compose.uitest", "compose.junit4", "compose.manifest", "compose.ui.test"]
@@ -125,3 +134,4 @@ android_library = { id = "com.android.library", version.ref = "android_gradle_pl
 kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin_kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin_parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
