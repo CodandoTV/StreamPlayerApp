@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun IconWithText(
-    onClick: (String) -> Unit,
+    onClick: () -> Unit,
     imageVector: ImageVector,
     imageColor: Color,
     text: String,
@@ -28,7 +28,7 @@ fun IconWithText(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.clickable { onClick("oi") } ) {
+        modifier = modifier.clickable { onClick() } ) {
         Icon(
             imageVector = imageVector,
             contentDescription = null,

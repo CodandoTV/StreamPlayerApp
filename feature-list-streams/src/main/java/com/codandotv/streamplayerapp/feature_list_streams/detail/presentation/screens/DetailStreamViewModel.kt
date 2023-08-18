@@ -1,6 +1,5 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
-import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
@@ -48,7 +47,6 @@ class DetailStreamViewModel(
 
     fun addToMyList(detailStreamId: String) {
         viewModelScope.launch {
-            Log.d("getDetailStreamId", detailStreamId)
             useCase.insertToFavorites(detailStreamId)
         }
     }

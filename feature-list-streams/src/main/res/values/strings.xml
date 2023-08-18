@@ -20,6 +20,7 @@
     <string name="list_highlight_banner_info">Saiba mais</string>
     <string name="list_highlight_banner_watch">Assistir</string>
     <string name="list_highlight_banner_stream_ranking">Top 1 em %s hoje</string>
+    <string name="adicionado_a_minha_lista">Adicionado à Minha lista</string>
     <!-- endregion Highlight banner -->
 
 </resources>

@@ -1,6 +1,7 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -12,6 +13,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,7 +24,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.feature.list.streams.R
-import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
 import org.koin.androidx.compose.koinViewModel
 
@@ -33,6 +35,7 @@ fun DetailStreamScreen(
     disposable: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
     val lifecycleOwner = LocalLifecycleOwner.current
     Lifecycle(lifecycleOwner, viewModel, disposable)
@@ -40,7 +43,10 @@ fun DetailStreamScreen(
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
             SetupDetailScreen(
-                addToMyList = { detailStreamId -> viewModel.addToMyList(detailStreamId) },
+                addToMyList = { detailStreamId ->
+                    viewModel.addToMyList(detailStreamId)
+                    Toast.makeText(context, R.string.adicionado_a_minha_lista, Toast.LENGTH_LONG).show()
+                },
                 uiState as DetailStreamsLoadedUIState,
                 navController
             )
@@ -62,7 +68,9 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
-    addToMyList: (String) -> Unit, uiState: DetailStreamsLoadedUIState, navController: NavController
+    addToMyList: (String) -> Unit,
+    uiState: DetailStreamsLoadedUIState,
+    navController: NavController,
 ) {
     Scaffold(
         topBar = {
