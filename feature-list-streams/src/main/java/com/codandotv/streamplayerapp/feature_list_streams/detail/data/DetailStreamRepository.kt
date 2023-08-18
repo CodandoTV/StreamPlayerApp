@@ -1,6 +1,5 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.data
 
-import android.util.Log
 import com.codandotv.streamplayerapp.core_local_storage.dao.FavoriteDao
 import com.codandotv.streamplayerapp.core_local_storage.entities.MovieEntity
 import com.codandotv.streamplayerapp.core_networking.handleError.toFlow
@@ -25,8 +24,10 @@ class DetailStreamRepositoryImpl(
         service.getMovie(movieId)
         .toFlow()
         .map {
-            it.toDetailStream()
+            it.toDetailStream(isFavorite())
         }
+
+    private suspend fun isFavorite() = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
 
     override suspend fun insertToFavorites(detailStreamId: String) {
         service.getMovie(movieId)
@@ -44,6 +45,5 @@ class DetailStreamRepositoryImpl(
                 )
                 favoriteDao.insert(favoriteMovie)
             }
-        Log.d("checkFavs", favoriteDao.fetchAll().toString())
     }
 }
