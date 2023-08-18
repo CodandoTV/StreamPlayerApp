@@ -2,15 +2,14 @@ package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.s
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamCustomView
 import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
@@ -71,7 +71,11 @@ private fun SetupDetailScreen(
     addToMyList: (String) -> Unit,
     uiState: DetailStreamsLoadedUIState,
     navController: NavController,
+    uiState: DetailStreamsLoadedUIState,
+    navController: NavController
 ) {
+    val showDialog = remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             DetailStreamToolbar(navController = navController)
@@ -137,7 +141,23 @@ private fun SetupDetailScreen(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     DetailStreamActionOption(uiState.detailStream, addToMyList)
+                    DetailStreamActionOption({ showDialog.value = true })
                     Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
+            if (showDialog.value) {
+                SharingStreamCustomView(
+                    contentTitle = uiState.detailStream.title,
+                    contentUrl = uiState.detailStream.url,
+                    setShowDialog = {
+                        showDialog.value = it
+                    })
+            }
+            BackHandler {
+                if (showDialog.value) {
+                    showDialog.value = false
+                } else {
+                    navController.navigateUp()
                 }
             }
         })

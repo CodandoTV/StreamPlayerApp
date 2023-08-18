@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.coreShared)
     implementation(libs.bundles.koin)
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.androidSupport)

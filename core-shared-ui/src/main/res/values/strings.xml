@@ -7,4 +7,17 @@
     <string name="topbar_categories">Categorias</string>
     <!-- endregion Topbar   -->
 
+    <!-- region Sharing Content   -->
+    <string name="sharing_title_message">Compartilhar em...</string>
+    <string name="sharing_title_whatsapp">WhatsApp</string>
+    <string name="sharing_title_sms">Mensagens</string>
+    <string name="sharing_title_instagram">Stories do Instagram</string>
+    <string name="sharing_title_link">Copiar Link</string>
+    <string name="sharing_link_copied_message">Link copiado</string>
+    <string name="sharing_title_more_options">Mais Opções</string>
+    <string name="sharing_whatsapp_message">Já assistiu a \"%1s\" na Netflix?\n\n%2s</string>
+    <string name="whatsapp_not_installed_message">Por favor, instale o aplicativo WhatsApp</string>
+    <string name="instagram_not_installed_message">Por favor, instale o aplicativo Instagram</string>
+    <string name="sms_app_error_message">Erro ao abrir o app Mensagens</string>
+    <!-- endregion Sharing Content   -->
 </resources>
