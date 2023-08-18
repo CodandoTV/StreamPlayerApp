@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.core_shared_ui.widget
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -17,16 +18,17 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun IconWithText(
+    onClick: (String) -> Unit,
     imageVector: ImageVector,
     imageColor: Color,
     text: String,
     textColor: Color,
     modifier: Modifier = Modifier
 ) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-    ) {
+        modifier = modifier.clickable { onClick("oi") } ) {
         Icon(
             imageVector = imageVector,
             contentDescription = null,

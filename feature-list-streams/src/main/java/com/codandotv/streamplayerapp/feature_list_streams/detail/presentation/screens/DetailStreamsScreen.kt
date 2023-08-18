@@ -39,7 +39,11 @@ fun DetailStreamScreen(
 
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
-            SetupDetailScreen(uiState as DetailStreamsLoadedUIState, navController)
+            SetupDetailScreen(
+                addToMyList = { detailStreamId -> viewModel.addToMyList(detailStreamId) },
+                uiState as DetailStreamsLoadedUIState,
+                navController
+            )
         }
         else -> {
             Box(Modifier.fillMaxSize()) {
@@ -58,7 +62,7 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
-    uiState: DetailStreamsLoadedUIState, navController: NavController
+    addToMyList: (String) -> Unit, uiState: DetailStreamsLoadedUIState, navController: NavController
 ) {
     Scaffold(
         topBar = {
@@ -124,7 +128,7 @@ private fun SetupDetailScreen(
                         modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    DetailStreamActionOption()
+                    DetailStreamActionOption(uiState.detailStream, addToMyList)
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
