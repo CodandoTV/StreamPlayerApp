@@ -6,5 +6,6 @@ data class DetailStream(
     val overview : String,
     val tagline : String,
     val url : String,
-    val releaseYear : String
+    val releaseYear : String,
+    val isFavorite: Boolean
 )
