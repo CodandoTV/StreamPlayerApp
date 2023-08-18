@@ -29,6 +29,7 @@ object DetailStreamModule {
         }
         factory<DetailStreamRepository> { (id: String) ->
             DetailStreamRepositoryImpl(
+                favoriteDao = get(),
                 service = get(),
                 movieId = id,
             )
