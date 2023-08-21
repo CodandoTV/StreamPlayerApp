@@ -1,7 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,7 +34,6 @@ fun DetailStreamScreen(
     disposable: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val context = LocalContext.current
 
     val lifecycleOwner = LocalLifecycleOwner.current
     Lifecycle(lifecycleOwner, viewModel, disposable)
@@ -44,10 +41,7 @@ fun DetailStreamScreen(
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
             SetupDetailScreen(
-                addToMyList = { detailStream ->
-                    viewModel.toggleItemInFavorites(detailStream)
-                    Toast.makeText(context, R.string.adicionado_a_minha_lista, Toast.LENGTH_LONG).show()
-                },
+                onToggleToMyList = { detailStream -> viewModel.toggleItemInFavorites(detailStream) },
                 uiState as DetailStreamsLoadedUIState,
                 navController
             )
@@ -69,9 +63,7 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
-    addToMyList: (DetailStream) -> Unit,
-    uiState: DetailStreamsLoadedUIState,
-    navController: NavController,
+    onToggleToMyList: (DetailStream) -> Unit,
     uiState: DetailStreamsLoadedUIState,
     navController: NavController
 ) {
@@ -141,8 +133,7 @@ private fun SetupDetailScreen(
                         modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    DetailStreamActionOption(uiState.detailStream, addToMyList)
-                    DetailStreamActionOption({ showDialog.value = true })
+                    DetailStreamActionOption(uiState.detailStream, onToggleToMyList, { showDialog.value = true })
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
