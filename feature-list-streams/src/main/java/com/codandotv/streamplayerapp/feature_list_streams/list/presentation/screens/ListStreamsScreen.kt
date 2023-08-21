@@ -83,10 +83,9 @@ fun ListStreamsScreen(
 
                     HighlightBanner(data = uiState.highlightBanner)
 
-                    uiState.genres.forEach { genre ->
+                    uiState.streamsCarouselContent.forEach { streamCarouselContent ->
                         StreamsCarousel(
-                            title = genre.name,
-                            contentList = viewModel.loadMovies(genre),
+                            content = streamCarouselContent,
                             onNavigateDetailList = onNavigateDetailList,
                         )
                         Spacer(modifier = Modifier.height(12.dp))

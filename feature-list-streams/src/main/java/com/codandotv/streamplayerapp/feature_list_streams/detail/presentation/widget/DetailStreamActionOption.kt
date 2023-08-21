@@ -1,5 +1,6 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailSt
 fun DetailStreamActionOption(
     detailStream: DetailStream,
     addToMyList: (DetailStream) -> Unit,
+    onShowSharingOptions: () -> Unit,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
     var checked by rememberSaveable { mutableStateOf(detailStream.isFavorite) }
@@ -27,7 +29,6 @@ fun DetailStreamActionOption(
         iconCheckList =
             if (checked) Icons.Filled.Check else Icons.Filled.Add
     }
-
 
     Row(
         modifier = modifier,
@@ -56,6 +57,7 @@ fun DetailStreamActionOption(
             imageColor = Color.White,
             text = stringResource(id = R.string.detail_share),
             textColor = Color.Gray,
+            modifier = Modifier.clickable { onShowSharingOptions.invoke() }
         )
         IconWithText(
             onClick = { },
