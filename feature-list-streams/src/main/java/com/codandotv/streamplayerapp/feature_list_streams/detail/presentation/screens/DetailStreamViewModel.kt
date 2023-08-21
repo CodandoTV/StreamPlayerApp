@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStream
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.LoadingStreamUIState
@@ -45,9 +46,9 @@ class DetailStreamViewModel(
         _uiState.update { LoadingStreamUIState }
     }
 
-    fun addToMyList(detailStreamId: String) {
+    fun toggleItemInFavorites(detailStream: DetailStream) {
         viewModelScope.launch {
-            useCase.insertToFavorites(detailStreamId)
+            useCase.toggleItemInFavorites(detailStream)
         }
     }
 }

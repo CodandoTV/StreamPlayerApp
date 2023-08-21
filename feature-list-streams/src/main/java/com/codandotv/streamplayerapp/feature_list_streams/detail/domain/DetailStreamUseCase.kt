@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface DetailStreamUseCase {
     suspend fun getMovie(): Flow<DetailStream>
 
-    suspend fun insertToFavorites(movieId: String)
+    suspend fun toggleItemInFavorites(movie: DetailStream)
 }
 
 class DetailStreamUseCaseImpl(
@@ -16,7 +16,7 @@ class DetailStreamUseCaseImpl(
     override suspend fun getMovie(): Flow<DetailStream> =
         detailStreamRepository.getMovie()
 
-    override suspend fun insertToFavorites(movieId: String) {
-        detailStreamRepository.insertToFavorites(movieId)
+    override suspend fun toggleItemInFavorites(movie: DetailStream) {
+        detailStreamRepository.toggleItemInFavorites(movie)
     }
 }

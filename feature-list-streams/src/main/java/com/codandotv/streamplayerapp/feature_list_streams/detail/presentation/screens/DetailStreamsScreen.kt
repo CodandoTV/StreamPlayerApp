@@ -24,6 +24,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.feature.list.streams.R
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStream
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
 import org.koin.androidx.compose.koinViewModel
@@ -43,8 +44,8 @@ fun DetailStreamScreen(
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
             SetupDetailScreen(
-                addToMyList = { detailStreamId ->
-                    viewModel.addToMyList(detailStreamId)
+                addToMyList = { detailStream ->
+                    viewModel.toggleItemInFavorites(detailStream)
                     Toast.makeText(context, R.string.adicionado_a_minha_lista, Toast.LENGTH_LONG).show()
                 },
                 uiState as DetailStreamsLoadedUIState,
@@ -68,7 +69,7 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
-    addToMyList: (String) -> Unit,
+    addToMyList: (DetailStream) -> Unit,
     uiState: DetailStreamsLoadedUIState,
     navController: NavController,
 ) {

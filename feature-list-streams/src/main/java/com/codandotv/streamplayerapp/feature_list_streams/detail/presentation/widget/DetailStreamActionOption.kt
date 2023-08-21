@@ -17,16 +17,17 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailSt
 @Composable
 fun DetailStreamActionOption(
     detailStream: DetailStream,
-    addToMyList: (String) -> Unit,
+    addToMyList: (DetailStream) -> Unit,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
-    var checked by rememberSaveable { mutableStateOf(false) }
+    var checked by rememberSaveable { mutableStateOf(detailStream.isFavorite) }
     var iconCheckList by remember { mutableStateOf(Icons.Filled.Add) }
 
     LaunchedEffect(checked) {
         iconCheckList =
-            if (checked || detailStream.isFavorite) Icons.Filled.Check else Icons.Filled.Add
+            if (checked) Icons.Filled.Check else Icons.Filled.Add
     }
+
 
     Row(
         modifier = modifier,
@@ -34,8 +35,8 @@ fun DetailStreamActionOption(
     ) {
         IconWithText(
             onClick = {
-                checked = true
-                addToMyList(detailStream.id)
+                checked = !checked
+                addToMyList(detailStream)
             },
             imageVector = iconCheckList,
             imageColor = Color.White,

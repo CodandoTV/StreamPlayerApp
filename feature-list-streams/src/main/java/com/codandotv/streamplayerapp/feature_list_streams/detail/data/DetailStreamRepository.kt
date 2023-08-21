@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 interface DetailStreamRepository {
     suspend fun getMovie(): Flow<DetailStream>
 
-    suspend fun insertToFavorites(detailStreamId: String)
+    suspend fun toggleItemInFavorites(movie: DetailStream)
 }
 
 class DetailStreamRepositoryImpl(
@@ -22,28 +22,34 @@ class DetailStreamRepositoryImpl(
 
     override suspend fun getMovie(): Flow<DetailStream> =
         service.getMovie(movieId)
-        .toFlow()
-        .map {
-            it.toDetailStream(isFavorite())
-        }
-
-    private suspend fun isFavorite() = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
-
-    override suspend fun insertToFavorites(detailStreamId: String) {
-        service.getMovie(movieId)
             .toFlow()
             .map {
-                it.toDetailStream()
-            }.collect { movie ->
-                val favoriteMovie = MovieEntity(
-                    id = movie.id,
-                    title = movie.title,
-                    overview = movie.overview,
-                    tagline = movie.tagline,
-                    url = movie.url,
-                    releaseYear = movie.releaseYear
-                )
-                favoriteDao.insert(favoriteMovie)
+                it.toDetailStream(isFavorite())
             }
+
+    override suspend fun toggleItemInFavorites(movie: DetailStream) {
+
+        val favoriteMovie = MovieEntity(
+            id = movie.id,
+            title = movie.title,
+            overview = movie.overview,
+            tagline = movie.tagline,
+            url = movie.url,
+            releaseYear = movie.releaseYear
+        )
+        insertOrDelete(favoriteMovie)
+
     }
+
+    private suspend fun insertOrDelete(
+        favoriteMovie: MovieEntity
+    ) {
+        if (isFavorite()) {
+            favoriteDao.delete(movieId)
+        } else {
+            favoriteDao.insert(favoriteMovie)
+        }
+    }
+
+    private suspend fun isFavorite() = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
 }
