@@ -1,17 +1,18 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.data
 
-import com.codandotv.streamplayerapp.core_local_storage.dao.FavoriteDao
-import com.codandotv.streamplayerapp.core_local_storage.entities.MovieEntity
+import com.codandotv.streamplayerapp.core_local_storage.data.dao.FavoriteDao
 import com.codandotv.streamplayerapp.core_networking.handleError.toFlow
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStream
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toDetailStream
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toDetailStreamLocal
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 interface DetailStreamRepository {
     suspend fun getMovie(): Flow<DetailStream>
-
-    suspend fun toggleItemInFavorites(movie: DetailStream)
+    suspend fun deleteFromMyList(movie: String)
+    suspend fun insertToMyList(movie: DetailStream)
+    suspend fun isFavorite(movieId:String) : Boolean
 }
 
 class DetailStreamRepositoryImpl(
@@ -24,32 +25,12 @@ class DetailStreamRepositoryImpl(
         service.getMovie(movieId)
             .toFlow()
             .map {
-                it.toDetailStream(isFavorite())
+                it.toDetailStream(isFavorite(movieId))
             }
 
-    override suspend fun toggleItemInFavorites(movie: DetailStream) {
+    override suspend fun deleteFromMyList(movie: String) = favoriteDao.delete(movie)
 
-        val favoriteMovie = MovieEntity(
-            id = movie.id,
-            title = movie.title,
-            overview = movie.overview,
-            tagline = movie.tagline,
-            url = movie.url,
-            releaseYear = movie.releaseYear
-        )
-        insertOrDelete(favoriteMovie)
+    override suspend fun insertToMyList(movie: DetailStream) = favoriteDao.insert(movie.toDetailStreamLocal())
 
-    }
-
-    private suspend fun insertOrDelete(
-        favoriteMovie: MovieEntity
-    ) {
-        if (isFavorite()) {
-            favoriteDao.delete(movieId)
-        } else {
-            favoriteDao.insert(favoriteMovie)
-        }
-    }
-
-    private suspend fun isFavorite() = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
+    override suspend fun isFavorite(movieId: String) : Boolean = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
 }

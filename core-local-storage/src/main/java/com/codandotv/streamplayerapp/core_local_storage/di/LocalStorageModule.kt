@@ -1,8 +1,8 @@
 package com.codandotv.streamplayerapp.core_local_storage.di
 
 import androidx.room.Room
-import com.codandotv.streamplayerapp.core_local_storage.database.StreamPlayerAppDatabase
-import com.codandotv.streamplayerapp.core_local_storage.database.StreamPlayerAppDatabase.Companion.DATABASE_NAME
+import com.codandotv.streamplayerapp.core_local_storage.data.database.StreamPlayerAppDatabase
+import com.codandotv.streamplayerapp.core_local_storage.data.database.StreamPlayerAppDatabase.Companion.DATABASE_NAME
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

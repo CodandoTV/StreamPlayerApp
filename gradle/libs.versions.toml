@@ -119,7 +119,7 @@ roomCompiler = { group = "androidx.room", name= "room-compiler", version.ref = "
 roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
 
 [bundles]
-room = ["roomRuntime","roomCompiler","roomKtx"]
+room = ["roomRuntime","roomKtx"]
 compose = ["compose.ui", "compose.icons", "compose.material3","compose_pagging", "compose.lifecycle", "compose.navigation", "compose.activity", "compose.ui.tooling"]
 composetest = ["compose.uitest", "compose.junit4", "compose.manifest", "compose.ui.test"]
 networking = ["retrofit", "moshi", "moshi_converter", "okhttp", "interceptor"]

@@ -17,6 +17,10 @@ class DetailStreamUseCaseImpl(
         detailStreamRepository.getMovie()
 
     override suspend fun toggleItemInFavorites(movie: DetailStream) {
-        detailStreamRepository.toggleItemInFavorites(movie)
+        if (detailStreamRepository.isFavorite(movie.id)) {
+            detailStreamRepository.deleteFromMyList(movie.id)
+        } else {
+            detailStreamRepository.insertToMyList(movie)
+        }
     }
 }

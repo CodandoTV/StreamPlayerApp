@@ -1,10 +1,10 @@
-package com.codandotv.streamplayerapp.core_local_storage.dao
+package com.codandotv.streamplayerapp.core_local_storage.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.codandotv.streamplayerapp.core_local_storage.entities.MovieEntity
+import com.codandotv.streamplayerapp.core_local_storage.domain.model.MovieEntity
 
 @Dao
 interface FavoriteDao {

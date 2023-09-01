@@ -5,10 +5,8 @@ plugins {
 
 dependencies {
 
-    implementation(libs.roomRuntime)
-    implementation(libs.roomKtx)
     ksp(libs.roomCompiler)
-
+    implementation(libs.bundles.room)
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.koin)
     testImplementation(libs.bundles.test)

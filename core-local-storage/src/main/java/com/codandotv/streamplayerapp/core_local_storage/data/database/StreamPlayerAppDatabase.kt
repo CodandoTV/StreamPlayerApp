@@ -1,11 +1,11 @@
-package com.codandotv.streamplayerapp.core_local_storage.database
+package com.codandotv.streamplayerapp.core_local_storage.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.codandotv.streamplayerapp.core_local_storage.dao.FavoriteDao
-import com.codandotv.streamplayerapp.core_local_storage.entities.MovieEntity
+import com.codandotv.streamplayerapp.core_local_storage.data.dao.FavoriteDao
+import com.codandotv.streamplayerapp.core_local_storage.domain.model.MovieEntity
 
 @Database(entities = [MovieEntity::class], version = 1)
 abstract class StreamPlayerAppDatabase : RoomDatabase() {
