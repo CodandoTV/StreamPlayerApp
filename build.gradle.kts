@@ -1,3 +1,5 @@
+import java.net.URI
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -13,5 +15,8 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = URI.create("https://jitpack.io")
+        }
     }
 }
