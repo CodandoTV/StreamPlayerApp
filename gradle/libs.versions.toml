@@ -42,6 +42,8 @@ compose_pagging="1.0.0-alpha20"
 coil = "2.3.0"
 lottie = "5.2.0"
 
+android_youtube_player_version = "12.0.0"
+
 [libraries]
 kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 android_gradle_plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android_gradle_plugin" }
@@ -109,6 +111,8 @@ moshi_converter = { group = "com.squareup.retrofit2", name = "converter-moshi", 
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 compose-material = { group = "androidx.wear.compose", name = "compose-material", version = "1.2.0" }
+
+android_youtube_player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "android_youtube_player_version" }
 
 [bundles]
 compose = ["compose.ui", "compose.icons", "compose.material3","compose_pagging", "compose.lifecycle", "compose.navigation", "compose.activity", "compose.ui.tooling"]

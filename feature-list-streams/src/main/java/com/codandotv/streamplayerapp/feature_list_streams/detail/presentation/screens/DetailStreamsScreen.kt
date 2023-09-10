@@ -1,15 +1,14 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -21,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamCustomView
 import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
@@ -58,8 +58,13 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
-    uiState: DetailStreamsLoadedUIState, navController: NavController
+    uiState: DetailStreamsLoadedUIState,
+    navController: NavController
 ) {
+    val showDialog = remember { mutableStateOf(false) }
+
+    var showPlayer by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             DetailStreamToolbar(navController = navController)
@@ -71,7 +76,13 @@ private fun SetupDetailScreen(
                     .verticalScroll(rememberScrollState())
                     .padding(innerPadding)
             ) {
-                DetailStreamImagePreview(uiState)
+                DetailStreamImagePreview(
+                    uiState = uiState,
+                    onPlayEvent = {
+                        showPlayer = true
+                    },
+                    showPlayer = showPlayer
+                )
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -124,8 +135,23 @@ private fun SetupDetailScreen(
                         modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    DetailStreamActionOption()
+                    DetailStreamActionOption({ showDialog.value = true })
                     Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
+            if (showDialog.value) {
+                SharingStreamCustomView(
+                    contentTitle = uiState.detailStream.title,
+                    contentUrl = uiState.detailStream.url,
+                    setShowDialog = {
+                        showDialog.value = it
+                    })
+            }
+            BackHandler {
+                if (showDialog.value) {
+                    showDialog.value = false
+                } else {
+                    navController.navigateUp()
                 }
             }
         })
