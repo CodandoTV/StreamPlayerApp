@@ -4,6 +4,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.search.data.datasource
 import com.codandotv.streamplayerapp.feature_list_streams.search.data.repository.SearchStreamRepositoryImpl
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.datasource.SearchStreamDataSource
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.repository.SearchStreamRepository
+import com.codandotv.streamplayerapp.feature_list_streams.search.domain.usecase.SearchUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.screens.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -14,7 +15,7 @@ object SearchModule {
         viewModel { (id: String) ->
             SearchViewModel()
         }
-        //factory { SearchUseCase(repository = get()) }
+        factory { SearchUseCase(repository = get()) }
         factory<SearchStreamDataSource> { SearchStreamDataSourceImpl(required = get(), service = get()) }
         factory<SearchStreamRepository> { SearchStreamRepositoryImpl(dataSource = get()) }
     }
