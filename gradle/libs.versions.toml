@@ -41,6 +41,7 @@ compose_pagging="1.0.0-alpha20"
 
 coil = "2.3.0"
 lottie = "5.2.0"
+palette = "1.0.0"
 
 [libraries]
 kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -48,6 +49,7 @@ android_gradle_plugin = { group = "com.android.tools.build", name = "gradle", ve
 
 #Coil
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+palette = { group = "androidx.palette", name = "palette-ktx", version.ref = "palette" }
 
 #Lottie
 lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }

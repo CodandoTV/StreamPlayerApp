@@ -34,6 +34,7 @@ fun ListStreamsScreen(
     viewModel: ListStreamViewModel = koinViewModel(),
     navController: NavController,
     onNavigateDetailList: (String) -> Unit = {},
+    onNavigateProfilePicker: () -> Unit = {},
     disposable: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -56,7 +57,10 @@ fun ListStreamsScreen(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            StreamPlayerTopBar(scrollBehavior)
+            StreamPlayerTopBar(
+                scrollBehavior = scrollBehavior,
+                onNavigateProfilePicker = onNavigateProfilePicker
+            )
         },
         bottomBar = {
             StreamPlayerBottomNavigation(navController = navController)

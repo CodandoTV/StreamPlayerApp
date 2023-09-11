@@ -2,12 +2,12 @@ package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.nav
 
 import androidx.activity.compose.BackHandler
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes.DETAIL
+import com.codandotv.streamplayerapp.core_navigation.routes.Routes.PROFILE_PICKER
 import com.codandotv.streamplayerapp.feature_list_streams.list.di.ListStreamModule
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.ListStreamsScreen
 import org.koin.core.context.loadKoinModules
@@ -22,7 +22,11 @@ fun NavGraphBuilder.listStreamsNavGraph(navController: NavHostController) {
         ListStreamsScreen(navController = navController,
             onNavigateDetailList = { id ->
                 navController.navigate("${DETAIL}${id}")
-            }, disposable = {
+            },
+            onNavigateProfilePicker = {
+                navController.navigate(PROFILE_PICKER)
+            },
+            disposable = {
                 unloadKoinModules(ListStreamModule.module)
             })
     }
