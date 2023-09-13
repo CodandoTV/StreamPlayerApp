@@ -56,6 +56,7 @@ import org.koin.androidx.compose.koinViewModel
 fun ProfilePickerStreamScreen(
     viewModel: ProfilePickerStreamViewModel = koinViewModel(),
     navController: NavController,
+    onNavigateListStreams: (String) -> Unit = {},
     disposable: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -76,6 +77,7 @@ fun ProfilePickerStreamScreen(
             onSetScreenSize = { width, height, widthPx, heightPx ->
                 viewModel.setScreenSize(width, height, widthPx, heightPx)
             },
+            onNavigateListStreams = onNavigateListStreams
         )
     }
 }
@@ -92,6 +94,7 @@ private fun SetupProfilePickerScreen(
     onSetHaltSizeImage: (Int) -> Unit = { },
     onSetHalfExpandedSizeImage: (Int) -> Unit = { },
     onClickSelectedProfile: (ProfileStream) -> Unit = {},
+    onNavigateListStreams: (String) -> Unit = {}
 ) {
     val profiles = uiState.profilesStream
 
@@ -105,7 +108,7 @@ private fun SetupProfilePickerScreen(
         animationSpec = tween(durationMillis = 1000),
         finishedListener = {
             onSetCenterImageAlpha(0f)
-            navController.navigateUp()
+            onNavigateListStreams(uiState.selectedItem.imageUrl)
         }
     )
 

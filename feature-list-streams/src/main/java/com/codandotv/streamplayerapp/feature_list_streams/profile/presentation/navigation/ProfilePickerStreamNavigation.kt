@@ -4,6 +4,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes.PARAM.PROFILE_ID
+import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes.HOME
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes
 import com.codandotv.streamplayerapp.feature_list_streams.profile.di.ProfilePickerStreamModule
 import com.codandotv.streamplayerapp.feature_list_streams.profile.presentation.screens.ProfilePickerStreamScreen
@@ -16,7 +18,10 @@ fun NavGraphBuilder.profilePickerStreamNavGraph(navController: NavHostController
             loadKoinModules(ProfilePickerStreamModule.module)
         }
         ProfilePickerStreamScreen(
-            navController = navController
+            navController = navController,
+            onNavigateListStreams = { profilePic ->
+                navController.navigate("$HOME?$PROFILE_ID=$profilePic")
+            }
         ) {
             unloadKoinModules(ProfilePickerStreamModule.module)
         }

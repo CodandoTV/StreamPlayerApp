@@ -35,7 +35,8 @@ fun ListStreamsScreen(
     navController: NavController,
     onNavigateDetailList: (String) -> Unit = {},
     onNavigateProfilePicker: () -> Unit = {},
-    disposable: () -> Unit = {}
+    disposable: () -> Unit = {},
+    profilePicture: String
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -59,7 +60,8 @@ fun ListStreamsScreen(
         topBar = {
             StreamPlayerTopBar(
                 scrollBehavior = scrollBehavior,
-                onNavigateProfilePicker = onNavigateProfilePicker
+                onNavigateProfilePicker = onNavigateProfilePicker,
+                onSelectedProfilePicture = profilePicture
             )
         },
         bottomBar = {
@@ -103,5 +105,5 @@ fun ListStreamsScreen(
 @ThemePreviews
 @Composable
 fun ListStreamsScreenPreview() {
-    ListStreamsScreen(navController = rememberNavController())
+    ListStreamsScreen(navController = rememberNavController(), profilePicture = "")
 }

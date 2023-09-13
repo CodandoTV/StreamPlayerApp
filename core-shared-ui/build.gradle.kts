@@ -10,4 +10,5 @@ dependencies {
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.androidSupport)
     testImplementation(libs.bundles.test)
+    implementation(libs.coil)
 }
