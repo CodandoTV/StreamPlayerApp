@@ -25,7 +25,6 @@ class ProfilePickerStreamViewModel(
         initialValue = _uiState.value
     )
 
-
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
 
@@ -44,45 +43,6 @@ class ProfilePickerStreamViewModel(
                     }
                 }
         }
-    }
-
-    private fun changeShowCenterImage(value: Boolean) {
-        _uiState.value = _uiState.value.copy(
-            showCenterImage = value
-        )
-    }
-
-    fun changeCenterImageAlpha(alpha: Float) {
-        _uiState.value = _uiState.value.copy(
-            centerImageAlpha = alpha
-        )
-    }
-
-    private fun changeSelectedProfile(profile: ProfileStream) {
-        _uiState.value = _uiState.value.copy(
-            selectedItem = profile
-        )
-    }
-
-    private fun changeCanMoveImageToCenter(value: Boolean) {
-        _uiState.value = _uiState.value.copy(
-            canMoveImageToCenter = value
-        )
-    }
-
-    private fun changeExpandImage(value: Boolean) {
-        _uiState.value = _uiState.value.copy(
-            expandImage = value
-        )
-    }
-
-    fun changeScreenSize(width: Float, height: Float, widthPx: Int, heightPx: Int) {
-        _uiState.value = _uiState.value.copy(
-            screenWidth = width,
-            screenHeight = height
-        )
-
-        calculateGridScreenSize(widthPx, heightPx)
     }
 
     private fun calculateGridScreenSize(widthPx: Int, heightPx: Int) {
@@ -107,37 +67,14 @@ class ProfilePickerStreamViewModel(
                 oneThirdOfWidthScreen - haltSizeImage,
                 oneQuarterOfHeightScreen * 2
             ),
+            Pair(
+                oneThirdOfWidthScreen * 2 - haltSizeImage,
+                oneQuarterOfHeightScreen * 2
+            ),
         )
 
         _uiState.value = _uiState.value.copy(
             offsetProfiles = listOffsetProfiles
-        )
-    }
-
-    fun setLastItemPositioned(value: Boolean) {
-        _uiState.value = _uiState.value.copy(
-            lastItemPositioned = value
-        )
-    }
-
-
-    fun setHaltSizeImage(size: Int) {
-        _uiState.value = _uiState.value.copy(
-            haltSizeImage = size
-        )
-    }
-
-    fun setHalfExpandedSizeImage(size: Int) {
-        _uiState.value = _uiState.value.copy(
-            halfExpandedSizeImage = size
-        )
-        calculateCenterScreen()
-    }
-
-
-    private fun setSelectedImageAlpha(alpha: Float) {
-        _uiState.value = _uiState.value.copy(
-            selectedImageAlpha = alpha
         )
     }
 
@@ -155,31 +92,67 @@ class ProfilePickerStreamViewModel(
 
     }
 
-    fun clickSelectedProfile(profile: ProfileStream) {
+    fun setCenterImageAlpha(alpha: Float) {
+        _uiState.value = _uiState.value.copy(
+            centerImageAlpha = alpha
+        )
+    }
+
+    fun setScreenSize(width: Float, height: Float, widthPx: Int, heightPx: Int) {
+        _uiState.value = _uiState.value.copy(
+            screenWidth = width,
+            screenHeight = height
+        )
+
+        calculateGridScreenSize(widthPx, heightPx)
+    }
+
+    fun setLastItemPositioned(value: Boolean) {
+        _uiState.value = _uiState.value.copy(
+            lastItemPositioned = value
+        )
+    }
+
+    fun setHaltSizeImage(size: Int) {
+        _uiState.value = _uiState.value.copy(
+            haltSizeImage = size
+        )
+    }
+
+    fun setHalfExpandedSizeImage(size: Int) {
+        _uiState.value = _uiState.value.copy(
+            halfExpandedSizeImage = size
+        )
+        calculateCenterScreen()
+    }
+
+    fun moveSelectedProfileToCenterImage(profile: ProfileStream) {
         viewModelScope.launch {
             with(_uiState.value) {
                 // move hide image to the position of the clicked item
-                changeSelectedProfile(profile)
+                _uiState.value = _uiState.value.copy(
+                    selectedItem = profile
+                )
 
-                // displacement to clicked item
+                // delay displacement to clicked item
                 delay(200)
 
                 // show hidden image
-                changeShowCenterImage(!showCenterImage)
+                _uiState.value = _uiState.value.copy(
+                    showCenterImage = !showCenterImage
+                )
 
                 // maybe can remove this delay, when to join codes of this block
-                delay(200)
+                delay(100)
 
                 // hidden selected image
-//                                            selectedImageAlpha = 0f
-                setSelectedImageAlpha(0f)
-
                 // move the new image to the center screen
-//                                            canMoveImageToCenter = !canMoveImageToCenter
-                changeCanMoveImageToCenter(!canMoveImageToCenter)
-
                 // as increase in size
-                changeExpandImage(!expandImage)
+                _uiState.value = _uiState.value.copy(
+                    selectedImageAlpha = 0f,
+                    canMoveImageToCenter = !canMoveImageToCenter,
+                    expandImage = !expandImage
+                )
             }
         }
     }

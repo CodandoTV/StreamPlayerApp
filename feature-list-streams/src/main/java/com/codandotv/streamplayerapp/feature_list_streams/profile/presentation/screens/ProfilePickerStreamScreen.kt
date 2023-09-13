@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
@@ -67,14 +68,14 @@ fun ProfilePickerStreamScreen(
         SetupProfilePickerScreen(
             uiState = uiState,
             navController = navController,
-            onChangeCenterImageAlpha = { viewModel.changeCenterImageAlpha(it) },
-            onSetScreenSize = { width, height, widthPx, heightPx ->
-                viewModel.changeScreenSize(width, height, widthPx, heightPx)
-            },
+            onSetCenterImageAlpha = { viewModel.setCenterImageAlpha(it) },
             onSetLastItemPositioned = { viewModel.setLastItemPositioned(it) },
             onSetHaltSizeImage = { viewModel.setHaltSizeImage(it) },
             onSetHalfExpandedSizeImage = { viewModel.setHalfExpandedSizeImage(it) },
-            onClickSelectedProfile = { viewModel.clickSelectedProfile(it) }
+            onClickSelectedProfile = { viewModel.moveSelectedProfileToCenterImage(it) },
+            onSetScreenSize = { width, height, widthPx, heightPx ->
+                viewModel.setScreenSize(width, height, widthPx, heightPx)
+            },
         )
     }
 }
@@ -85,7 +86,7 @@ fun ProfilePickerStreamScreen(
 private fun SetupProfilePickerScreen(
     uiState: ProfilePickerStreamsUIState,
     navController: NavController,
-    onChangeCenterImageAlpha: (Float) -> Unit = {},
+    onSetCenterImageAlpha: (Float) -> Unit = {},
     onSetScreenSize: (Float, Float, Int, Int) -> Unit = { _, _, _, _ -> },
     onSetLastItemPositioned: (Boolean) -> Unit = {},
     onSetHaltSizeImage: (Int) -> Unit = { },
@@ -100,10 +101,10 @@ private fun SetupProfilePickerScreen(
         } else {
             Color.Transparent
         },
-        label = "fundo da tela escurecendo",
+        label = stringResource(R.string.profile_animation_background_opacity),
         animationSpec = tween(durationMillis = 1000),
         finishedListener = {
-            onChangeCenterImageAlpha(0f)
+            onSetCenterImageAlpha(0f)
             navController.navigateUp()
         }
     )
@@ -122,13 +123,13 @@ private fun SetupProfilePickerScreen(
 
                 val animatedSizeImage by animateDpAsState(
                     targetValue = if (expandImage) expandedImageSize.dp else defaultImageSize.dp,
-                    label = "imagem de perfil selecionada aumentando de tamanho",
+                    label = stringResource(R.string.profile_animation_selected_image_size),
                     animationSpec = tween(durationMillis = 1000),
                 )
 
                 val animatedProfileAlpha: Float by animateFloatAsState(
                     if (lastItemPositioned) 1f else 0f,
-                    label = "mostrando todos os perfis",
+                    label = stringResource(R.string.profile_animation_showing_all_profiles),
                 )
 
                 val offsetSelectedProfileImage by animateIntOffsetAsState(
@@ -143,7 +144,7 @@ private fun SetupProfilePickerScreen(
                             IntOffset(0, 0)
                         }
                     },
-                    label = "imagem de perfil selecionada se movendo para o centro",
+                    label = stringResource(R.string.profile_animation_selected_image_position),
                     animationSpec = tween(durationMillis = if (!showCenterImage) 100 else 800)
                 )
 
@@ -181,7 +182,10 @@ private fun SetupProfilePickerScreen(
                             AsyncImage(
                                 model = profile.imageUrl,
                                 placeholder = painterResource(id = R.drawable.image_placeholder),
-                                contentDescription = "image de perfil de ${profile.name}",
+                                contentDescription = stringResource(
+                                    id = R.string.profile_current_profile_name,
+                                    profile.name
+                                ),
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(5))
                                     .alpha(if (selectedItem == profile) selectedImageAlpha else 1f)
@@ -226,7 +230,10 @@ private fun SetupProfilePickerScreen(
                                     .crossfade(true)
                                     .build(),
                                 placeholder = painterResource(id = R.drawable.image_placeholder),
-                                contentDescription = "image de perfil de ${selectedItem.name}",
+                                contentDescription = stringResource(
+                                    id = R.string.profile_current_profile_name,
+                                    selectedItem.name
+                                ),
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(5))
                                     .size(animatedSizeImage)

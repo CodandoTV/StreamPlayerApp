@@ -47,5 +47,9 @@ private val mockProfiles = listOf(
     ProfileStream(
         name = "Random name 2",
         imageUrl = "https://raw.githubusercontent.com/git-jr/sample-files/main/profile%20pics/netflix_profile_pic_5.png"
+    ),
+    ProfileStream(
+        name = "CodandoTV",
+        imageUrl = "https://raw.githubusercontent.com/git-jr/sample-files/main/profile%20pics/netflix_profile_pic_6.png"
     )
 )
