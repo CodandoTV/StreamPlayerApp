@@ -45,6 +45,8 @@ lottie = "5.2.0"
 
 #Room Database
 room = "2.5.2"
+android_youtube_player_version = "12.0.0"
+
 
 [libraries]
 kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -117,6 +119,8 @@ interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", ve
 roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
 roomCompiler = { group = "androidx.room", name= "room-compiler", version.ref = "room"}
 roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
+
+android_youtube_player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "android_youtube_player_version" }
 
 [bundles]
 room = ["roomRuntime","roomKtx"]

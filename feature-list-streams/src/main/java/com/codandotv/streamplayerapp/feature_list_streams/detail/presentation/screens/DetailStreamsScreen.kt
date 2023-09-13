@@ -69,6 +69,8 @@ private fun SetupDetailScreen(
 ) {
     val showDialog = remember { mutableStateOf(false) }
 
+    var showPlayer by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             DetailStreamToolbar(navController = navController)
@@ -80,7 +82,13 @@ private fun SetupDetailScreen(
                     .verticalScroll(rememberScrollState())
                     .padding(innerPadding)
             ) {
-                DetailStreamImagePreview(uiState)
+                DetailStreamImagePreview(
+                    uiState = uiState,
+                    onPlayEvent = {
+                        showPlayer = true
+                    },
+                    showPlayer = showPlayer
+                )
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
