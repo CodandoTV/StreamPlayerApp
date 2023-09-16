@@ -10,9 +10,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object SearchModule {
-    val searchInstance = module {
+    val module = module {
 
-        viewModel { (id: String) ->
+        viewModel {
             SearchViewModel()
         }
         factory { SearchUseCase(repository = get()) }
