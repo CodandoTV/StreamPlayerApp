@@ -4,6 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.codandotv.streamplayerapp.core_navigation.routes.Routes
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes.DETAIL_COMPLETE
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes.PARAM.ID
 import com.codandotv.streamplayerapp.feature_list_streams.detail.di.DetailStreamModule
@@ -21,12 +22,16 @@ fun NavGraphBuilder.detailStreamNavGraph(navController: NavHostController) {
             loadKoinModules(DetailStreamModule.module)
         }
         DetailStreamScreen(
-            koinViewModel {
+            viewModel = koinViewModel {
                 parametersOf(nav.arguments?.getString(ID) ?: DEFAULT_ID)
             },
-            navController
-        ) {
-            unloadKoinModules(DetailStreamModule.module)
-        }
+            navController = navController,
+            onNavigateSearchScreen = {
+                navController.navigate(Routes.SEARCH)
+            },
+            disposable = {
+                unloadKoinModules(DetailStreamModule.module)
+            }
+        )
     }
 }

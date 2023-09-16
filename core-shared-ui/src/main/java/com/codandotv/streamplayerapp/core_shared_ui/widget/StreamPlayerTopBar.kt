@@ -34,15 +34,22 @@ import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StreamPlayerTopBar(scrollBehavior: TopAppBarScrollBehavior) {
+fun StreamPlayerTopBar(
+    scrollBehavior: TopAppBarScrollBehavior,
+    onNavigateSearchScreen: () -> Unit = {},
+) {
     Box(modifier = Modifier.background(color = Colors.Dark10)) {
-        StreamPlayerTopBar()
+        StreamPlayerTopBar(
+            onNavigateSearchScreen = onNavigateSearchScreen
+        )
         StreamPlayerOptionsTopBar(modifier = Modifier.padding(top = 50.dp), scrollBehavior)
     }
 }
 
 @Composable
-private fun StreamPlayerTopBar() {
+private fun StreamPlayerTopBar(
+    onNavigateSearchScreen: () -> Unit = {},
+) {
     Row(
         modifier = Modifier
             .height(50.dp)
@@ -63,7 +70,9 @@ private fun StreamPlayerTopBar() {
 
         IconButton(
             modifier = Modifier.fillMaxHeight(),
-            onClick = { /* todo */ }
+            onClick = {
+                onNavigateSearchScreen.invoke()
+            }
         ) {
             Icon(
                 imageVector = Icons.Default.Search,

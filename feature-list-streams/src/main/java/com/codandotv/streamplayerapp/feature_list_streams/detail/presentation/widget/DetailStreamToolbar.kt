@@ -2,11 +2,14 @@ package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.w
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +21,10 @@ import com.codandotv.streamplayerapp.feature.list.streams.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailStreamToolbar(navController : NavController) {
+fun DetailStreamToolbar(
+    navController: NavController,
+    onNavigateSearchScreen: () -> Unit = {}
+) {
     TopAppBar(
         title = { Text(text = "") },
         modifier = Modifier.height(56.dp),
@@ -30,7 +36,9 @@ fun DetailStreamToolbar(navController : NavController) {
                 )
             }
         }, actions = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                onNavigateSearchScreen.invoke()
+            }) {
                 Icon(
                     imageVector = Icons.Default.Search,
                     tint = Color.White,
