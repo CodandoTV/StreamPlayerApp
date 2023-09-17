@@ -5,7 +5,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStream
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.LoadingStreamUIState
+import kotlinx.coroutines.flow.*
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,5 +58,11 @@ class DetailStreamViewModel(
 
     private fun onLoading() {
         _uiState.update { LoadingStreamUIState }
+    }
+
+    fun toggleItemInFavorites(detailStream: DetailStream) {
+        viewModelScope.launch {
+            useCase.toggleItemInFavorites(detailStream)
+        }
     }
 }

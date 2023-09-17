@@ -6,11 +6,13 @@ plugins {
 
 dependencies {
 
+    implementation(projects.featureFavorites)
     implementation(projects.featureListStreams)
     implementation(projects.coreShared)
     implementation(projects.coreSharedUi)
     implementation(projects.coreNavigation)
     implementation(projects.coreNetworking)
+    implementation(projects.coreLocalStorage)
 
     implementation(platform(libs.compose.bom))
     androidTestImplementation(platform(libs.compose.bom))

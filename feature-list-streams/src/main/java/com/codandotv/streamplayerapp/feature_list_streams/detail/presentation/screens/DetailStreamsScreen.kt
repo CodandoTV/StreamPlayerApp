@@ -22,7 +22,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamCustomView
 import com.codandotv.streamplayerapp.feature.list.streams.R
-import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStream
+import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.widget.*
 import org.koin.androidx.compose.koinViewModel
 
@@ -41,6 +42,7 @@ fun DetailStreamScreen(
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
             SetupDetailScreen(
+                onToggleToMyList = { detailStream -> viewModel.toggleItemInFavorites(detailStream) },
                 uiState = uiState as DetailStreamsLoadedUIState,
                 navController = navController,
                 onNavigateSearchScreen = onNavigateSearchScreen
@@ -63,6 +65,7 @@ fun DetailStreamScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun SetupDetailScreen(
+    onToggleToMyList: (DetailStream) -> Unit,
     uiState: DetailStreamsLoadedUIState,
     navController: NavController,
     onNavigateSearchScreen: () -> Unit = {},
@@ -144,7 +147,7 @@ private fun SetupDetailScreen(
                         modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    DetailStreamActionOption({ showDialog.value = true })
+                    DetailStreamActionOption(uiState.detailStream, onToggleToMyList, { showDialog.value = true })
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
