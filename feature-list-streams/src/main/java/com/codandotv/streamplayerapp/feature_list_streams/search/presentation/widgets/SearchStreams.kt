@@ -46,8 +46,9 @@ fun SearchableTopBar(
     onSearchTextChanged: (String) -> Unit,
     onSearchDeactivated: () -> Unit,
     onSearchDispatched: (String) -> Unit,
-    onSearchIconClicked: () -> Unit,
-    onBackPressed: () -> Unit
+    onSearchIconPressed: () -> Unit,
+    onBackPressed: () -> Unit,
+    onCleanTextPressed: () -> Unit
 ) {
     Column {
         StreamPlayerTopBar(
@@ -57,7 +58,8 @@ fun SearchableTopBar(
             currentSearchText = currentSearchText,
             onSearchTextChanged = onSearchTextChanged,
             onSearchDeactivated = onSearchDeactivated,
-            onSearchDispatched = onSearchDispatched
+            onSearchDispatched = onSearchDispatched,
+            onCleanTextPressed = onCleanTextPressed
         )
     }
 
@@ -119,6 +121,7 @@ fun SearchTopBar(
     onSearchTextChanged: (String) -> Unit,
     onSearchDeactivated: () -> Unit,
     onSearchDispatched: (String) -> Unit,
+    onCleanTextPressed: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -155,7 +158,9 @@ fun SearchTopBar(
                 SearchIcon()
             },
             trailingIcon = {
-                if (currentSearchText.isEmpty()) MicButton() else CloseButton()
+                if (currentSearchText.isEmpty()) MicButton() else CloseButton(
+                   action = onCleanTextPressed
+                )
             },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = { onSearchDispatched(currentSearchText) }),
@@ -228,7 +233,8 @@ fun SearchTopBarEmptyPreview() {
         currentSearchText = "",
         onSearchTextChanged = {},
         onSearchDeactivated = {},
-        onSearchDispatched = {}
+        onSearchDispatched = {},
+        onCleanTextPressed = {}
     )
 }
 
@@ -239,6 +245,7 @@ fun SearchTopBarPreview() {
         currentSearchText = "Texto de busca",
         onSearchTextChanged = {},
         onSearchDeactivated = {},
-        onSearchDispatched = {}
+        onSearchDispatched = {},
+        onCleanTextPressed = {}
     )
 }

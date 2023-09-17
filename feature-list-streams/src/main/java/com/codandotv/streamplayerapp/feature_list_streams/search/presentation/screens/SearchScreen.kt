@@ -35,12 +35,13 @@ fun SearchScreen(
                     text = currentText
                 },
                 onSearchDeactivated = {},
-                onSearchDispatched = {
-                    text = ""
-                },
-                onSearchIconClicked = {},
+                onSearchDispatched = {},
+                onSearchIconPressed = {},
                 onBackPressed = {
                     navController.goBack()
+                },
+                onCleanTextPressed = {
+                    text = ""
                 },
                 isShowingSearchField = false
             )
