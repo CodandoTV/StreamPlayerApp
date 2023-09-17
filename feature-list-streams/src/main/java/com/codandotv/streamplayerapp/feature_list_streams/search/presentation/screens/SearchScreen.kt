@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.codandotv.streamplayerapp.core_navigation.extensions.goBack
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchableTopBar
 import org.koin.androidx.compose.koinViewModel
 
@@ -38,6 +39,9 @@ fun SearchScreen(
                     text = ""
                 },
                 onSearchIconClicked = {},
+                onBackPressed = {
+                    navController.goBack()
+                },
                 isShowingSearchField = false
             )
         }
@@ -48,7 +52,7 @@ fun SearchScreen(
             }
         }
         BackHandler {
-            navController.navigateUp()
+            navController.goBack()
         }
     }
 }

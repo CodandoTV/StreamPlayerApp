@@ -46,10 +46,13 @@ fun SearchableTopBar(
     onSearchTextChanged: (String) -> Unit,
     onSearchDeactivated: () -> Unit,
     onSearchDispatched: (String) -> Unit,
-    onSearchIconClicked: () -> Unit
+    onSearchIconClicked: () -> Unit,
+    onBackPressed: () -> Unit
 ) {
     Column {
-        StreamPlayerTopBar()
+        StreamPlayerTopBar(
+            onBackPressed = onBackPressed
+        )
         SearchTopBar(
             currentSearchText = currentSearchText,
             onSearchTextChanged = onSearchTextChanged,
@@ -61,14 +64,18 @@ fun SearchableTopBar(
 }
 
 @Composable
-private fun StreamPlayerTopBar() {
+private fun StreamPlayerTopBar(
+    onBackPressed: () -> Unit
+) {
     Row(
         modifier = Modifier
             .height(56.dp)
     ) {
         IconButton(
             modifier = Modifier.fillMaxHeight(),
-            onClick = { /* todo */ }
+            onClick = {
+                onBackPressed.invoke()
+            }
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
@@ -209,7 +216,9 @@ private fun MicButton(action: () -> Unit = {}) {
 @Composable
 @Preview
 fun SearchBarPreview() {
-    StreamPlayerTopBar()
+    StreamPlayerTopBar(
+        onBackPressed = {}
+    )
 }
 
 @Composable
