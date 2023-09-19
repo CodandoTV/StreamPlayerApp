@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.codandotv.streamplayerapp.core.shared.ui.R
+import com.codandotv.streamplayerapp.core_shared.extension.empty
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreview
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
@@ -144,7 +145,7 @@ fun StreamPlayerTopBarPreview() {
                 rememberTopAppBarState()
             ),
             onNavigateProfilePicker = {},
-            onSelectedProfilePicture = ""
+            onSelectedProfilePicture = String.empty()
         )
     }
 }

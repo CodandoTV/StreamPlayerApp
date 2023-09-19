@@ -8,6 +8,17 @@ object QualifierHost : Qualifier {
         get() = "QualifierHost"
 }
 
+object QualifierProfile : Qualifier {
+    override val value: QualifierValue
+        get() = "QualifierProfile"
+}
+
+object QualifierProfileRetrofit : Qualifier {
+    override val value: QualifierValue
+        get() = "QualifierProfileRetrofit"
+}
+
+
 object QualifierLoggerInterceptor : Qualifier {
     override val value: QualifierValue
         get() = "QualifierLoggerInterceptor"
@@ -17,3 +28,4 @@ object QualifierAuthInterceptor : Qualifier {
     override val value: QualifierValue
         get() = "QualifierAuthInterceptor"
 }
+

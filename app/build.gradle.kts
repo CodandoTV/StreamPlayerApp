@@ -7,6 +7,7 @@ plugins {
 dependencies {
 
     implementation(projects.featureListStreams)
+    implementation(projects.featureProfile)
     implementation(projects.coreShared)
     implementation(projects.coreSharedUi)
     implementation(projects.coreNavigation)

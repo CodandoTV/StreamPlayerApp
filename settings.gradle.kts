@@ -24,5 +24,6 @@ include(":core-shared")
 include(":core-networking")
 include(":core-shared-ui")
 include(":core-navigation")
+include(":feature-profile")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
