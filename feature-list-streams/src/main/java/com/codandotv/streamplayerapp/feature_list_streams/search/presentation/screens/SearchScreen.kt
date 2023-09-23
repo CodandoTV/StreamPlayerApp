@@ -7,10 +7,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_navigation.extensions.goBack
@@ -25,14 +23,13 @@ fun SearchScreen(
     disposable: () -> Unit = {}
 ) {
 
-    var text by remember { mutableStateOf("") }
-
     Scaffold(
         topBar = {
+            val currentText by viewModel.currentSearchText.collectAsState()
             SearchableTopBar(
-                currentSearchText = text,
-                onSearchTextChanged = { currentText ->
-                    text = currentText
+                currentSearchText = currentText,
+                onSearchTextChanged = { value ->
+                    viewModel.setCurrentSearchText(newText = value)
                 },
                 onSearchDeactivated = {},
                 onSearchDispatched = {},
@@ -41,7 +38,7 @@ fun SearchScreen(
                     navController.goBack()
                 },
                 onCleanTextPressed = {
-                    text = ""
+                    viewModel.onCleanText()
                 },
                 isShowingSearchField = false
             )
