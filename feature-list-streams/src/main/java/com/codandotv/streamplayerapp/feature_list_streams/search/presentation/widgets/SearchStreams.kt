@@ -62,7 +62,6 @@ fun SearchableTopBar(
             onCleanTextPressed = onCleanTextPressed
         )
     }
-
 }
 
 @Composable

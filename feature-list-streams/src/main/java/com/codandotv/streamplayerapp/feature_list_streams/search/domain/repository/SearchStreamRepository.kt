@@ -4,6 +4,6 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.data.model.ListSt
 import kotlinx.coroutines.flow.Flow
 
 interface SearchStreamRepository {
-    suspend fun getMovieSearch() : Flow<ListStreamResponse>
+    suspend fun getMovieSearch(query: String) : Flow<ListStreamResponse>
 
 }

@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface SearchStreamService {
     @GET("search/movie")
-    suspend fun getSearch(@Query("required") query: String) : NetworkResponse<ListStreamResponse>
+    suspend fun getSearch(@Query("query") query: String) : NetworkResponse<ListStreamResponse>
 }

@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 class SearchStreamRepositoryImpl(
     private val dataSource: SearchStreamDataSource
-): SearchStreamRepository {
-    override suspend fun getMovieSearch() : Flow<ListStreamResponse> = dataSource.getMovieSearch()
+) : SearchStreamRepository {
+    override suspend fun getMovieSearch(query: String): Flow<ListStreamResponse> =
+        dataSource.getMovieSearch(query)
 }

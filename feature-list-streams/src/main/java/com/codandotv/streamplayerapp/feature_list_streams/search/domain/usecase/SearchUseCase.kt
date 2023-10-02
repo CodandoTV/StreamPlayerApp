@@ -4,8 +4,12 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.data.model.ListSt
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.repository.SearchStreamRepository
 import kotlinx.coroutines.flow.Flow
 
-class SearchUseCase(val repository: SearchStreamRepository) {
-    suspend operator fun invoke(): Flow<ListStreamResponse> {
-        return repository.getMovieSearch()
+interface SearchUseCase {
+    suspend operator fun invoke(query:String): Flow<ListStreamResponse>
+}
+
+class SearchUseCaseImpl(val repository: SearchStreamRepository) : SearchUseCase {
+    override suspend operator fun invoke(query:String): Flow<ListStreamResponse> {
+        return repository.getMovieSearch(query = query)
     }
 }

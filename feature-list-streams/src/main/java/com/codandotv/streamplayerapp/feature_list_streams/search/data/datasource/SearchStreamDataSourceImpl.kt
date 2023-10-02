@@ -7,12 +7,9 @@ import com.codandotv.streamplayerapp.feature_list_streams.search.domain.datasour
 import kotlinx.coroutines.flow.Flow
 
 class SearchStreamDataSourceImpl(
-    private val service: SearchStreamService,
-    private val required: String,
+    private val service: SearchStreamService
 ): SearchStreamDataSource {
 
-    override suspend fun getMovieSearch(): Flow<ListStreamResponse> =
-        service.getSearch(required)
-            .toFlow()
-
+    override suspend fun getMovieSearch(query:String): Flow<ListStreamResponse> =
+        service.getSearch(query= query).toFlow()
 }
