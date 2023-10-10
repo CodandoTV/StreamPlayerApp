@@ -1,11 +1,10 @@
 package com.codandotv.streamplayerapp.feature_list_streams.search.presentation.screens
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
+import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.usecase.SearchUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,11 +13,12 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val searchUseCase: SearchUseCase
+    private val searchUseCase: SearchUseCase,
+    private val latestStream: GetTopRatedStream
 ): ViewModel(), DefaultLifecycleObserver {
 
-    private val _isShowstateSearch: MutableState<Boolean> = mutableStateOf(false)
-    val isShowstateSearch: MutableState<Boolean> = _isShowstateSearch
+//    private val _isShowstateSearch: MutableState<SearchUIState> = mutableStateOf(false)
+//    val isShowstateSearch: MutableState<Boolean> = _isShowstateSearch
 
     private val _currentSearchText = MutableStateFlow("")
     val currentSearchText = _currentSearchText.asStateFlow()
@@ -41,10 +41,6 @@ class SearchViewModel(
             }
         }
     }
-    fun showSearchField(show: Boolean){
-        _isShowstateSearch.value = show
-    }
-
     fun setCurrentSearchText(newText: String){
         _currentSearchText.value = newText
     }

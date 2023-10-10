@@ -16,7 +16,7 @@ object SearchModule {
     val module = module {
 
         viewModel {
-            SearchViewModel(searchUseCase = get())
+            SearchViewModel(searchUseCase = get(), latestStream = get())
         }
         factory { get<Retrofit>().create( SearchStreamService::class.java) }
         factory<SearchUseCase> { SearchUseCaseImpl(repository = get()) }

@@ -22,4 +22,7 @@
     <string name="list_highlight_banner_stream_ranking">Top 1 em %s hoje</string>
     <!-- endregion Highlight banner -->
 
+    <string name="search_list_describle">Principais buscas</string>
+
+
 </resources>
