@@ -19,7 +19,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2' 
+        bundler-cache: true 
 
+    - name: install fastlane
+      run: bundle install
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
