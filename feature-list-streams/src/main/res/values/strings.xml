@@ -21,12 +21,4 @@
     <string name="list_highlight_banner_watch">Assistir</string>
     <string name="list_highlight_banner_stream_ranking">Top 1 em %s hoje</string>
     <!-- endregion Highlight banner -->
-
-    <string name="profile_animation_background_opacity">Fundo da tela escurecendo</string>
-    <string name="profile_animation_selected_image_size">Imagem de perfil selecionada aumentando de tamanho</string>
-    <string name="profile_animation_selected_image_position"> "Imagem de perfil selecionada se movendo para o centro"</string>
-    <string name="profile_animation_showing_all_profiles">Mostrando todos os perfis</string>
-    <string name="profile_current_profile_name">Imagem de perfil de %s</string>
-
-
 </resources>
