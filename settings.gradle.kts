@@ -25,5 +25,7 @@ include(":core-networking")
 include(":core-shared-ui")
 include(":core-navigation")
 include(":feature-profile")
+include(":core-local-storage")
+include(":feature-favorites")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
