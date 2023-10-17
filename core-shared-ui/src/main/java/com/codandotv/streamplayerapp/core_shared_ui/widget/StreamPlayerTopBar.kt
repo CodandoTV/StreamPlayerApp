@@ -27,22 +27,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.codandotv.streamplayerapp.core.shared.ui.R
+import com.codandotv.streamplayerapp.core_shared.extension.empty
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreview
 import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StreamPlayerTopBar(scrollBehavior: TopAppBarScrollBehavior) {
+fun StreamPlayerTopBar(
+    scrollBehavior: TopAppBarScrollBehavior,
+    onNavigateProfilePicker: () -> Unit = {},
+    onSelectedProfilePicture: String
+) {
     Box(modifier = Modifier.background(color = Colors.Dark10)) {
-        StreamPlayerTopBar()
+        StreamPlayerTopBar(
+            onNavigateProfilePicker = { onNavigateProfilePicker() },
+            profilePicture = onSelectedProfilePicture
+        )
         StreamPlayerOptionsTopBar(modifier = Modifier.padding(top = 50.dp), scrollBehavior)
     }
 }
 
 @Composable
-private fun StreamPlayerTopBar() {
+private fun StreamPlayerTopBar(
+    onNavigateProfilePicker: () -> Unit = {},
+    profilePicture: String
+) {
     Row(
         modifier = Modifier
             .height(50.dp)
@@ -75,15 +87,16 @@ private fun StreamPlayerTopBar() {
 
         IconButton(
             modifier = Modifier.fillMaxHeight(),
-            onClick = { /* todo */ }
+            onClick = { onNavigateProfilePicker() }
         ) {
-            Icon(
+            AsyncImage(
                 modifier = Modifier
                     .height(24.dp)
                     .clip(RoundedCornerShape(4.dp)),
-                painter = painterResource(R.drawable.perfil_fake),
-                contentDescription = stringResource(id = R.string.icon_profile),
-                tint = Color.Unspecified,
+                model = profilePicture,
+                error = painterResource(id = R.drawable.perfil_fake),
+                placeholder = painterResource(id = R.drawable.perfil_fake),
+                contentDescription = stringResource(id = R.string.icon_profile)
             )
         }
     }
@@ -130,7 +143,9 @@ fun StreamPlayerTopBarPreview() {
         StreamPlayerTopBar(
             scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
                 rememberTopAppBarState()
-            )
+            ),
+            onNavigateProfilePicker = {},
+            onSelectedProfilePicture = String.empty()
         )
     }
 }

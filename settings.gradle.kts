@@ -24,6 +24,7 @@ include(":core-shared")
 include(":core-networking")
 include(":core-shared-ui")
 include(":core-navigation")
+include(":feature-profile")
 include(":core-local-storage")
 include(":feature-favorites")
 

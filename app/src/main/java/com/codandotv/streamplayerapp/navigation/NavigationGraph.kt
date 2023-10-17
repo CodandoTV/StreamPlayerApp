@@ -5,7 +5,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -17,6 +16,7 @@ import com.codandotv.streamplayerapp.core_navigation.routes.BottomNavRoutes
 import com.codandotv.streamplayerapp.core_navigation.routes.Routes
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.navigation.detailStreamNavGraph
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.navigation.listStreamsNavGraph
+import com.codandotv.streamplayerapp.feature_profile.profile.presentation.navigation.profilePickerStreamNavGraph
 import com.codandotv.streamplayerapp.splah.presentation.navigation.splashNavGraph
 
 @Composable
@@ -29,6 +29,7 @@ fun NavigationGraph(navController: NavHostController) {
         temporaryFun(BottomNavRoutes.NEWS, navController)
         temporaryFun(BottomNavRoutes.SCENES, navController)
         temporaryFun(BottomNavRoutes.DOWNLOADS, navController)
+        profilePickerStreamNavGraph(navController = navController)
     }
 }
 

@@ -18,6 +18,10 @@ object NetworkModule {
             BuildConfig.HOST
         }
 
+        single(QualifierProfile) {
+            BuildConfig.PROFILE
+        }
+
         single {
             Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
@@ -53,6 +57,14 @@ object NetworkModule {
                 okHttpClient = get(),
                 moshi = get(),
                 baseUrl = get(QualifierHost)
+            )
+        }
+
+        single(QualifierProfileRetrofit) {
+            provideRetrofit(
+                okHttpClient = get(),
+                moshi = get(),
+                baseUrl = get(QualifierProfile)
             )
         }
 
