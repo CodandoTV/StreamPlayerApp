@@ -62,7 +62,7 @@ class DetailStreamViewModel(
 
     fun toggleItemInFavorites(detailStream: DetailStream) {
         viewModelScope.launch {
-            useCase.toggleItemInFavorites(detailStream)
+            detailStreamUseCase.toggleItemInFavorites(detailStream)
         }
     }
 }
