@@ -23,8 +23,7 @@ interface DetailStreamRepository {
 class DetailStreamRepositoryImpl(
     private val movieId: String,
     private val service: DetailStreamService,
-    private val favoriteDao: FavoriteDao
-    private val service: DetailStreamService
+    private val favoriteDao: FavoriteDao,
 ) : DetailStreamRepository {
 
     override suspend fun getMovie(): Flow<DetailStream> =
