@@ -1,0 +1,26 @@
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Run all CI lanes"
+  lane :ci do 
+     test
+     debug
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Create Release build"
+  lane :release do
+    gradle(task: "clean assembleRelease")
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :debug do
+    gradle(task: "clean assembleDebug")
+  end
+end
