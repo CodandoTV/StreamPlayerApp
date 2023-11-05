@@ -25,7 +25,7 @@ jobs:
 
   build:
     needs: prepare-environment
-
+    runs-on: ubuntu-latest
     steps:
     - name: install fastlane
       run: bundle install
