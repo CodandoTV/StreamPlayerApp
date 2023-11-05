@@ -23,10 +23,6 @@ jobs:
         bundler-cache: true
 
 
-  build:
-    needs: prepare-environment
-    runs-on: ubuntu-latest
-    steps:
     - name: install fastlane
       run: bundle install
     - name: Grant execute permission for gradlew
