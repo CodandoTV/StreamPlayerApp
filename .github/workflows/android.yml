@@ -7,10 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  prepare-environment:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK 11
@@ -21,15 +19,20 @@ jobs:
         cache: gradle
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.2' 
-        bundler-cache: true 
+        ruby-version: '3.2'
+        bundler-cache: true
 
+
+  build:
+    needs: prepare-environment
+
+    steps:
     - name: install fastlane
       run: bundle install
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Run Lane from fastlane
+      run: bundle exec fastlane ci
       
     - name: Adding markdown
       if: failure()
