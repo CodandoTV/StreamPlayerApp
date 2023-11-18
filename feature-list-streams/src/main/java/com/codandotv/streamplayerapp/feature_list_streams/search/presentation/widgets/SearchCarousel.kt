@@ -64,7 +64,6 @@ fun SearchCarouselStream(
     }
 }
 
-
 @Composable
 @Preview
 fun StreamsCarouselPreview() {
