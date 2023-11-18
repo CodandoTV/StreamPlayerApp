@@ -21,7 +21,6 @@ import retrofit2.Retrofit
 
 object SearchModule {
     val module = module {
-
         viewModel {
             SearchViewModel(
                 searchUseCase = get(),

@@ -46,7 +46,7 @@ fun SearchStreamCard(
             .background(color = Color.Black)
             .padding(vertical = 4.dp, horizontal = 8.dp)
             .clickable {
-                onSearchStreamPressed.invoke(content.id)
+                onSearchStreamPressed(content.id)
             }
     ) {
         ImageStream(

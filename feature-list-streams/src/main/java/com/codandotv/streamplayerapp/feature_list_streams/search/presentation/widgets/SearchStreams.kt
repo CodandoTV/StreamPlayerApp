@@ -73,7 +73,7 @@ private fun StreamPlayerTopBar(
         IconButton(
             modifier = Modifier.fillMaxHeight(),
             onClick = {
-                onBackPressed.invoke()
+                onBackPressed()
             }
         ) {
             Icon(
