@@ -27,17 +27,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_navigation.extensions.goBack
-import com.codandotv.streamplayerapp.core_navigation.routes.Routes
 import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.mapper.toSearchStreamCardModel
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchStreamCard
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchableTopBar
 import org.koin.androidx.compose.koinViewModel
 
-
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = koinViewModel(),
+    onNavigateDetailList: (String) -> Unit = {},
     navController: NavController,
     disposable: () -> Unit = {}
 ) {
@@ -54,7 +53,8 @@ fun SearchScreen(
             SetupSearchScreen(
                 navController = navController,
                 uiState = uiState as SearchUIState.Success,
-                viewModel = viewModel
+                viewModel = viewModel,
+                onNavigateDetailList = onNavigateDetailList
             )
         }
 
@@ -77,6 +77,7 @@ fun SearchScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SetupSearchScreen(
+    onNavigateDetailList: (String) -> Unit = {},
     navController: NavController,
     uiState: SearchUIState.Success,
     viewModel: SearchViewModel
@@ -87,13 +88,15 @@ private fun SetupSearchScreen(
             SearchableTopBar(
                 currentSearchText = currentText,
                 onSearchTextChanged = { value ->
-                    viewModel.setCurrentSearchText(newText = value)
+                    viewModel.setCurrentSearchText(
+                        newText = value
+                    )
                 },
                 onSearchDispatched = {
-                    viewModel.fetchMovieByQuery()
+                    viewModel.fetchMovies()
                 },
                 onSearchIconPressed = {
-                    viewModel.fetchMovieByQuery()
+                    viewModel.fetchMovies()
                 },
                 onBackPressed = {
                     navController.goBack()
@@ -121,7 +124,7 @@ private fun SetupSearchScreen(
                 SearchStreamCard(
                     content = it.toSearchStreamCardModel(),
                     onSearchStreamPressed = { id ->
-                        openDetail(navController, id)
+                        onNavigateDetailList(id)
                     }
                 )
             }
@@ -130,10 +133,6 @@ private fun SetupSearchScreen(
             navController.goBack()
         }
     }
-}
-
-private fun openDetail(navController: NavController, id: String) {
-    navController.navigate("${Routes.DETAIL}${id}")
 }
 
 @Composable

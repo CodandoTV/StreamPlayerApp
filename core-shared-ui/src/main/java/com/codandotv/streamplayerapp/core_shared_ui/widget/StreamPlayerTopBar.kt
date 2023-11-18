@@ -45,7 +45,7 @@ fun StreamPlayerTopBar(
     Box(modifier = Modifier.background(color = Colors.Dark10)) {
         StreamPlayerTopBar(
             onNavigateProfilePicker = { onNavigateProfilePicker() },
-            onNavigateSearchScreen = { onNavigateSearchScreen },
+            onNavigateSearchScreen = { onNavigateSearchScreen() },
             profilePicture = onSelectedProfilePicture
         )
         StreamPlayerOptionsTopBar(modifier = Modifier.padding(top = 50.dp), scrollBehavior)
@@ -55,6 +55,7 @@ fun StreamPlayerTopBar(
 @Composable
 private fun StreamPlayerTopBar(
     onNavigateProfilePicker: () -> Unit = {},
+    onNavigateSearchScreen: () -> Unit = {},
     profilePicture: String
 ) {
     Row(
@@ -87,7 +88,6 @@ private fun StreamPlayerTopBar(
                 tint = Color.White,
             )
         }
-
 
         IconButton(
             modifier = Modifier.fillMaxHeight(),

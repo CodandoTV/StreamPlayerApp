@@ -19,6 +19,9 @@ fun NavGraphBuilder.searchStreamsNavGraph(navController: NavHostController) {
         }
         SearchScreen(
             navController = navController,
+            onNavigateDetailList = { id ->
+                navController.navigate("${Routes.DETAIL}${id}")
+            },
             disposable = {
                 unloadKoinModules(SearchModule.module)
             }
