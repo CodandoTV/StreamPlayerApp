@@ -34,7 +34,15 @@ class SearchViewModel(
         fetchMostPopularMovies()
     }
 
-    fun fetchMovieByQuery() {
+    fun fetchMovies() {
+        if (_currentSearchText.value.isBlank()) {
+            fetchMostPopularMovies()
+        } else {
+            fetchMovieByQuery()
+        }
+    }
+
+    private fun fetchMovieByQuery() {
         viewModelScope.launch {
             searchUseCase(
                 query = _currentSearchText.value
