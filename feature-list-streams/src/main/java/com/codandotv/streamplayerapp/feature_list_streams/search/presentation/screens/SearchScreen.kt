@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +27,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_navigation.extensions.goBack
+import com.codandotv.streamplayerapp.core_navigation.routes.Routes
+import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.mapper.toSearchStreamCardModel
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchStreamCard
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchableTopBar
@@ -53,6 +56,10 @@ fun SearchScreen(
                 uiState = uiState as SearchUIState.Success,
                 viewModel = viewModel
             )
+        }
+
+        is SearchUIState.Error -> {
+            //implementar cenário de erro
         }
 
         else -> {
@@ -103,21 +110,30 @@ private fun SetupSearchScreen(
                 .verticalScroll(rememberScrollState()),
         ) {
             Text(
-                text = "Principais buscas",
+                text = stringResource(id = R.string.search_list_describle),
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp,
+                fontSize = 20.sp,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
 
             uiState.listCharacters.results.map {
-                SearchStreamCard(model = it.toSearchStreamCardModel())
+                SearchStreamCard(
+                    content = it.toSearchStreamCardModel(),
+                    onSearchStreamPressed = { id ->
+                        openDetail(navController, id)
+                    }
+                )
             }
         }
         BackHandler {
             navController.goBack()
         }
     }
+}
+
+private fun openDetail(navController: NavController, id: String) {
+    navController.navigate("${Routes.DETAIL}${id}")
 }
 
 @Composable

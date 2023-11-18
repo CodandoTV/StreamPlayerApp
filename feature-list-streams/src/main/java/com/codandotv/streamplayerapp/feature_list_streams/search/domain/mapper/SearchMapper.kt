@@ -5,6 +5,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.search.data.model.List
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchStreamCardModel
 
 fun SearchStreamResponse.toSearchStreamCardModel() = SearchStreamCardModel(
+    id = id,
     title = title,
     url = "${Url.IMAGE_URL_SIZE_200}${posterPath}"
 )

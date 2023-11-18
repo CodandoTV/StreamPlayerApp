@@ -2,6 +2,7 @@ package com.codandotv.streamplayerapp.feature_list_streams.search.presentation.w
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -20,36 +21,49 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.codandotv.streamplayerapp.core_shared_ui.theme.ThemePreviews
 
 data class SearchStreamCardModel(
-    val title : String,
+    val id: String,
+    val title: String,
     val url: String
 )
+
 @Composable
-fun SearchStreamCard(model: SearchStreamCardModel) {
+fun SearchStreamCard(
+    content: SearchStreamCardModel,
+    onSearchStreamPressed: (id: String) -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(90.dp)
             .background(color = Color.Black)
-            .padding(2.dp)
+            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .clickable {
+                onSearchStreamPressed.invoke(content.id)
+            }
     ) {
         ImageStream(
-            url= model.url,
+            url = content.url,
             modifier = Modifier
-                .weight(3f)
-                .padding(2.dp)
+                .weight(2.5f)
+                .padding(vertical = 2.dp)
         )
         Text(
-            text = model.title,
+            text = content.title,
             color = Color.White,
             modifier = Modifier
-                .weight(5f)
-                .padding(2.dp),
-            fontWeight = FontWeight.SemiBold
+                .weight(4.5f)
+                .padding(8.dp),
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            overflow = TextOverflow.Ellipsis
         )
         PlayerIcon(
             modifier = Modifier
@@ -60,7 +74,7 @@ fun SearchStreamCard(model: SearchStreamCardModel) {
 }
 
 @Composable
-fun ImageStream(modifier: Modifier, url:String) {
+fun ImageStream(modifier: Modifier, url: String) {
     Card(
         shape = RoundedCornerShape(4.dp),
         modifier = modifier
@@ -78,7 +92,7 @@ fun ImageStream(modifier: Modifier, url:String) {
 fun PlayerIcon(modifier: Modifier) {
     Box(
         modifier = Modifier.border(
-            width = 0.2.dp,
+            width = 0.5.dp,
             shape = RoundedCornerShape(100),
             color = Color.White
         )
@@ -95,10 +109,14 @@ fun PlayerIcon(modifier: Modifier) {
 @ThemePreviews
 @Composable
 fun SearchStreamCardPreview() {
-    SearchStreamCard(model = SearchStreamCardModel(
-        title = "The Witcher",
-        url = "https://image.tmdb.org/t/p/w200/iwsMu0ehRPbtaSxqiaUDQB9qMWT.jpg"
-    ))
+    SearchStreamCard(
+        content = SearchStreamCardModel(
+            id = "1",
+            title = "The Witcher",
+            url = "https://image.tmdb.org/t/p/w200/iwsMu0ehRPbtaSxqiaUDQB9qMWT.jpg"
+        ),
+        onSearchStreamPressed = {}
+    )
 }
 
 @ThemePreviews
