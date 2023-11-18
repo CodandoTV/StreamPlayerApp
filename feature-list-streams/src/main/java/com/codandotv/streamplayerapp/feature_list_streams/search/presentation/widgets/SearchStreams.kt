@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codandotv.streamplayerapp.core.shared.ui.R
 import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
+import com.codandotv.streamplayerapp.feature.list.streams.R as ResourceListStream
 
 @Composable
 fun SearchableTopBar(
@@ -78,7 +79,7 @@ private fun StreamPlayerTopBar(
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
+                contentDescription = stringResource(id = R.string.icon_back),
                 tint = Color.White,
             )
         }
@@ -90,7 +91,7 @@ private fun StreamPlayerTopBar(
         ) {
             Icon(
                 imageVector = Icons.Default.Cast,
-                contentDescription = stringResource(id = R.string.icon_profile),
+                contentDescription = stringResource(id = R.string.icon_cast),
                 tint = Color.White,
             )
         }
@@ -141,7 +142,7 @@ fun SearchTopBar(
             },
             placeholder = {
                 Text(
-                    text = "Digite aqui...",
+                    text = stringResource(id = ResourceListStream.string.search_list_main_search),
                     color = Color.Gray
                 )
             },
@@ -172,7 +173,7 @@ fun DefaultIcon(
     modifier: Modifier = Modifier,
     searchIcon: ImageVector = Icons.Default.Search,
     iconColor: Color = Color.White,
-    contentDescription: String = "Magnifier Search Icon",
+    contentDescription: String = "",
     onIconClickAction: () -> Unit = {}
 ) {
     IconButton(
@@ -191,7 +192,7 @@ fun DefaultIcon(
 fun SearchIcon(action: () -> Unit = {}) {
     DefaultIcon(
         searchIcon = Icons.Filled.Search,
-        contentDescription = "Search Icon",
+        contentDescription = stringResource(id = R.string.icon_search),
         onIconClickAction = action,
         iconColor = Color.Gray
     )
@@ -201,7 +202,7 @@ fun SearchIcon(action: () -> Unit = {}) {
 fun CloseButton(action: () -> Unit = {}) {
     DefaultIcon(
         searchIcon = Icons.Default.Close,
-        contentDescription = "Deactivate Search Icon",
+        contentDescription = stringResource(id = R.string.icon_close),
         onIconClickAction = action,
         iconColor = Color.Gray
     )
@@ -211,7 +212,7 @@ fun CloseButton(action: () -> Unit = {}) {
 private fun MicButton(action: () -> Unit = {}) {
     DefaultIcon(
         searchIcon = Icons.Default.MicNone,
-        contentDescription = "Mic Icon",
+        contentDescription = stringResource(id = R.string.icon_mic),
         onIconClickAction = action,
         iconColor = Color.Gray
     )

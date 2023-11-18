@@ -24,6 +24,7 @@
 
     <!-- region Search Stream -->
     <string name="search_list_describle">Principais buscas</string>
+    <string name="search_list_main_search">Principais buscas</string>
     <!-- endregion Search Stream -->
 
 </resources>
