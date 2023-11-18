@@ -41,11 +41,9 @@ import com.codandotv.streamplayerapp.core_shared_ui.resources.Colors
 
 @Composable
 fun SearchableTopBar(
-    isShowingSearchField: Boolean,
     currentSearchText: String,
     onSearchTextChanged: (String) -> Unit,
-    onSearchDeactivated: () -> Unit,
-    onSearchDispatched: (String) -> Unit,
+    onSearchDispatched: () -> Unit,
     onSearchIconPressed: () -> Unit,
     onBackPressed: () -> Unit,
     onCleanTextPressed: () -> Unit
@@ -57,9 +55,9 @@ fun SearchableTopBar(
         SearchTopBar(
             currentSearchText = currentSearchText,
             onSearchTextChanged = onSearchTextChanged,
-            onSearchDeactivated = onSearchDeactivated,
             onSearchDispatched = onSearchDispatched,
-            onCleanTextPressed = onCleanTextPressed
+            onCleanTextPressed = onCleanTextPressed,
+            onSearchIconPressed = onSearchIconPressed
         )
     }
 }
@@ -118,9 +116,9 @@ private fun StreamPlayerTopBar(
 fun SearchTopBar(
     currentSearchText: String,
     onSearchTextChanged: (String) -> Unit,
-    onSearchDeactivated: () -> Unit,
-    onSearchDispatched: (String) -> Unit,
-    onCleanTextPressed: () -> Unit
+    onSearchDispatched: () -> Unit,
+    onCleanTextPressed: () -> Unit,
+    onSearchIconPressed: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -154,15 +152,17 @@ fun SearchTopBar(
             singleLine = true,
             maxLines = 1,
             leadingIcon = {
-                SearchIcon()
+                SearchIcon(action = onSearchIconPressed)
             },
             trailingIcon = {
                 if (currentSearchText.isEmpty()) MicButton() else CloseButton(
-                   action = onCleanTextPressed
+                    action = onCleanTextPressed
                 )
             },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = { onSearchDispatched(currentSearchText) }),
+            keyboardActions = KeyboardActions(onSearch = {
+                onSearchDispatched()
+            }),
         )
     }
 }
@@ -231,9 +231,9 @@ fun SearchTopBarEmptyPreview() {
     SearchTopBar(
         currentSearchText = "",
         onSearchTextChanged = {},
-        onSearchDeactivated = {},
         onSearchDispatched = {},
-        onCleanTextPressed = {}
+        onCleanTextPressed = {},
+        onSearchIconPressed = {}
     )
 }
 
@@ -243,8 +243,8 @@ fun SearchTopBarPreview() {
     SearchTopBar(
         currentSearchText = "Texto de busca",
         onSearchTextChanged = {},
-        onSearchDeactivated = {},
         onSearchDispatched = {},
-        onCleanTextPressed = {}
+        onCleanTextPressed = {},
+        onSearchIconPressed = {}
     )
 }

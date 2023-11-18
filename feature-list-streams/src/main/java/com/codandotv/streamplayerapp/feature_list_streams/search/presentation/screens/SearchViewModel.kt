@@ -4,48 +4,72 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
-import com.codandotv.streamplayerapp.feature_list_streams.search.domain.usecase.SearchUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.search.domain.MostPopularMoviesUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.search.domain.SearchUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val searchUseCase: SearchUseCase,
-    private val latestStream: GetTopRatedStream
-): ViewModel(), DefaultLifecycleObserver {
+    private val mostPopularMoviesUseCase: MostPopularMoviesUseCase
+) : ViewModel(), DefaultLifecycleObserver {
 
-//    private val _isShowstateSearch: MutableState<SearchUIState> = mutableStateOf(false)
-//    val isShowstateSearch: MutableState<Boolean> = _isShowstateSearch
+    private val _uiState = MutableStateFlow<SearchUIState>(SearchUIState.Loading(true))
+    val uiState: StateFlow<SearchUIState> = _uiState.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = _uiState.value
+    )
 
     private val _currentSearchText = MutableStateFlow("")
     val currentSearchText = _currentSearchText.asStateFlow()
 
     init {
+        fetchMostPopularMovies()
+    }
+
+    fun fetchMovieByQuery() {
         viewModelScope.launch {
-            /*
-            Substituir esse chamada ao endpoint de pesquisa pelo o de principais buscas,
-            Devemos substituir o parametro query com o texto que usuário está digitando
-             */
-            searchUseCase(query = "i").onStart {
-                //começar load
-            }.onCompletion {
-                //parar load
+            searchUseCase(
+                query = _currentSearchText.value
+            ).onStart {
+                SearchUIState.Loading(true)
             }.catchFailure {
-                //erro
-            }.collect{
-                //atualizar _uiState
-                println(it)
+                //implementar cenário de erro
+            }.collect { result ->
+                _uiState.update {
+                    SearchUIState.Success(result)
+                }
             }
         }
     }
-    fun setCurrentSearchText(newText: String){
+
+    private fun fetchMostPopularMovies() {
+        viewModelScope.launch {
+            mostPopularMoviesUseCase().onStart {
+                SearchUIState.Loading(true)
+            }.catchFailure {
+                //implementar cenário de erro
+            }.collect { result ->
+                _uiState.update {
+                    SearchUIState.Success(result)
+                }
+            }
+        }
+    }
+
+    fun setCurrentSearchText(newText: String) {
         _currentSearchText.value = newText
     }
 
-    fun onCleanText(){
+    fun onCleanText() {
         _currentSearchText.value = ""
+        fetchMostPopularMovies()
     }
 }
