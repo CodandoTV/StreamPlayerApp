@@ -8,6 +8,7 @@ dependencies {
 
     implementation(projects.featureFavorites)
     implementation(projects.featureListStreams)
+    implementation(projects.featureProfile)
     implementation(projects.coreShared)
     implementation(projects.coreSharedUi)
     implementation(projects.coreNavigation)

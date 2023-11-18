@@ -10,6 +10,8 @@ object Config {
     object BuildField {
         const val host_debug = "\"https://api.themoviedb.org/3/\""
         const val host_release = "\"https://api.themoviedb.org/3/\""
+        const val api_profile_debug = "\"https://demo3364084.mockable.io/\""
+        const val api_profile_release = "\"https://demo3364084.mockable.io/\""
 
         private const val tmdb_token_name_debug = "TMDB_BEARER_TOKEN_DEBUG"
         private const val tmdb_token_name_release = "TMDB_BEARER_TOKEN_RELEASE"

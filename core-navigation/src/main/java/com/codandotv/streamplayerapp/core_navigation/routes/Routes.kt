@@ -7,6 +7,7 @@ object Routes {
     const val DETAIL_COMPLETE = "${DETAIL}{${ID}}"
     const val Splash = "splash"
     const val SEARCH = "Search"
+    const val PROFILE_PICKER = "profilePicker"
 
     object PARAM {
         const val ID = "id"
