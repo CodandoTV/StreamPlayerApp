@@ -11,7 +11,7 @@
 
 ## 🇧🇷 Versão em Português ↙️
 
-🇧🇷 Se você fala português do Brasil, olhe [aqui](./README.md) 🇧🇷
+🇧🇷 Se você fala português do Brasil, olhe [aqui](./README_pt-br.md) 🇧🇷
 
 ## 🎯 Sobre o Projeto
 O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria. Por causa disso estaremos utilizando todas as tecnologias mais atuais de desenvolvimento android como:
