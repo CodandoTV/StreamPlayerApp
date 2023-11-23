@@ -13,15 +13,15 @@
 
 🇧🇷 Se você fala português do Brasil, olhe [aqui](./README_pt-br.md) 🇧🇷
 
-## 🎯 Sobre o Projeto
+## 🎯 About
 O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria. Por causa disso estaremos utilizando todas as tecnologias mais atuais de desenvolvimento android como:
 
 **Flow, Compose, Koin, NavigationCompose, Arquitetura MVVM com clean architecture entre outras ( ainda será separado um link para isso)**
 
-## 🏋️‍♀️ Motivação
+## 🏋️‍♀️ Goal
 Este projeto foi iniciado com o propósito de fornecer uma oportunidade de aprendizado prático e colaborativo para a comunidade. Através dele, os participantes podem aprimorar suas habilidades em desenvolvimento Android, Kotlin, arquitetura de aplicativos e trabalho em equipe.
 
-## 💬 Comunicação:
+## 💬 Communication
 Toda a comunicação desse grupo será feita no nosso grupo do [Discord](https://discord.gg/fZMDmjKmju) no canal [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351))
 
 ------------------------------------------
@@ -33,7 +33,7 @@ Acompanhe a série [Projeto Netflix](https://www.youtube.com/playlist?list=PL-7t
 
 ------------------------------------------
 
-## ✨ Como Contribuir
+## ✨ How to contribute?
 
 Se você deseja contribuir para o projeto veja, qual cenário que se adeque melhor a você:
 
@@ -58,7 +58,7 @@ Para todas as condições de contribuições do repo, a continuação está no [
 
 ---
 
-## 🗺️ Como usar nossa WIKI (sétima aba do projeto do git)
+## 🗺️ How to use the WIKI (7th tab in our git project)
 
 A ideia que a nossa wiki fique cade vez mais rica, então será um processo continuo.
 Lá estarão listadas, nossas tecnologias, e motivadores e mais alguma coisa que acharmos relevante.
@@ -68,7 +68,7 @@ Se vc achou que faltou algo relevante ali, fique a vontade e faça um PR para wi
 
 --- 
 
-## 🎤 Como usar a opção Discussions (quarta aba do projeto do git)
+## 🎤 How to use the Discussions option (4th tab in our git project)
 
 Pode ser que existam threads no discord interminaveis e as vezes a comunicação como em qualquer empresa tem uma falha, imagina um projeto que fazemos no nosso tempo vago.
 
@@ -76,16 +76,16 @@ Criei um `discussions` e la além de ficar no histórico, se quiser olhar o exem
 
 ---
 
-## 👀 Quer ver como esta ficando?
+## 👀 Do you wanna see our app?
 
 <img src="file_readme/splash_list_detail.gif" alt="atualizado dia 22/05/2023" width="200" height="400">
 
 ---
 
-### Se você chegou ate aqui na leitura, se inscreva no canal 😛 [Codandotv](https://bit.ly/3Ob3yPH)
+### If you arrived here, please subscribe in our YouTube channel 😛 [Codandotv](https://bit.ly/3Ob3yPH)
 
 
-## Contribuidores
+## Contributors
 
 Este projeto existe graças a todas as pessoas que contribuem.
 <a href="https://github.com/CodandoTV/StreamPlayerApp"><img src="https://opencollective.com/stremplayerapp/contributors.svg?width=890&button=false" /></a>
