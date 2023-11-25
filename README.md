@@ -15,15 +15,15 @@
 
 ## 🎯 About
 
-StreamPlayerApp is an open source project based on the Netflix app, all of the features are implemented by members of our CodandoTV community. The objective is to provide a learning and practical programming experience, in addition to serving as a mentoring platform. These are the technologies we are using here:
+StreamPlayerApp is an open source project based on the Netflix app, all of the features are being implemented by members of our CodandoTV community. The objective is to provide a learning and practical programming experience, serving as a mentoring platform. These are the technologies we are using here:
 
 **Flow, Compose, Koin, NavigationCompose, Arquitetura MVVM com clean architecture entre outras ( ainda será separado um link para isso)**
 
 ## 🏋️‍♀️ Goal
-This project was initiated with the purpose of providing a hands-on and collaborative learning opportunity for the community. Through it, participants can improve their skills in Android development, Kotlin, application architecture and teamwork.
+This project was initiated with the purpose of providing a hands-on and collaborative learning opportunity for the community. Through it, participants can improve their skills in Android development, Kotlin, clean architecture and teamwork.
 
 ## 💬 Communication
-We have a specific channel called [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)) in our [Discord](https://discord.gg/fZMDmjKmju) server to  about the project.
+We have a specific channel called [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)) in our [Discord](https://discord.gg/fZMDmjKmju) server to talk about the project.
 
 ------------------------------------------
 
@@ -36,15 +36,15 @@ Follow our playlist of videos called [Projeto Netflix](https://www.youtube.com/p
 
 ## ✨ How to contribute?
 
-If you wish to contribute to this project, chose the best that suits you:
+If you wish to contribute to this project, chose the best path that suits you:
 
 1. If you want to learn something or want to explore the mentoring process or you have questions about what you should do.
     - Talk to someone in our [Discord](https://discord.gg/fZMDmjKmju), you can use the channel called  [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)(Rods, Gabriel Moro or Carlos Vaccari) to help you.
-    - The mentoring will be shaped together with youm we do not know how it will be in practice 😊, so be patient and let's learn together!
+    - The mentoring will be shaped together with we do not know how it will be, so be patient and let's learn together 😊!
     - The main goal is to use the Discord as main communication tool.
     
 2. If you want to help mentoring people:
-    - Talk to someone in the Discord, use the channel #projeto-netflix, you can start from there helping people there.
+    - Talk to someone in the Discord, use the channel `#projeto-netflix`, you can start from there helping people there.
     - Reach us in the [Discord](https://discord.gg/fZMDmjKmju) server, you can reach out Rods, Moro or Carlos Vaccari.
 
 3. If you are just trying to find an excuse to code, do some fun or why do not you find something fun to do!
