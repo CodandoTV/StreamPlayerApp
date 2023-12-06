@@ -31,6 +31,7 @@ import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.mapper.toSearchStreamCardModel
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchStreamCard
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchableTopBar
+import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.StreamsError
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -59,7 +60,11 @@ fun SearchScreen(
         }
 
         is SearchUIState.Error -> {
-            //implementar cenário de erro
+            StreamsError()
+        }
+
+        is SearchUIState.Empty -> {
+
         }
 
         else -> {

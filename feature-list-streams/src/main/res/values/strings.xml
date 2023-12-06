@@ -25,6 +25,10 @@
     <!-- region Search Stream -->
     <string name="search_list_describle">Principais buscas</string>
     <string name="search_list_main_search">Principais buscas</string>
+
+    <!-- search error -->
+    <string name="search_list_error">A netflix encontrou um erro. Tente novamente!</string>
+
     <!-- endregion Search Stream -->
 
 </resources>

@@ -49,7 +49,7 @@ class SearchViewModel(
             ).onStart {
                 SearchUIState.Loading(true)
             }.catchFailure {
-                //implementar cenário de erro
+                println(">>>> ${it.errorMessage}")
             }.collect { result ->
                 _uiState.update {
                     SearchUIState.Success(result)
@@ -63,12 +63,13 @@ class SearchViewModel(
             mostPopularMoviesUseCase().onStart {
                 SearchUIState.Loading(true)
             }.catchFailure {
-                //implementar cenário de erro
+                println(">>>> ${it.errorMessage}")
             }.collect { result ->
                 _uiState.update {
                     SearchUIState.Success(result)
                 }
             }
+            SearchUIState.Loading(false)
         }
     }
 
