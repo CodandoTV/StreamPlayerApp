@@ -31,6 +31,7 @@ import com.codandotv.streamplayerapp.feature.list.streams.R
 import com.codandotv.streamplayerapp.feature_list_streams.search.domain.mapper.toSearchStreamCardModel
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchStreamCard
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.SearchableTopBar
+import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.StreamsEmpty
 import com.codandotv.streamplayerapp.feature_list_streams.search.presentation.widgets.StreamsError
 import org.koin.androidx.compose.koinViewModel
 
@@ -51,6 +52,7 @@ fun SearchScreen(
 
     when (uiState) {
         is SearchUIState.Success -> {
+            SearchUIState.Loading(true)
             SetupSearchScreen(
                 navController = navController,
                 uiState = uiState as SearchUIState.Success,
@@ -60,11 +62,8 @@ fun SearchScreen(
         }
 
         is SearchUIState.Error -> {
-            StreamsError()
-        }
-
-        is SearchUIState.Empty -> {
-
+            SearchUIState.Loading(true)
+            StreamsError { viewModel.fetchMovies() }
         }
 
         else -> {
@@ -74,6 +73,8 @@ fun SearchScreen(
                         Alignment.Center
                     )
                 )
+                SearchUIState.Loading(true)
+                StreamsEmpty()
             }
         }
     }
