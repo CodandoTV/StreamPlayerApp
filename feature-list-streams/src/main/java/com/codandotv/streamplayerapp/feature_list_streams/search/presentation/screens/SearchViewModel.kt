@@ -20,7 +20,9 @@ class SearchViewModel(
     private val mostPopularMoviesUseCase: MostPopularMoviesUseCase
 ) : ViewModel(), DefaultLifecycleObserver {
 
-    private val _uiState = MutableStateFlow<SearchUIState>(SearchUIState.Loading(true))
+    private var tryAgain: () -> Unit = {}
+
+    private val _uiState = MutableStateFlow<SearchUIState>(SearchUIState.Loading)
     val uiState: StateFlow<SearchUIState> = _uiState.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
@@ -43,34 +45,61 @@ class SearchViewModel(
     }
 
     private fun fetchMovieByQuery() {
+        tryAgain = ::fetchMovieByQuery
+
         viewModelScope.launch {
             searchUseCase(
                 query = _currentSearchText.value
             ).onStart {
-                SearchUIState.Loading(true)
-            }.catchFailure {
-                println(">>>> ${it.errorMessage}")
+                showLoading()
+            }.catchFailure { response ->
+                showError(messageError = response.errorMessage.orEmpty())
             }.collect { result ->
                 _uiState.update {
-                    SearchUIState.Success(result)
+                    if (result.results.isEmpty()) {
+                        SearchUIState.Empty
+                    } else {
+                        SearchUIState.Success(result)
+                    }
                 }
             }
         }
     }
 
     private fun fetchMostPopularMovies() {
+        tryAgain = ::fetchMostPopularMovies
+
         viewModelScope.launch {
             mostPopularMoviesUseCase().onStart {
-                SearchUIState.Loading(true)
-            }.catchFailure {
-                println(">>>> ${it.errorMessage}")
+                showLoading()
+            }.catchFailure { response ->
+                showError(messageError = response.errorMessage.orEmpty())
             }.collect { result ->
                 _uiState.update {
-                    SearchUIState.Success(result)
+                    if (result.results.isEmpty()) {
+                        SearchUIState.Empty
+                    } else {
+                        SearchUIState.Success(result)
+                    }
                 }
             }
-            SearchUIState.Loading(false)
         }
+    }
+
+    private fun showError(messageError: String) {
+        _uiState.update {
+            SearchUIState.Error(messageError = messageError)
+        }
+    }
+
+    private fun showLoading() {
+        _uiState.update {
+            SearchUIState.Loading
+        }
+    }
+
+    fun onTryAgain() {
+        tryAgain()
     }
 
     fun setCurrentSearchText(newText: String) {

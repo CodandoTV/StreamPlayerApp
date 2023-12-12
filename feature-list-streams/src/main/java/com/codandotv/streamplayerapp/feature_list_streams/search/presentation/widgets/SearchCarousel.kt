@@ -10,8 +10,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -67,7 +71,7 @@ fun SearchCarouselStream(
                 item?.let {
                     StreamsCard(
                         content = it,
-                        onNavigateDetailList
+                        onNavigateDetailList = onNavigateDetailList
                     )
                 }
             }
@@ -87,29 +91,44 @@ fun StreamsCarouselPreview() {
 }
 
 @Composable
-fun StreamsError(onRetry: () -> Unit) {
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
+fun StreamsError(
+    onRetry: () -> Unit,
+    onCloseButton: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        IconButton(onClick = {
+            onCloseButton()
+        }) {
+            Icon(
+                imageVector = Icons.Filled.Close,
+                contentDescription = stringResource(id = R.string.detail_back),
+                tint = Color.White
+            )
+        }
         Text(
             text = stringResource(id = R.string.search_list_error),
             color = Color.White,
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp,
+            textAlign= TextAlign.Center,
             modifier = Modifier
                 .align(Alignment.Center)
         )
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = onRetry,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(8.dp)
                 .align(Alignment.BottomCenter),
             enabled = true,
             colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White
+                contentColor = Color.White,
+                containerColor = Color.Red
             ),
             shape = RoundedCornerShape(8.dp),
         ) {
@@ -134,4 +153,13 @@ fun StreamsEmpty() {
             )
         }
     }
+}
+
+@Composable
+@Preview
+fun StreamsErrorPreview() {
+    StreamsError(
+        onRetry = {},
+        onCloseButton = {}
+    )
 }

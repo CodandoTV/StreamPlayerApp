@@ -52,7 +52,6 @@ fun SearchScreen(
 
     when (uiState) {
         is SearchUIState.Success -> {
-            SearchUIState.Loading(true)
             SetupSearchScreen(
                 navController = navController,
                 uiState = uiState as SearchUIState.Success,
@@ -62,8 +61,19 @@ fun SearchScreen(
         }
 
         is SearchUIState.Error -> {
-            SearchUIState.Loading(true)
-            StreamsError { viewModel.fetchMovies() }
+            StreamsError(
+                onRetry = { viewModel.onTryAgain() },
+                onCloseButton = { navController.goBack() }
+            )
+        }
+
+        is SearchUIState.Empty -> {
+            SetupSearchScreen(
+                navController = navController,
+                uiState = uiState as SearchUIState.Empty,
+                viewModel = viewModel,
+                onNavigateDetailList = onNavigateDetailList
+            )
         }
 
         else -> {
@@ -73,8 +83,6 @@ fun SearchScreen(
                         Alignment.Center
                     )
                 )
-                SearchUIState.Loading(true)
-                StreamsEmpty()
             }
         }
     }
@@ -85,7 +93,7 @@ fun SearchScreen(
 private fun SetupSearchScreen(
     onNavigateDetailList: (String) -> Unit = {},
     navController: NavController,
-    uiState: SearchUIState.Success,
+    uiState: SearchUIState,
     viewModel: SearchViewModel
 ) {
     Scaffold(
@@ -113,32 +121,39 @@ private fun SetupSearchScreen(
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState()),
-        ) {
-            Text(
-                text = stringResource(id = R.string.search_list_describle),
-                color = Color.White,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
 
-            uiState.listCharacters.results.map {
-                SearchStreamCard(
-                    content = it.toSearchStreamCardModel(),
-                    onSearchStreamPressed = { id ->
-                        onNavigateDetailList(id)
-                    }
+        if (uiState is SearchUIState.Success) {
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .verticalScroll(rememberScrollState()),
+            ) {
+                Text(
+                    text = stringResource(id = R.string.search_list_describle),
+                    color = Color.White,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(vertical = 8.dp)
                 )
+                uiState.listCharacters.results.map {
+                    SearchStreamCard(
+                        content = it.toSearchStreamCardModel(),
+                        onSearchStreamPressed = { id ->
+                            onNavigateDetailList(id)
+                        }
+                    )
+                }
+            }
+        } else {
+            Box(modifier = Modifier.padding(paddingValues)) {
+                StreamsEmpty()
             }
         }
-        BackHandler {
-            navController.goBack()
-        }
     }
+    BackHandler {
+        navController.goBack()
+    }
+
 }
 
 @Composable
