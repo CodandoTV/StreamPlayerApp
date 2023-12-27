@@ -7,7 +7,8 @@ ksp = "1.8.10-1.0.9"
 #Test
 test_junit = "4.13.2"
 androidx_core_testing = "2.2.0"
-mockk = "1.10.0"
+mockk = "1.13.7"
+kotlinx-coroutines-test= "1.5.1"
 
 #Android Test
 androidx_test_core = "1.5.0"
@@ -72,6 +73,7 @@ junit = { group = "junit", name = "junit", version.ref = "test_junit" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 mockk_android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 viewmodel_test = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx_core_testing" }
+coroutines_test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 
 # AndroidX Lifecycle
 androidx_viewmodel_lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "viewmodel" }
@@ -128,7 +130,7 @@ compose = ["compose.ui", "compose.icons", "compose.material3","compose_pagging",
 composetest = ["compose.uitest", "compose.junit4", "compose.manifest", "compose.ui.test"]
 networking = ["retrofit", "moshi", "moshi_converter", "okhttp", "interceptor"]
 koin = ["koin_android", "koin_compose"]
-test = ["junit", "mockk", "mockk_android", "viewmodel_test", "koin_test"]
+test = ["junit", "mockk", "mockk_android", "viewmodel_test", "koin_test","coroutines_test"]
 androidSupport = ["androidx_core", "androidx_appcompat", "androidx_dynamicanimation","google_material"]
 kotlin = ["androidx_core", "kotlin_stdlib", "kotlin_reflect"]
 

@@ -167,6 +167,7 @@ private fun SetupDetailScreen(
 private fun Lifecycle(
     lifecycleOwner: LifecycleOwner, viewModel: DetailStreamViewModel, disposable: () -> Unit
 ) {
+    
     DisposableEffect(lifecycleOwner) {
         val lifecycle = lifecycleOwner.lifecycle
 

@@ -8,6 +8,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailSt
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCaseImpl
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamViewModel
+import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
@@ -22,7 +23,8 @@ object DetailStreamModule {
                 },
                 videoStreamsUseCase = get {
                     parametersOf(id)
-                }
+                },
+                dispatcher = Dispatchers.IO
             )
         }
         factory<DetailStreamUseCase> { (id: String) ->
