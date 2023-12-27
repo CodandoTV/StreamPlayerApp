@@ -9,81 +9,85 @@
 
 ![Logo do Projeto](file_readme/codandotv.png)
 
-## 🎯 Sobre o Projeto
-O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria. Por causa disso estaremos utilizando todas as tecnologias mais atuais de desenvolvimento android como:
+## 🇧🇷 Versão em Português ↙️
+
+🇧🇷 Se você fala português do Brasil, olhe [aqui](./README_pt-br.md) 🇧🇷
+
+## 🎯 About
+
+StreamPlayerApp is an open source project based on the Netflix app, all of the features are being implemented by members of our CodandoTV community. The objective is to provide a learning and practical programming experience, serving as a mentoring platform. These are the technologies we are using here:
 
 **Flow, Compose, Koin, NavigationCompose, Arquitetura MVVM com clean architecture entre outras ( ainda será separado um link para isso)**
 
-## 🏋️‍♀️ Motivação
-Este projeto foi iniciado com o propósito de fornecer uma oportunidade de aprendizado prático e colaborativo para a comunidade. Através dele, os participantes podem aprimorar suas habilidades em desenvolvimento Android, Kotlin, arquitetura de aplicativos e trabalho em equipe.
+## 🏋️‍♀️ Goal
+This project was initiated with the purpose of providing a hands-on and collaborative learning opportunity for the community. Through it, participants can improve their skills in Android development, Kotlin, clean architecture and teamwork.
 
-## 💬 Comunicação:
-Toda a comunicação desse grupo será feita no nosso grupo do [Discord](https://discord.gg/fZMDmjKmju) no canal [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351))
+## 💬 Communication
+We have a specific channel called [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)) in our [Discord](https://discord.gg/fZMDmjKmju) server to talk about the project.
 
 ------------------------------------------
 
-### 🚨 Ahhhhhh se você esta entrando nesse repo, ou sendo mento(ra/r) ou sendo mentorad(a/o) ou passando aqui por a caso só para pegar um café ☕ e ainda não se inscreveu no canal, inscreva-se 🙏. 
+### 🚨 If you arrived here, and you are not subscribed in our YouTube channel, this is a great moment to do that 🙏. 
 [![CodandoTV](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://bit.ly/3Ob3yPH)
 
-Acompanhe a série [Projeto Netflix](https://www.youtube.com/playlist?list=PL-7tME9TKyA4At5ze9i8-w_trk7nXMGRj) que é um conteúdo originado deste repositório
+Follow our playlist of videos called [Projeto Netflix](https://www.youtube.com/playlist?list=PL-7tME9TKyA4At5ze9i8-w_trk7nXMGRj), all of the material was produced using this repository.
 
 ------------------------------------------
 
-## ✨ Como Contribuir
+## ✨ How to contribute?
 
-Se você deseja contribuir para o projeto veja, qual cenário que se adeque melhor a você:
+If you wish to contribute to this project, chose the best path that suits you:
 
-1. Caso você queira aprender algo ou quer explorar o processo de mentoria ou está na dúvida sobre o que pegar.
-    - Fale com um dos membros apoiadores no grupo do [Discord](https://discord.gg/fZMDmjKmju), no canal [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)(Rods, Gabriel Moro ou Carlos Vaccari), para ajudar a instruí-l(a/o).
-    - Essa parte da dinâmica da mentoria será moldada junto com você, logo não sabemos como vai ser na pratica 😊, então tente/tenha paciência e vamos aprender juntos!
-    - O objetivo é utilizar o discord como principal meio de comunicação
+1. If you want to learn something or want to explore the mentoring process or you have questions about what you should do.
+    - Talk to someone in our [Discord](https://discord.gg/fZMDmjKmju), you can use the channel called  [#projeto-netflix](https://discord.com/channels/843114243859546142/1101921493010616351)(Rods, Gabriel Moro or Carlos Vaccari) to help you.
+    - The mentoring will be shaped together with we do not know how it will be, so be patient and let's learn together 😊!
+    - The main goal is to use the Discord as main communication tool.
     
-2. Caso você queira ajudar a galera no processo de mentoria.
-    - Fale com um dos membros apoiadores no grupo do Discord, no canal #projeto-netflix, e participe ajudando o pessoal lá.
-    - Entre em contato conosco no [Discord](https://discord.gg/fZMDmjKmju) com Rods, Gabriel Moro ou Carlos Vaccari.
+2. If you want to help mentoring people:
+    - Talk to someone in the Discord, use the channel `#projeto-netflix`, you can start from there helping people there.
+    - Reach us in the [Discord](https://discord.gg/fZMDmjKmju) server, you can reach out Rods, Moro or Carlos Vaccari.
 
-3. Caso você esteja apenas procurando um pretexto para codar, fazer alguma melhoria ou porque não pegar algo divertido para fazer!
-    - Siga o resto dos [passos](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md) e seja bem-vindo!
+3. If you are just trying to find an excuse to code, do some fun or why do not you find something fun to do!
+    - Follow the [steps](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md) and welcome!
 
-4. Caso tenha sentido falta de algo que não está mapeando, crie uma issue e fale com nossos membros apoiadores;
+4. If there is a lack of something that is not being mapped, there is an issue and a failure with our supporting members;
 
-5. Quer gravar vídeo no CodandoTV do que você fez?
-    - Fale com Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
+5. If you want to record videos to be published in the CodandoTV channel showing what you did, you can:
+    - Talk to Rods! [Discord](https://discord.gg/fZMDmjKmju) / [LinkedIn](https://www.linkedin.com/in/rviannaoliveira/)
 
-Para todas as condições de contribuições do repo, a continuação está no [Passo a Passo Completo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
+All contributions conditions are available here in the  [Step-by-step to be a contributor](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_PROJECT.md)
 
 ---
 
-## 🗺️ Como usar nossa WIKI (sétima aba do projeto do git)
+## 🗺️ How to use the WIKI (7th tab in our git project)
 
-A ideia que a nossa wiki fique cade vez mais rica, então será um processo continuo.
-Lá estarão listadas, nossas tecnologias, e motivadores e mais alguma coisa que acharmos relevante.
+I hope our wiki becomes richer and richer, so it will be a continuous process. These will be listed, our technologies motivators and more something that we find relevant.
 
-Se vc achou que faltou algo relevante ali, fique a vontade e faça um PR para wiki também!
-[Passo a Passo](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_WIKI.md)
+If you realize that something relevant is missing here, please vote and post a PR for the wiki as well!
+[Step-by-step](https://github.com/CodandoTV/StreamPlayerApp/blob/master/CONTRIBUTOR_WIKI.md)
 
 --- 
 
-## 🎤 Como usar a opção Discussions (quarta aba do projeto do git)
+## 🎤 How to use the Discussions option (4th tab in our git project)
 
-Pode ser que existam threads no discord interminaveis e as vezes a comunicação como em qualquer empresa tem uma falha, imagina um projeto que fazemos no nosso tempo vago.
+It may be that there are non-discord threads that interrupt and sometimes communicate like in any company there is a mistake, imagine a project that we do in our spared time.
 
-Criei um `discussions` e la além de ficar no histórico, se quiser olhar o exemplo [Discussion](https://github.com/CodandoTV/StreamPlayerApp/discussions/48), podemos fazer threads mais longas e tudo guardado para as pessoas verem, parecido com as threads do `reddit` vamos ver se funciona bem isso, contamos com sua compreensão e apoio.
+We have a section called `discussions`, this is hosted in our repository, so we keep history. If you want to see an example of [Discussion](https://github.com/CodandoTV/StreamPlayerApp/discussions/48), we can create long threads there, something like `reddit`. Let's see if this approach works for us.
 
 ---
 
-## 👀 Quer ver como esta ficando?
+## 👀 Do you wanna see our app?
 
 <img src="file_readme/splash_list_detail.gif" alt="atualizado dia 22/05/2023" width="200" height="400">
 
 ---
 
-### Se você chegou ate aqui na leitura, se inscreva no canal 😛 [Codandotv](https://bit.ly/3Ob3yPH)
+### If you arrived here, please subscribe in our YouTube channel 😛 [Codandotv](https://bit.ly/3Ob3yPH)
 
 
-## Contribuidores
+## Contributors
 
-Este projeto existe graças a todas as pessoas que contribuem.
+This project exists thanks to all the people who contribute.
 <a href="https://github.com/CodandoTV/StreamPlayerApp"><img src="https://opencollective.com/stremplayerapp/contributors.svg?width=890&button=false" /></a>
 
 
