@@ -35,6 +35,7 @@ fun ListStreamsScreen(
     navController: NavController,
     onNavigateDetailList: (String) -> Unit = {},
     onNavigateProfilePicker: () -> Unit = {},
+    onNavigateSearchScreen: () -> Unit = {},
     disposable: () -> Unit = {},
     profilePicture: String
 ) {
@@ -61,6 +62,7 @@ fun ListStreamsScreen(
             StreamPlayerTopBar(
                 scrollBehavior = scrollBehavior,
                 onNavigateProfilePicker = onNavigateProfilePicker,
+                onNavigateSearchScreen = onNavigateSearchScreen,
                 onSelectedProfilePicture = profilePicture
             )
         },

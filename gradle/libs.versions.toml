@@ -114,6 +114,7 @@ moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "mo
 moshi_converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+compose-material = { group = "androidx.wear.compose", name = "compose-material", version = "1.2.0" }
 
 #Room
 roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}

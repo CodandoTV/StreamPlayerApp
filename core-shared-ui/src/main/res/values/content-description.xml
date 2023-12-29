@@ -3,4 +3,8 @@
     <string name="icon_netflix">Ícone Netflix</string>
     <string name="icon_profile">Ícone Perfil</string>
     <string name="icon_search">Ícone Buscar</string>
+    <string name="icon_close">Ícone Fechar</string>
+    <string name="icon_mic">Ícone Microfone</string>
+    <string name="icon_back">Ícone Voltar</string>
+    <string name="icon_cast">Ícone Projetar</string>
 </resources>

@@ -21,4 +21,14 @@
     <string name="list_highlight_banner_watch">Assistir</string>
     <string name="list_highlight_banner_stream_ranking">Top 1 em %s hoje</string>
     <!-- endregion Highlight banner -->
+
+    <!-- region Search Stream -->
+    <string name="search_list_describle">Principais buscas</string>
+    <string name="search_list_main_search">Principais buscas</string>
+
+    <!-- search error and empty -->
+    <string name="search_list_error">Houve um problema ao conectar à Netflix. Tente novamente mais tarde.</string>
+    <string name="bottom_search_list_error">Tente novamente</string>
+    <string name="empty_search_list">Conteúdo não encontrado</string>
+
 </resources>

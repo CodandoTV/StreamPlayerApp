@@ -8,6 +8,8 @@ object Colors {
     val Dark10 = Color(0x1A000000)
     val AlphaBlack = Color(0xEB000000)
 
+    val Gray100 = Color(0xFF2C2C2C)
+
     val LightColors = lightColorScheme(
         primary = Color(0xFFE50914),
         secondary = Color(0xFFF5F5F1),
