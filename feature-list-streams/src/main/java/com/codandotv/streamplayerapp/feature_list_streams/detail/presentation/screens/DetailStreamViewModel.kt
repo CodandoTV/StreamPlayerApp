@@ -12,9 +12,11 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.sc
 import kotlinx.coroutines.flow.*
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -24,6 +26,7 @@ import kotlinx.coroutines.launch
 class DetailStreamViewModel(
     private val detailStreamUseCase: DetailStreamUseCase,
     private val videoStreamsUseCase: VideoStreamsUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel(), DefaultLifecycleObserver {
 
     private val _uiState = MutableStateFlow<DetailStreamsUIState>(LoadingStreamUIState)
@@ -44,6 +47,7 @@ class DetailStreamViewModel(
                         videoId = videoUrl.firstOrNull()?.videoId
                     )
                 }
+                .flowOn(dispatcher)
                 .onStart { onLoading() }
                 .catchFailure {
                     println(">>>> ${it.errorMessage}")
