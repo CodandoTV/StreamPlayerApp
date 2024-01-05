@@ -11,17 +11,21 @@ import io.mockk.coVerifyOrder
 import io.mockk.mockk
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class DetailStreamRepositoryTest {
     private lateinit var repository: DetailStreamRepository
     private val movieId = movieIdString
-    private val service: DetailStreamService = mockk()
-    private val favoriteDao: FavoriteDao = mockk()
+    private lateinit var service: DetailStreamService
+    private lateinit var favoriteDao: FavoriteDao
 
     @Before
     fun setUp() {
+        service = mockk()
+        favoriteDao = mockk()
         repository = DetailStreamRepositoryImpl(
             movieId = movieId,
             service = service,
@@ -31,8 +35,10 @@ class DetailStreamRepositoryTest {
 
     @Test
     fun `getmovie should load the movies when passed a movieId`() {
-        runBlocking {
-            coEvery { service.getMovie(movieId) } returns NetworkResponse.Success(detailStreamResponse)
+        runTest {
+            coEvery { service.getMovie(movieId) } returns NetworkResponse.Success(
+                detailStreamResponse
+            )
             coEvery { favoriteDao.fetchAll() } returns emptyList()
 
             repository.getMovie()

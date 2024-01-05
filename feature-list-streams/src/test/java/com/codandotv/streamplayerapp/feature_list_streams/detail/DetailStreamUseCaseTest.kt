@@ -10,16 +10,18 @@ import io.mockk.mockk
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertTrue
 
 class DetailStreamUseCaseTest {
     private lateinit var detailStreamUseCase: DetailStreamUseCase
-    private val detailStreamRepository: DetailStreamRepository = mockk()
+    private lateinit var detailStreamRepository: DetailStreamRepository
 
     @Before
     fun setUp() {
+        detailStreamRepository = mockk()
         detailStreamUseCase = DetailStreamUseCaseImpl(
             detailStreamRepository = detailStreamRepository
         )
@@ -27,7 +29,7 @@ class DetailStreamUseCaseTest {
 
     @Test
     fun `load movies`() {
-        runBlocking {
+        runTest {
             coEvery { detailStreamRepository.getMovie() } returns flowOf(detailStream)
 
             detailStreamUseCase.getMovie()

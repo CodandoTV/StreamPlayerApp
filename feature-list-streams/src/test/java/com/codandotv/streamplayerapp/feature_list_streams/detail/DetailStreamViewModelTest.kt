@@ -11,6 +11,7 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -18,9 +19,9 @@ import kotlin.test.assertTrue
 
 class DetailStreamViewModelTest {
     private lateinit var detailStreamViewModel: DetailStreamViewModel
-    private val detailUseCase: DetailStreamUseCase = mockk()
-    private val videoUseCase: VideoStreamsUseCase = mockk()
-    private val lifecycleOwner: LifecycleOwner = mockk()
+    private lateinit var detailUseCase: DetailStreamUseCase
+    private lateinit var videoUseCase: VideoStreamsUseCase
+    private lateinit var lifecycleOwner: LifecycleOwner
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -30,6 +31,10 @@ class DetailStreamViewModelTest {
 
     @Before
     fun setUp() {
+        detailUseCase = mockk()
+        videoUseCase = mockk()
+        lifecycleOwner = mockk()
+
         detailStreamViewModel = DetailStreamViewModel(
             detailStreamUseCase = detailUseCase,
             videoStreamsUseCase = videoUseCase,
@@ -39,7 +44,7 @@ class DetailStreamViewModelTest {
 
     @Test
     fun `should load the movies with videoId`() {
-        runBlocking {
+        runTest {
             coEvery { detailUseCase.getMovie() } returns flowOf(detailStream)
             coEvery { videoUseCase.getVideoStreams() } returns flowOf(videosStreamsList)
 
