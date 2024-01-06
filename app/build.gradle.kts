@@ -2,10 +2,29 @@
 
 plugins {
     id("com.streamplayer.application")
+    alias(libs.plugins.kover)
+}
+
+android {
+    koverReport {
+        filters {
+            excludes {
+                packages(
+                    "*.di",
+                )
+
+                classes(
+                    "*.BuildConfig",
+                    "*.ComposableSingletons",
+                    "*ScreenKt*",
+                )
+                annotatedBy("Generated")
+            }
+        }
+    }
 }
 
 dependencies {
-
     implementation(projects.featureFavorites)
     implementation(projects.featureListStreams)
     implementation(projects.featureProfile)
@@ -26,4 +45,9 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.lottie)
     testImplementation(libs.bundles.test)
+
+    // Kover - Combined report
+    kover(projects.featureListStreams)
+    kover(projects.featureProfile)
+    kover(projects.featureFavorites)
 }

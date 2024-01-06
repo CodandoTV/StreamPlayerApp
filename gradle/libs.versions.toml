@@ -3,6 +3,7 @@ kotlin = "1.8.10"
 android_gradle_plugin = "8.0.0"
 koin = "3.4.0"
 ksp = "1.8.10-1.0.9"
+kover = "0.7.5"
 
 #Test
 test_junit = "4.13.2"
@@ -143,3 +144,4 @@ kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin_kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin_parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
