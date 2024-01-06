@@ -11,7 +11,7 @@ import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 internal fun CommonExtension<*, *, *, *>.setupPackingOptions() {
-    packagingOptions {
+    packaging {
         with(resources) {
             with(pickFirsts) {
                 add("META-INF/library_release.kotlin_module")
@@ -38,12 +38,12 @@ internal fun CommonExtension<*, *, *, *>.setupAndroidDefaultConfig() {
 
 internal fun CommonExtension<*, *, *, *>.setupCompileOptions() {
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -56,7 +56,7 @@ fun CommonExtension<*, *, *, *>.setupCompose(catalog: VersionCatalog) {
         kotlinCompilerExtensionVersion = "${catalog.getVersion("compose")}"
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes.apply {
             add("META-INF/AL2.0")
             add("META-INF/LGPL2.1")
