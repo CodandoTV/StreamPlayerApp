@@ -7,12 +7,20 @@
 <a href="https://www.youtube.com/c/CodandoTV"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" height="20px"/></a>
 </h3> 
 
-![Logo do Projeto](file_readme/codandotv.png)
+![Logo do Projeto](https://raw.githubusercontent.com/CodandoTV/StreamPlayerApp/master/file_readme/codandotv.png)
 
 ## 🎯 Sobre o Projeto
 O projeto StreamPlayerApp é um clone do Netflix, desenvolvido de forma colaborativa e gratuita para a comunidade. O objetivo é proporcionar uma experiência de aprendizado e prática de programação, além de servir como uma plataforma de mentoria. Por causa disso estaremos utilizando todas as tecnologias mais atuais de desenvolvimento android como:
 
 **Flow, Compose, Koin, NavigationCompose, Arquitetura MVVM com clean architecture entre outras ( ainda será separado um link para isso)**
+
+Este repositório contém dois projetos principais:
+
+1. **Android Nativo**: Um projeto focado no desenvolvimento da aplicação utilizando as tecnologias e frameworks nativos do Android. Você pode encontrar mais detalhes e como começar a trabalhar com este projeto em [Android-Nativo](https://github.com/git-jr/StreamPlayerApp/tree/main-kmp/Android-Nativo).
+
+2. **Kotlin Multiplatform (KMP)**: Este projeto explora as capacidades multiplataforma do Kotlin, permitindo compartilhar código entre diferentes sistemas operacionais. Para mais informações sobre o projeto KMP, visite [Kotlin-Multiplatform](https://github.com/git-jr/StreamPlayerApp/tree/main-kmp/Kotlin-Multiplatform).
+
+Escolha o projeto que mais se alinha com seus objetivos e veja as instruções específicas na pasta correspondente para começar.
 
 ## 🏋️‍♀️ Motivação
 Este projeto foi iniciado com o propósito de fornecer uma oportunidade de aprendizado prático e colaborativo para a comunidade. Através dele, os participantes podem aprimorar suas habilidades em desenvolvimento Android, Kotlin, arquitetura de aplicativos e trabalho em equipe.
