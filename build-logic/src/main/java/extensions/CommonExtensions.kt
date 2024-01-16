@@ -11,8 +11,8 @@ import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 internal fun CommonExtension<*, *, *, *, *>.setupPackingOptions() {
-    packagingOptions {
-        with(resources) {
+    packaging {
+        resources {
             with(pickFirsts) {
                 add("META-INF/library_release.kotlin_module")
                 add("META-INF/LICENSE.md")
@@ -57,10 +57,12 @@ fun CommonExtension<*, *, *, *, *>.setupCompose(catalog: VersionCatalog) {
         kotlinCompilerExtensionVersion = "${catalog.getVersion("compose")}"
     }
 
-    packagingOptions {
-        resources.excludes.apply {
-            add("META-INF/AL2.0")
-            add("META-INF/LGPL2.1")
+    packaging {
+        resources {
+            excludes.apply {
+                add("META-INF/AL2.0")
+                add("META-INF/LGPL2.1")
+            }
         }
     }
 }
