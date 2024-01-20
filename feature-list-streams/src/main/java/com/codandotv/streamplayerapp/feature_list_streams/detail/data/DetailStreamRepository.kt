@@ -38,6 +38,11 @@ class DetailStreamRepositoryImpl(
 
     override suspend fun insertToMyList(movie: DetailStream) = favoriteDao.insert(movie.toDetailStreamLocal())
 
+    /**
+     * Verify if movieId was saved as favorite
+     * @param movieId
+     * @return Boolean
+     */
     override suspend fun isFavorite(movieId: String) : Boolean = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
     
     override suspend fun getVideoStreams(): Flow<List<VideoStream>> =

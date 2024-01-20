@@ -3,6 +3,7 @@ kotlin = "1.8.10"
 android_gradle_plugin = "7.4.2"
 koin = "3.4.0"
 ksp = "1.8.10-1.0.9"
+dokka = "1.9.10"
 
 #Test
 test_junit = "4.13.2"
@@ -121,6 +122,7 @@ roomCompiler = { group = "androidx.room", name= "room-compiler", version.ref = "
 roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
 
 android_youtube_player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "android_youtube_player_version" }
+dokka = { group = "org.jetbrains.dokka", name = "android-documentation-plugin", version.ref = "dokka" }
 
 [bundles]
 room = ["roomRuntime","roomKtx"]
@@ -140,3 +142,4 @@ kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin_kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin_parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka"}
