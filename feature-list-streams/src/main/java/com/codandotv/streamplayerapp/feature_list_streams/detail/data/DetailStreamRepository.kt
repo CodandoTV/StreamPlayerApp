@@ -8,8 +8,6 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toDetail
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toDetailStreamLocal
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toVideoStreams
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
 interface DetailStreamRepository {
