@@ -2,6 +2,9 @@ plugins {
     id("com.streamplayer.android-library")
 }
 android {
+    buildFeatures {
+        buildConfig = true
+    }
     buildTypes {
         debug {
             buildConfigField("String", "HOST", Config.BuildField.host_debug)

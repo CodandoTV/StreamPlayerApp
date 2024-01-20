@@ -10,9 +10,9 @@ import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
-internal fun CommonExtension<*, *, *, *>.setupPackingOptions() {
-    packagingOptions {
-        with(resources) {
+internal fun CommonExtension<*, *, *, *, *>.setupPackingOptions() {
+    packaging {
+        resources {
             with(pickFirsts) {
                 add("META-INF/library_release.kotlin_module")
                 add("META-INF/LICENSE.md")
@@ -26,7 +26,7 @@ internal fun CommonExtension<*, *, *, *>.setupPackingOptions() {
     }
 }
 
-internal fun CommonExtension<*, *, *, *>.setupAndroidDefaultConfig() {
+internal fun CommonExtension<*, *, *, *, *>.setupAndroidDefaultConfig() {
     defaultConfig {
         compileSdk = Config.compileSdkVersion
         minSdk = Config.minSdkVersion
@@ -36,36 +36,39 @@ internal fun CommonExtension<*, *, *, *>.setupAndroidDefaultConfig() {
     }
 }
 
-internal fun CommonExtension<*, *, *, *>.setupCompileOptions() {
+internal fun CommonExtension<*, *, *, *, *>.setupCompileOptions() {
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
-fun CommonExtension<*, *, *, *>.setupCompose(catalog: VersionCatalog) {
+fun CommonExtension<*, *, *, *, *>.setupCompose(catalog: VersionCatalog) {
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = "${catalog.getVersion("compose")}"
     }
 
-    packagingOptions {
-        resources.excludes.apply {
-            add("META-INF/AL2.0")
-            add("META-INF/LGPL2.1")
+    packaging {
+        resources {
+            excludes.apply {
+                add("META-INF/AL2.0")
+                add("META-INF/LGPL2.1")
+            }
         }
     }
 }
 
 
-internal fun CommonExtension<*, *, *, *>.setupNameSpace(project: Project) {
+internal fun CommonExtension<*, *, *, *, *>.setupNameSpace(project: Project) {
     val moduleName = project.displayName
         .removePrefix("project ")
         .replace(":", ".")
@@ -75,6 +78,6 @@ internal fun CommonExtension<*, *, *, *>.setupNameSpace(project: Project) {
     namespace = "${Config.applicationId}$moduleName"
 }
 
-private fun CommonExtension<*, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+private fun CommonExtension<*, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
