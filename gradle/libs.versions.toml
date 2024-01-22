@@ -39,7 +39,7 @@ compose_material_3 = "1.0.1"
 compose_activity = "1.5.0"
 compose_icons = "1.4.3"
 compose_navigation = "2.5.3"
-lifecycle_compose_runtime = "2.6.1"
+lifecycle_version = "2.7.0"
 compose_pagging="1.0.0-alpha20"
 
 coil = "2.3.0"
@@ -95,7 +95,7 @@ compose_bom = { group = "androidx.compose", name = "compose-bom", version.ref = 
 compose_ui = { module = "androidx.compose.ui:ui" }
 compose_toolingpreview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose_icons = { module = "androidx.compose.material:material-icons-extended" }
-compose_lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle_compose_runtime" }
+compose_lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle_version" }
 compose_material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose_material_3" }
 compose_navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose_navigation" }
 compose_pagging = { group = "androidx.paging", name = "paging-compose", version.ref = "compose_pagging" }

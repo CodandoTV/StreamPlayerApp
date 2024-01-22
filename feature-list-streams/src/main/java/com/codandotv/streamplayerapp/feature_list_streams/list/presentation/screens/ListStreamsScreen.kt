@@ -46,12 +46,7 @@ fun ListStreamsScreen(
     val baseScrollState = rememberScrollState()
 
     DisposableEffect(lifecycleOwner) {
-        val lifecycle = lifecycleOwner.lifecycle
-
-        lifecycle.addObserver(viewModel)
-
         onDispose {
-            lifecycle.removeObserver(viewModel)
             disposable.invoke()
         }
     }

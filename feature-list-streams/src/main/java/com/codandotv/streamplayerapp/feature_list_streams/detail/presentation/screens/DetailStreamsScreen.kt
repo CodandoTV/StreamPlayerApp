@@ -17,7 +17,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codandotv.streamplayerapp.core_shared_ui.widget.SharingStreamCustomView
@@ -37,7 +39,25 @@ fun DetailStreamScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val lifecycleOwner = LocalLifecycleOwner.current
-    Lifecycle(lifecycleOwner, viewModel, disposable)
+
+    LifecycleEventEffect(Lifecycle.Event.ON_START) {
+        viewModel.loadDetail()
+    }
+
+//    //Or you can use directly
+//    LifecycleStartEffect(Unit){
+//        viewModel.loadDetail()
+//
+//        this.onStopOrDispose {
+//
+//        }
+//    }
+
+    DisposableEffect(lifecycleOwner) {
+        onDispose {
+            disposable.invoke()
+        }
+    }
 
     when (uiState) {
         is DetailStreamsLoadedUIState -> {
@@ -48,6 +68,7 @@ fun DetailStreamScreen(
                 onNavigateSearchScreen = onNavigateSearchScreen
             )
         }
+
         else -> {
             Box(Modifier.fillMaxSize()) {
                 CircularProgressIndicator(
@@ -147,7 +168,10 @@ private fun SetupDetailScreen(
                         modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    DetailStreamActionOption(uiState.detailStream, onToggleToMyList, { showDialog.value = true })
+                    DetailStreamActionOption(
+                        uiState.detailStream,
+                        onToggleToMyList,
+                        { showDialog.value = true })
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
@@ -167,21 +191,4 @@ private fun SetupDetailScreen(
                 }
             }
         })
-}
-
-@Composable
-private fun Lifecycle(
-    lifecycleOwner: LifecycleOwner, viewModel: DetailStreamViewModel, disposable: () -> Unit
-) {
-    
-    DisposableEffect(lifecycleOwner) {
-        val lifecycle = lifecycleOwner.lifecycle
-
-        lifecycle.addObserver(viewModel)
-
-        onDispose {
-            lifecycle.removeObserver(viewModel)
-            disposable.invoke()
-        }
-    }
 }
