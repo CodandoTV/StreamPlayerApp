@@ -8,8 +8,6 @@ import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toDetail
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toDetailStreamLocal
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.toVideoStreams
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
 interface DetailStreamRepository {
@@ -38,6 +36,11 @@ class DetailStreamRepositoryImpl(
 
     override suspend fun insertToMyList(movie: DetailStream) = favoriteDao.insert(movie.toDetailStreamLocal())
 
+    /**
+     * Verify if movieId was saved as favorite
+     * @param movieId
+     * @return Boolean
+     */
     override suspend fun isFavorite(movieId: String) : Boolean = favoriteDao.fetchAll().any { movie -> movie.id == movieId }
     
     override suspend fun getVideoStreams(): Flow<List<VideoStream>> =

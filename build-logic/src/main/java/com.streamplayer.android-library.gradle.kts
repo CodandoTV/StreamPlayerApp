@@ -1,15 +1,20 @@
 @file:Suppress("UnstableApiUsage")
 
+import extensions.dokkaPlugin
+import extensions.getLibrary
 import extensions.setupAndroidDefaultConfig
 import extensions.setupCompileOptions
 import extensions.setupNameSpace
 import extensions.setupPackingOptions
+
+val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("com.streamplayer.dokka")
 }
 
 android {
@@ -33,4 +38,8 @@ android {
             isMinifyEnabled = false
         }
     }
+}
+
+dependencies {
+    dokkaPlugin(libs.getLibrary("dokka"))
 }
