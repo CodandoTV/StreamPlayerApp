@@ -10,7 +10,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -21,7 +20,6 @@ class DetailStreamViewModelTest {
     private lateinit var detailStreamViewModel: DetailStreamViewModel
     private lateinit var detailUseCase: DetailStreamUseCase
     private lateinit var videoUseCase: VideoStreamsUseCase
-    private lateinit var lifecycleOwner: LifecycleOwner
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -33,7 +31,6 @@ class DetailStreamViewModelTest {
     fun setUp() {
         detailUseCase = mockk()
         videoUseCase = mockk()
-        lifecycleOwner = mockk()
 
         detailStreamViewModel = DetailStreamViewModel(
             detailStreamUseCase = detailUseCase,
@@ -48,7 +45,7 @@ class DetailStreamViewModelTest {
             coEvery { detailUseCase.getMovie() } returns flowOf(detailStream)
             coEvery { videoUseCase.getVideoStreams() } returns flowOf(videosStreamsList)
 
-            detailStreamViewModel.onCreate(lifecycleOwner)
+            detailStreamViewModel.loadDetail()
 
             coVerify {
                 detailStreamViewModel.uiState.value.let {
