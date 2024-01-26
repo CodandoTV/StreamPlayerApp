@@ -1,6 +1,5 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens
 
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
@@ -32,7 +31,7 @@ class ListStreamViewModel(
     private val listStreams: ListStreamUseCase,
     private val listGenres: GetGenresUseCase,
     private val latestStream: GetTopRatedStream
-) : ViewModel(), DefaultLifecycleObserver {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         ListStreamsUIState(

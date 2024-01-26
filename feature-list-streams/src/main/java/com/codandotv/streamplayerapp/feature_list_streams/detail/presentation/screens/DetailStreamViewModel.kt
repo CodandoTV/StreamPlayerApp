@@ -1,17 +1,13 @@
 package com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens
 
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codandotv.streamplayerapp.core_networking.handleError.catchFailure
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStream
 import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.DetailStreamUseCase
+import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCase
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.DetailStreamsLoadedUIState
 import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.LoadingStreamUIState
-import kotlinx.coroutines.flow.*
-import com.codandotv.streamplayerapp.feature_list_streams.detail.domain.VideoStreamsUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.detail.presentation.screens.DetailStreamsUIState.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,11 +19,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 
-class DetailStreamViewModel(
+class  DetailStreamViewModel(
     private val detailStreamUseCase: DetailStreamUseCase,
     private val videoStreamsUseCase: VideoStreamsUseCase,
     private val dispatcher: CoroutineDispatcher
-) : ViewModel(), DefaultLifecycleObserver {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<DetailStreamsUIState>(LoadingStreamUIState)
     val uiState: StateFlow<DetailStreamsUIState> = _uiState.stateIn(
@@ -36,9 +32,7 @@ class DetailStreamViewModel(
         initialValue = _uiState.value
     )
 
-    override fun onCreate(owner: LifecycleOwner) {
-        super.onCreate(owner)
-
+    fun loadDetail() {
         viewModelScope.launch {
             detailStreamUseCase.getMovie()
                 .zip(videoStreamsUseCase.getVideoStreams()) { detailStream, videoUrl ->
