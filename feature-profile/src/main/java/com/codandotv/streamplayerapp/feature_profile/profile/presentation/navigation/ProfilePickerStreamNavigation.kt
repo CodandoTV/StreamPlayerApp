@@ -11,18 +11,19 @@ import com.codandotv.streamplayerapp.feature_profile.profile.di.ProfilePickerStr
 import com.codandotv.streamplayerapp.feature_profile.profile.presentation.screens.ProfilePickerStreamScreen
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import org.koin.ksp.generated.module
 
 fun NavGraphBuilder.profilePickerStreamNavGraph(navController: NavHostController) {
     composable(Routes.PROFILE_PICKER) { nav ->
         if (nav.getLifecycle().currentState == Lifecycle.State.STARTED) {
-            loadKoinModules(ProfilePickerStreamModule.module)
+            loadKoinModules(ProfilePickerStreamModule().module)
         }
         ProfilePickerStreamScreen(
             onNavigateListStreams = { profilePic ->
                 navController.navigate("$HOME?$PROFILE_ID=$profilePic")
             }
         ) {
-            unloadKoinModules(ProfilePickerStreamModule.module)
+            unloadKoinModules(ProfilePickerStreamModule().module)
         }
     }
 }
