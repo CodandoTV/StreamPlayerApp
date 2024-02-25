@@ -47,7 +47,5 @@ dependencies {
     testImplementation(libs.bundles.test)
 
     // Kover - Combined report
-    kover(projects.featureListStreams)
-    kover(projects.featureProfile)
-    kover(projects.featureFavorites)
+    rootProject.subprojects.forEach { kover(it) }
 }
