@@ -2,6 +2,7 @@
 kotlin = "1.8.10"
 android_gradle_plugin = "8.2.1"
 koin = "3.4.0"
+koin-annotations-bom = "1.3.0"
 ksp = "1.8.10-1.0.9"
 dokka = "1.9.10"
 kover = "0.7.5"
@@ -110,6 +111,8 @@ compose_junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 # Koin
 koin_test = { group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koin" }
 koin_android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin_annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations-bom" }
+koin_compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotations-bom" }
 koin_compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 
 #Networking
