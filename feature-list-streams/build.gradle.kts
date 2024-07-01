@@ -3,7 +3,7 @@
 plugins {
     id("com.streamplayer.android-library")
     id("com.streamplayer.compose")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kover)
 }
 
