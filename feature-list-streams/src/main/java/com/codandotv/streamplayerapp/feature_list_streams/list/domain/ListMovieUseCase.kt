@@ -5,11 +5,13 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRe
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Genre
 import com.codandotv.streamplayerapp.feature_list_streams.list.domain.model.Stream
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Factory
 
 interface ListStreamUseCase {
     operator fun invoke(genre: Genre): Flow<PagingData<Stream>>
 }
 
+@Factory
 class ListStreamUseCaseImpl(
     private val repository: ListStreamRepository
 ) : ListStreamUseCase {

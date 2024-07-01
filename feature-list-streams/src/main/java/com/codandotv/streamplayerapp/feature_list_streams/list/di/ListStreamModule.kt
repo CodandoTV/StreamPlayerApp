@@ -1,61 +1,20 @@
 package com.codandotv.streamplayerapp.feature_list_streams.list.di
 
-import com.codandotv.streamplayerapp.core_shared.qualifier.QualifierDispatcherIO
-import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRepository
-import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamRepositoryImpl
 import com.codandotv.streamplayerapp.feature_list_streams.list.data.ListStreamService
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStream
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetTopRatedStreamImpl
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetGenresUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.GetGenresUseCaseImpl
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamAnalytics
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamAnalyticsImpl
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamUseCase
-import com.codandotv.streamplayerapp.feature_list_streams.list.domain.ListStreamUseCaseImpl
-import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.ListStreamViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Module
+import org.koin.core.context.GlobalContext
 import retrofit2.Retrofit
 
-object ListStreamModule {
-    val module = module {
-        viewModel {
-            ListStreamViewModel(
-                listStreams = get(),
-                listGenres = get(),
-                latestStream = get()
-            )
-        }
+@Module
+@ComponentScan("com.codandotv.streamplayerapp.feature_list_streams.list")
+class ListStreamModule {
 
-        factory<ListStreamUseCase> {
-            ListStreamUseCaseImpl(
-                repository = get()
-            )
-        }
-
-        factory<GetGenresUseCase> {
-            GetGenresUseCaseImpl(
-                repository = get()
-            )
-        }
-
-        factory<GetTopRatedStream> {
-            GetTopRatedStreamImpl(
-                repository = get()
-            )
-        }
-
-        factory<ListStreamAnalytics> {
-            ListStreamAnalyticsImpl()
-        }
-
-        factory<ListStreamRepository> {
-            ListStreamRepositoryImpl(
-                service = get(),
-                dispatcher = get(QualifierDispatcherIO)
-            )
-        }
-
-        factory { get<Retrofit>().create(ListStreamService::class.java) }
+    @Factory
+    fun service(): ListStreamService {
+        val koin = GlobalContext.get()
+        val retrofit = koin.get<Retrofit>()
+        return retrofit.create(ListStreamService::class.java)
     }
 }

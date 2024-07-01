@@ -14,6 +14,7 @@ import com.codandotv.streamplayerapp.feature_list_streams.list.di.ListStreamModu
 import com.codandotv.streamplayerapp.feature_list_streams.list.presentation.screens.ListStreamsScreen
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import org.koin.ksp.generated.module
 
 internal const val DEFAULT_ID = ""
 
@@ -21,7 +22,7 @@ fun NavGraphBuilder.listStreamsNavGraph(navController: NavHostController) {
     composable(HOME_COMPLETE) { nav ->
         BackHandler(true) {}
         if (nav.getLifecycle().currentState == Lifecycle.State.STARTED) {
-            loadKoinModules(ListStreamModule.module)
+            loadKoinModules(ListStreamModule().module)
         }
         ListStreamsScreen(navController = navController,
             onNavigateDetailList = { id ->
@@ -34,7 +35,7 @@ fun NavGraphBuilder.listStreamsNavGraph(navController: NavHostController) {
                 navController.navigate(Routes.SEARCH)
             },
             disposable = {
-                unloadKoinModules(ListStreamModule.module)
+                unloadKoinModules(ListStreamModule().module)
             },
             profilePicture = nav.arguments?.getString(PROFILE_ID) ?: DEFAULT_ID
         )
